@@ -1,0 +1,7 @@
+click
+eccodes
+jsonschema
+jsonpath_ng
+pyoscar
+cfunits
+pandas
