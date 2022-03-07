@@ -43,6 +43,7 @@ logs
 
 # pycharm
 .idea
+.idea/*
 
 # data files
 *.bufr4
