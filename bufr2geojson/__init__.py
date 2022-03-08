@@ -442,8 +442,8 @@ class BUFRParser:
             }
         # 7 digit buoy number
         # 001087
-        if "001087" in self.qualifiers["01"]:
-            id = self.get_qualifer("001087")
+        if "marine_observing_platform_identifier" in self.qualifiers["01"]:
+            id = self.get_qualifer("01","marine_observing_platform_identifier")  # noqa
             wsi_series = 0
             wsi_issuer = 20002
             wsi_number = 0
