@@ -1,0 +1,145 @@
+{
+    "id": "A_IOBH03LFPW080500_C_EDZW_20220308052201_98336694-1",
+    "type": "FeatureCollection",
+    "station_id": {
+        "tsi": {
+            "buoy_number": 1400011
+        },
+        "wsi": "0-20002-0-1400011"
+    },
+    "features": [
+        {
+            "id": "add50acc41ee4337b4b2e5e73d660ddf",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    55.27732,
+                    -20.94572
+                ]
+            },
+            "properties": {
+                "key": "duration_of_wave_record",
+                "value": 2400,
+                "units": "s",
+                "description": null,
+                "phenomenonTime": "2022-03-08T05:10:00Z",
+                "resultTime": "2022-03-08T14:41:37+0",
+                "metadata": "4dc9e7e0489371a7d1d0afd34fb554b5",
+                "index": 32
+            }
+        },
+        {
+            "id": "c426a946ebba48449ece4bf8f5def181",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    55.27732,
+                    -20.94572
+                ]
+            },
+            "properties": {
+                "key": "significant_wave_height",
+                "value": 0.5,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2022-03-08T05:10:00Z",
+                "resultTime": "2022-03-08T14:41:37+0",
+                "metadata": "4dc9e7e0489371a7d1d0afd34fb554b5",
+                "index": 33
+            }
+        },
+        {
+            "id": "372085bceb6d4c098be01ac09180f363",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    55.27732,
+                    -20.94572
+                ]
+            },
+            "properties": {
+                "key": "maximum_wave_height",
+                "value": 0.8,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2022-03-08T05:10:00Z",
+                "resultTime": "2022-03-08T14:41:37+0",
+                "metadata": "4dc9e7e0489371a7d1d0afd34fb554b5",
+                "index": 34
+            }
+        },
+        {
+            "id": "02bd312be9034041958d4a413708fa6a",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    55.27732,
+                    -20.94572
+                ]
+            },
+            "properties": {
+                "key": "average_wave_period",
+                "value": 6.0,
+                "units": "s",
+                "description": null,
+                "phenomenonTime": "2022-03-08T05:10:00Z",
+                "resultTime": "2022-03-08T14:41:37+0",
+                "metadata": "4dc9e7e0489371a7d1d0afd34fb554b5",
+                "index": 35
+            }
+        }
+    ],
+    "metadata": [
+        {
+            "id": "4dc9e7e0489371a7d1d0afd34fb554b5",
+            "metadata": [
+                {
+                    "name": "station_or_site_name",
+                    "value": "Rivi\ufffdre des galets  ",
+                    "units": "CCITT IA5",
+                    "description": "Rivi\ufffdre des galets  "
+                },
+                {
+                    "name": "data_buoy_type",
+                    "value": 25,
+                    "units": "CODE TABLE",
+                    "description": "Directional waverider"
+                },
+                {
+                    "name": "depth_below_water_surface",
+                    "value": 0.0,
+                    "units": "m",
+                    "description": null
+                }
+            ]
+        }
+    ],
+    "headers": {
+        "edition": 4,
+        "masterTableNumber": 0,
+        "bufrHeaderCentre": 85,
+        "bufrHeaderSubCentre": 0,
+        "updateSequenceNumber": 0,
+        "dataCategory": 1,
+        "internationalDataSubCategory": 25,
+        "dataSubCategory": 0,
+        "masterTablesVersionNumber": 23,
+        "localTablesVersionNumber": 0,
+        "typicalYear": 2022,
+        "typicalMonth": 3,
+        "typicalDay": 8,
+        "typicalHour": 5,
+        "typicalMinute": 19,
+        "typicalSecond": 0,
+        "typicalDate": "20220308",
+        "typicalTime": "051900",
+        "numberOfSubsets": 1,
+        "observedData": 1,
+        "compressedData": 0,
+        "subsetNumber": 1
+    }
+}

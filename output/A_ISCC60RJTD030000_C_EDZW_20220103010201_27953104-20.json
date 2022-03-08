@@ -1,0 +1,4193 @@
+{
+    "id": "A_ISCC60RJTD030000_C_EDZW_20220103010201_27953104-20",
+    "type": "FeatureCollection",
+    "station_id": {
+        "tsi": {
+            "block": 47,
+            "station": 636
+        },
+        "wsi": "0-20000-0-47636"
+    },
+    "features": [
+        {
+            "id": "eb68fb0d580c47b48977fecae8201f5a",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 16.4,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-01T00:00:00Z/2021-12-02T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 13
+            }
+        },
+        {
+            "id": "3a94d0e04730474d94566dfdd8e582a0",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 5.0,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-01T00:00:00Z/2021-12-02T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 15
+            }
+        },
+        {
+            "id": "3ce54f00d0e14b62a24b601e29a34020",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 11.0,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-01T00:00:00Z/2021-12-02T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 17
+            }
+        },
+        {
+            "id": "dc3653b2b1dd47afb2fcf3cf6b291bc8",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": 19.0,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-01T00:00:00Z/2021-12-02T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 21
+            }
+        },
+        {
+            "id": "da8a80e60e994c09abce91acb4abba86",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-01T00:00:00Z/2021-12-02T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 22
+            }
+        },
+        {
+            "id": "37aa2f03fa76417cb6045cec8edc99b7",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-01T00:00:00Z/2021-12-02T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 23
+            }
+        },
+        {
+            "id": "4403a24022f740bb94f7d8d0276c93ed",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 12.0,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-02T00:00:00Z/2021-12-03T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 28
+            }
+        },
+        {
+            "id": "4785d06e0d1e4a289c6672d14e8756e9",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 2.8,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-02T00:00:00Z/2021-12-03T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 30
+            }
+        },
+        {
+            "id": "8cd054c7f7904cc1920767217182c449",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 6.7,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-02T00:00:00Z/2021-12-03T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 32
+            }
+        },
+        {
+            "id": "1a2cc3a2dbfb49d0af5f6e433d96aca8",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": -0.1,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-02T00:00:00Z/2021-12-03T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 36
+            }
+        },
+        {
+            "id": "f739120eec92419b833f0bbd11cca29a",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-02T00:00:00Z/2021-12-03T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 37
+            }
+        },
+        {
+            "id": "c07e74b44e674fa9a3c2f4c58294bf26",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-02T00:00:00Z/2021-12-03T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 38
+            }
+        },
+        {
+            "id": "fd76755a9d28461b85ff8db112cbca8f",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 14.1,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-03T00:00:00Z/2021-12-04T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 43
+            }
+        },
+        {
+            "id": "964aecc5b9c64f578bee2c6c798a8301",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 3.5,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-03T00:00:00Z/2021-12-04T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 45
+            }
+        },
+        {
+            "id": "ff62b210ae634b8b9318a2366e2cadc7",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 8.0,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-03T00:00:00Z/2021-12-04T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 47
+            }
+        },
+        {
+            "id": "3f8c88ebe18a43a29bc5579868260be1",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": 0.0,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-03T00:00:00Z/2021-12-04T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 51
+            }
+        },
+        {
+            "id": "aba0dadc059f429cb1f0f1393a63bcd8",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-03T00:00:00Z/2021-12-04T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 52
+            }
+        },
+        {
+            "id": "e3286d0d51274a718e62f0eaa2243b7e",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-03T00:00:00Z/2021-12-04T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 53
+            }
+        },
+        {
+            "id": "ccfcd7e5b414465d95d56e4d6f0ca2da",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 12.5,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-04T00:00:00Z/2021-12-05T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 58
+            }
+        },
+        {
+            "id": "b536fc3579df43b09ad8a2b0588c4f47",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 4.1,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-04T00:00:00Z/2021-12-05T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 60
+            }
+        },
+        {
+            "id": "ebb29004a7654259ae08cd234ffe0e8c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 7.4,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-04T00:00:00Z/2021-12-05T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 62
+            }
+        },
+        {
+            "id": "23d39495e7cd40538e0c4a2fec484908",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": -0.1,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-04T00:00:00Z/2021-12-05T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 66
+            }
+        },
+        {
+            "id": "f0776d91d21f43c8b3c754e889bd1e89",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-04T00:00:00Z/2021-12-05T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 67
+            }
+        },
+        {
+            "id": "9791728281774257a107287b09ac7fc5",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-04T00:00:00Z/2021-12-05T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 68
+            }
+        },
+        {
+            "id": "d8ea48f792a0416c985a1d7df9977c46",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 11.3,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-05T00:00:00Z/2021-12-06T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 73
+            }
+        },
+        {
+            "id": "2757f9ec634547f1be06d5dc232d57d7",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 3.4,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-05T00:00:00Z/2021-12-06T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 75
+            }
+        },
+        {
+            "id": "37a34f464d6d4c28a1fbb9ececae3de9",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 7.9,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-05T00:00:00Z/2021-12-06T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 77
+            }
+        },
+        {
+            "id": "d1f9f0d5d9114716a93b4f8b167a1e4a",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": 0.0,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-05T00:00:00Z/2021-12-06T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 81
+            }
+        },
+        {
+            "id": "eb26bebccbef4b5e9f3ea1a91d369081",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-05T00:00:00Z/2021-12-06T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 82
+            }
+        },
+        {
+            "id": "e1e1025f96064011b664174aa42b93f2",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-05T00:00:00Z/2021-12-06T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 83
+            }
+        },
+        {
+            "id": "6bf26eabeebb420da9ff1f0825f02f89",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 10.6,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-06T00:00:00Z/2021-12-07T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 88
+            }
+        },
+        {
+            "id": "c430f23dbd0a4b48b24e5eab20cd96ea",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 8.0,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-06T00:00:00Z/2021-12-07T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 90
+            }
+        },
+        {
+            "id": "927719adc722434ab97fae84edc6dacc",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 9.5,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-06T00:00:00Z/2021-12-07T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 92
+            }
+        },
+        {
+            "id": "e10f78e62df04d769f4e77eebbf296e8",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": 12.5,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-06T00:00:00Z/2021-12-07T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 96
+            }
+        },
+        {
+            "id": "b17934687e054f25a53a83e65a3c6352",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-06T00:00:00Z/2021-12-07T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 97
+            }
+        },
+        {
+            "id": "5b502a9336a44fc087a89800c8b1c5fd",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-06T00:00:00Z/2021-12-07T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 98
+            }
+        },
+        {
+            "id": "a25113b6bd64468ea2ca34195364b186",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 12.2,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-07T00:00:00Z/2021-12-08T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 103
+            }
+        },
+        {
+            "id": "755a25da2a07496aa9a4645f39b2a4e3",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 10.2,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-07T00:00:00Z/2021-12-08T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 105
+            }
+        },
+        {
+            "id": "56458b9cf55e4d088196e9ede49ac45d",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 11.0,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-07T00:00:00Z/2021-12-08T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 107
+            }
+        },
+        {
+            "id": "3a69efba688346088a0646861d27f5d7",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": 22.0,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-07T00:00:00Z/2021-12-08T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 111
+            }
+        },
+        {
+            "id": "0e4ad7a548b84a0ca836a03827912458",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-07T00:00:00Z/2021-12-08T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 112
+            }
+        },
+        {
+            "id": "4dc8d51fd12d47b79c253704de3c65ee",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-07T00:00:00Z/2021-12-08T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 113
+            }
+        },
+        {
+            "id": "6069f04acf70480bb0914a500ed3f02a",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 15.7,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-08T00:00:00Z/2021-12-09T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 118
+            }
+        },
+        {
+            "id": "ff65f5cee46245f48e1a1cec1ad6b6af",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 9.8,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-08T00:00:00Z/2021-12-09T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 120
+            }
+        },
+        {
+            "id": "91500e5174004492af1aec3638b4991e",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 12.1,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-08T00:00:00Z/2021-12-09T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 122
+            }
+        },
+        {
+            "id": "e4b64f114db2486b94eb78d3722fe78f",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": 0.0,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-08T00:00:00Z/2021-12-09T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 126
+            }
+        },
+        {
+            "id": "c67727a0d3d6419880829f3ea993b332",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-08T00:00:00Z/2021-12-09T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 127
+            }
+        },
+        {
+            "id": "c3ec821c8fe24ed28fcd0f8f5a6b0a07",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-08T00:00:00Z/2021-12-09T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 128
+            }
+        },
+        {
+            "id": "d51ec7cff77144929aa9eb6999ba4f6a",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 16.9,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-09T00:00:00Z/2021-12-10T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 133
+            }
+        },
+        {
+            "id": "bc687201ca754feab93ba32167772d31",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 5.8,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-09T00:00:00Z/2021-12-10T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 135
+            }
+        },
+        {
+            "id": "d1991904005549daa8109c53eebb5541",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 11.1,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-09T00:00:00Z/2021-12-10T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 137
+            }
+        },
+        {
+            "id": "10fa2088c63b4019b8809895a0f80ef1",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": 0.0,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-09T00:00:00Z/2021-12-10T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 141
+            }
+        },
+        {
+            "id": "44778a57451949d781f5955bb75c7020",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-09T00:00:00Z/2021-12-10T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 142
+            }
+        },
+        {
+            "id": "55970b17cdf74a808d1e55484d7253c9",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-09T00:00:00Z/2021-12-10T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 143
+            }
+        },
+        {
+            "id": "039d3a4c45a9434e8581de16956ecaa9",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 15.7,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-10T00:00:00Z/2021-12-11T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 148
+            }
+        },
+        {
+            "id": "6895e10387464beab472dd52eb5646b0",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 6.9,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-10T00:00:00Z/2021-12-11T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 150
+            }
+        },
+        {
+            "id": "4cfe0441367a41baa3f3c83b71b6d25d",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 10.3,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-10T00:00:00Z/2021-12-11T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 152
+            }
+        },
+        {
+            "id": "a4b50e82e24446eb90a68eae2410d87d",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": 0.0,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-10T00:00:00Z/2021-12-11T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 156
+            }
+        },
+        {
+            "id": "35678ca632d24f6b90c15afed7713cd4",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-10T00:00:00Z/2021-12-11T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 157
+            }
+        },
+        {
+            "id": "7ec2387b1cf8411b99d4bcaad94f801f",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-10T00:00:00Z/2021-12-11T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 158
+            }
+        },
+        {
+            "id": "c8ffdf12b9244e36a27dd26abe05363a",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 18.0,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-11T00:00:00Z/2021-12-12T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 163
+            }
+        },
+        {
+            "id": "c54d225ea79c4a9ebea4e10d50c8ceb1",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 5.6,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-11T00:00:00Z/2021-12-12T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 165
+            }
+        },
+        {
+            "id": "6cf7abbb41a64f29b646b670555c1fed",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 10.9,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-11T00:00:00Z/2021-12-12T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 167
+            }
+        },
+        {
+            "id": "2b9064db5ca241d89f15392e0ae7d7e9",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": 0.0,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-11T00:00:00Z/2021-12-12T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 171
+            }
+        },
+        {
+            "id": "3d996b9f4dcc42eca83b9dd4a1ef7e15",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-11T00:00:00Z/2021-12-12T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 172
+            }
+        },
+        {
+            "id": "92b1fb7e63fd4a238ecf0e72a336aee9",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-11T00:00:00Z/2021-12-12T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 173
+            }
+        },
+        {
+            "id": "94dc34b90c8c447fb2fb316415986bd1",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 15.2,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-12T00:00:00Z/2021-12-13T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 178
+            }
+        },
+        {
+            "id": "5444bcabb579411d8a66eb0d872229a4",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 6.7,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-12T00:00:00Z/2021-12-13T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 180
+            }
+        },
+        {
+            "id": "07bfbe89de164e6784598dc2f18cd75d",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 11.2,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-12T00:00:00Z/2021-12-13T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 182
+            }
+        },
+        {
+            "id": "1be6a0ff3f7b49dd816ad6a71127a3cb",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": -0.1,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-12T00:00:00Z/2021-12-13T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 186
+            }
+        },
+        {
+            "id": "544a551a18a1417396f1a13363b1af39",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-12T00:00:00Z/2021-12-13T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 187
+            }
+        },
+        {
+            "id": "152af8c8934544e9ba566ecdce33cc25",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-12T00:00:00Z/2021-12-13T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 188
+            }
+        },
+        {
+            "id": "79f5d08812bb444ea5015d8739482dca",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 12.1,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-13T00:00:00Z/2021-12-14T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 193
+            }
+        },
+        {
+            "id": "0dfb0a56b30a4529ba7f78c08729ea29",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 4.8,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-13T00:00:00Z/2021-12-14T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 195
+            }
+        },
+        {
+            "id": "7447b38d2cb64469bab602dcf23cdcfd",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 8.9,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-13T00:00:00Z/2021-12-14T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 197
+            }
+        },
+        {
+            "id": "c6d802ffa96942de859a20724b0670c7",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": -0.1,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-13T00:00:00Z/2021-12-14T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 201
+            }
+        },
+        {
+            "id": "2b78c1f027f84313ad1b0ed62af42181",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-13T00:00:00Z/2021-12-14T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 202
+            }
+        },
+        {
+            "id": "28eab5dc003e4f66b52ea12855e51486",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-13T00:00:00Z/2021-12-14T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 203
+            }
+        },
+        {
+            "id": "885a2ca4c80242e295de2fc14ac9eef2",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 12.2,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-14T00:00:00Z/2021-12-15T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 208
+            }
+        },
+        {
+            "id": "610ba3100e15422c92bd57067ee09975",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 2.2,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-14T00:00:00Z/2021-12-15T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 210
+            }
+        },
+        {
+            "id": "9346630ccea8495185bb797412b69383",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 6.5,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-14T00:00:00Z/2021-12-15T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 212
+            }
+        },
+        {
+            "id": "18ebe076307e4e049710a895c99c486f",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": 0.0,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-14T00:00:00Z/2021-12-15T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 216
+            }
+        },
+        {
+            "id": "498ee4bece0e46cfb97151a950dc8e8e",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-14T00:00:00Z/2021-12-15T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 217
+            }
+        },
+        {
+            "id": "12dfe244f6e24341bcc2e828b36df9f2",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-14T00:00:00Z/2021-12-15T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 218
+            }
+        },
+        {
+            "id": "ed1eeb3705de4529903febf18a0bdddb",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 14.1,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-15T00:00:00Z/2021-12-16T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 223
+            }
+        },
+        {
+            "id": "3f3f401ba521435e9fb240cebae1bb83",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 2.4,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-15T00:00:00Z/2021-12-16T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 225
+            }
+        },
+        {
+            "id": "0434c2a3076a45008b3e641789b4b263",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 7.7,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-15T00:00:00Z/2021-12-16T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 227
+            }
+        },
+        {
+            "id": "6e22297048fd4d7da4bab912a27e8817",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": 0.0,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-15T00:00:00Z/2021-12-16T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 231
+            }
+        },
+        {
+            "id": "9cf4de1d928946b58ba0bedb5e4254ef",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-15T00:00:00Z/2021-12-16T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 232
+            }
+        },
+        {
+            "id": "ad015924aa4842a5b4d5f51a5a5b3c8e",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-15T00:00:00Z/2021-12-16T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 233
+            }
+        },
+        {
+            "id": "b760f5e3f0504dfba1ffeef47b7de63b",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 14.6,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-16T00:00:00Z/2021-12-17T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 238
+            }
+        },
+        {
+            "id": "98d81d7e5e8b425597b321282adb35d3",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 3.5,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-16T00:00:00Z/2021-12-17T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 240
+            }
+        },
+        {
+            "id": "15c37037aee54d6c847b0159690c57c9",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 9.2,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-16T00:00:00Z/2021-12-17T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 242
+            }
+        },
+        {
+            "id": "74f715a70b0f40899217c86790a58ff6",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": 2.5,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-16T00:00:00Z/2021-12-17T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 246
+            }
+        },
+        {
+            "id": "c129c2104fb5433da7df21da0056a860",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-16T00:00:00Z/2021-12-17T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 247
+            }
+        },
+        {
+            "id": "768450ea284f41e09bbe032a6c0c444c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-16T00:00:00Z/2021-12-17T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 248
+            }
+        },
+        {
+            "id": "6317c72335314e7392d32f8639c5c57c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 12.9,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-17T00:00:00Z/2021-12-18T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 253
+            }
+        },
+        {
+            "id": "9c0dfee581c04fb49fe6975cbd0ff06f",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 2.2,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-17T00:00:00Z/2021-12-18T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 255
+            }
+        },
+        {
+            "id": "0f167112b1254c7da2ccdec86b25f58d",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 8.4,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-17T00:00:00Z/2021-12-18T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 257
+            }
+        },
+        {
+            "id": "b725f802181b473c94711e0b9dae4399",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": 20.0,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-17T00:00:00Z/2021-12-18T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 261
+            }
+        },
+        {
+            "id": "12e0239a1ef84c4d8f99eed9d5189757",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-17T00:00:00Z/2021-12-18T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 262
+            }
+        },
+        {
+            "id": "c16ee6caf3ce47e988a4dc1da0dc5cba",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-17T00:00:00Z/2021-12-18T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 263
+            }
+        },
+        {
+            "id": "e53d775e46824255b22d05ef39f617f4",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 7.2,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-18T00:00:00Z/2021-12-19T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 268
+            }
+        },
+        {
+            "id": "b8d9aa306440483187f1c605635f139a",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 0.8,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-18T00:00:00Z/2021-12-19T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 270
+            }
+        },
+        {
+            "id": "725266d05ff043d38e47c3356584950c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 3.0,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-18T00:00:00Z/2021-12-19T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 272
+            }
+        },
+        {
+            "id": "c16e9e19e46249139fe25efa5096a888",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": -0.1,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-18T00:00:00Z/2021-12-19T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 276
+            }
+        },
+        {
+            "id": "1143ae212a4f4b8297947c5f9dfe67f8",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-18T00:00:00Z/2021-12-19T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 277
+            }
+        },
+        {
+            "id": "1c7bef3756804ea28ee7828c752fb448",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-18T00:00:00Z/2021-12-19T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 278
+            }
+        },
+        {
+            "id": "d27a6ace2f8244f69b35576b2a72d656",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 8.0,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-19T00:00:00Z/2021-12-20T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 283
+            }
+        },
+        {
+            "id": "4fd5edbf38a549919706f3ee3d431691",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": -0.4,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-19T00:00:00Z/2021-12-20T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 285
+            }
+        },
+        {
+            "id": "b984e44cf834434ebb4ac17e7546bc7a",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 3.5,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-19T00:00:00Z/2021-12-20T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 287
+            }
+        },
+        {
+            "id": "9be4f84f014a4b39a5df1ee603321ac1",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": -0.1,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-19T00:00:00Z/2021-12-20T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 291
+            }
+        },
+        {
+            "id": "310331ee08364cc7b115588ee20b1e0c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-19T00:00:00Z/2021-12-20T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 292
+            }
+        },
+        {
+            "id": "8eabda5915ff4aef985847e3820418bf",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-19T00:00:00Z/2021-12-20T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 293
+            }
+        },
+        {
+            "id": "86eca65b35a04ca99644eaf17c087797",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 11.3,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-20T00:00:00Z/2021-12-21T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 298
+            }
+        },
+        {
+            "id": "8226de9bb9fe49ea821e5b022e641b75",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 2.5,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-20T00:00:00Z/2021-12-21T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 300
+            }
+        },
+        {
+            "id": "a31734a8465e4630a34e19594ee328a6",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 6.4,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-20T00:00:00Z/2021-12-21T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 302
+            }
+        },
+        {
+            "id": "f4de126c422c4191a0a5f788bd1ac325",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": -0.1,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-20T00:00:00Z/2021-12-21T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 306
+            }
+        },
+        {
+            "id": "05771d9e65de42a195d1fd021b1aeca8",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-20T00:00:00Z/2021-12-21T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 307
+            }
+        },
+        {
+            "id": "93f39bb37a3946428ff6f16b59cb4a8b",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-20T00:00:00Z/2021-12-21T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 308
+            }
+        },
+        {
+            "id": "9c81c8d0f1d24166954b5a9be6f69570",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 12.9,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-21T00:00:00Z/2021-12-22T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 313
+            }
+        },
+        {
+            "id": "6088e29544a1407eb52b6606bedf6039",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 3.2,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-21T00:00:00Z/2021-12-22T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 315
+            }
+        },
+        {
+            "id": "e206c848506d476bbab4d537c4abcb24",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 7.6,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-21T00:00:00Z/2021-12-22T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 317
+            }
+        },
+        {
+            "id": "d4104b443a93496f8d4e92771ab73e30",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": -0.1,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-21T00:00:00Z/2021-12-22T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 321
+            }
+        },
+        {
+            "id": "c3a767a5158e47f6a2390322babf6f94",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-21T00:00:00Z/2021-12-22T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 322
+            }
+        },
+        {
+            "id": "e747c557d9674b529a809d3a2cd7cf7c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-21T00:00:00Z/2021-12-22T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 323
+            }
+        },
+        {
+            "id": "d6a1e9bd2f7040519bb06569af354493",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 14.7,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-22T00:00:00Z/2021-12-23T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 328
+            }
+        },
+        {
+            "id": "873999dfc90e4f7db06b9b55d636960f",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 4.5,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-22T00:00:00Z/2021-12-23T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 330
+            }
+        },
+        {
+            "id": "30e89440975b4fe7b078ac76c59ef3b7",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 8.1,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-22T00:00:00Z/2021-12-23T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 332
+            }
+        },
+        {
+            "id": "76444013decb477b8ec0bf178b043793",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": -0.1,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-22T00:00:00Z/2021-12-23T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 336
+            }
+        },
+        {
+            "id": "05d1fb7c38004292aa4e5ef9554ef768",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-22T00:00:00Z/2021-12-23T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 337
+            }
+        },
+        {
+            "id": "ed50846fe765482a9d24063009db8604",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-22T00:00:00Z/2021-12-23T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 338
+            }
+        },
+        {
+            "id": "c3e195bba16d47eab7f86009e7b30d7d",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 12.9,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-23T00:00:00Z/2021-12-24T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 343
+            }
+        },
+        {
+            "id": "cc41ea5bb8374320a95324c43ad3f1e1",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 2.3,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-23T00:00:00Z/2021-12-24T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 345
+            }
+        },
+        {
+            "id": "d3303156951f49edaf4ae4c49e02d611",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 7.4,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-23T00:00:00Z/2021-12-24T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 347
+            }
+        },
+        {
+            "id": "b44057516d974c40b5f83142fffca0e9",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": 0.0,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-23T00:00:00Z/2021-12-24T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 351
+            }
+        },
+        {
+            "id": "ebd32a575fbd4e959d62dea255855b2b",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-23T00:00:00Z/2021-12-24T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 352
+            }
+        },
+        {
+            "id": "7763ed15eeae4f2f83332c58d92d5594",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-23T00:00:00Z/2021-12-24T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 353
+            }
+        },
+        {
+            "id": "aaef416fa6b44361b4fd741f784107eb",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 14.2,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-24T00:00:00Z/2021-12-25T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 358
+            }
+        },
+        {
+            "id": "0dfc16743989434089a7f5c0136608e4",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 3.0,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-24T00:00:00Z/2021-12-25T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 360
+            }
+        },
+        {
+            "id": "5f2726a5163e475a8056277fe7fae367",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 8.7,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-24T00:00:00Z/2021-12-25T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 362
+            }
+        },
+        {
+            "id": "3c646ce9b6344321b6c2a53039a2f816",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": 6.0,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-24T00:00:00Z/2021-12-25T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 366
+            }
+        },
+        {
+            "id": "d3584219496d4ad09115fab7aaa34dc3",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-24T00:00:00Z/2021-12-25T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 367
+            }
+        },
+        {
+            "id": "7d49c980e7ce4ba4b85b81cff463f805",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-24T00:00:00Z/2021-12-25T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 368
+            }
+        },
+        {
+            "id": "8d57de1495af44b6a0ae7a23f25ffd3d",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 11.5,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-25T00:00:00Z/2021-12-26T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 373
+            }
+        },
+        {
+            "id": "eb0b61c1b0ca4609bb2f8850127bd9e1",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 2.4,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-25T00:00:00Z/2021-12-26T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 375
+            }
+        },
+        {
+            "id": "9865a43cae0d4d8f83c03860f2776601",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 7.8,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-25T00:00:00Z/2021-12-26T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 377
+            }
+        },
+        {
+            "id": "da4f8090628244f8bc30d157fe1b161d",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": 1.0,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-25T00:00:00Z/2021-12-26T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 381
+            }
+        },
+        {
+            "id": "973fd619c5e045ea8b0ba9fdfb9472a1",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-25T00:00:00Z/2021-12-26T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 382
+            }
+        },
+        {
+            "id": "a8b70534ea53476a87646b9f4b52d00d",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-25T00:00:00Z/2021-12-26T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 383
+            }
+        },
+        {
+            "id": "7239393ceee742578248c17e3ba51e92",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 5.2,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-26T00:00:00Z/2021-12-27T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 388
+            }
+        },
+        {
+            "id": "88a4ffc16f6c4e4fb4c1b13375beabd9",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": -0.7,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-26T00:00:00Z/2021-12-27T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 390
+            }
+        },
+        {
+            "id": "71c6e6e8faf345daafbf608db9916e5c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 1.5,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-26T00:00:00Z/2021-12-27T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 392
+            }
+        },
+        {
+            "id": "5f84103f5e7c4eb88719a81d43c3e42e",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": -0.1,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-26T00:00:00Z/2021-12-27T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 396
+            }
+        },
+        {
+            "id": "0261ec8878174fe8841ed13bb68eafe9",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-26T00:00:00Z/2021-12-27T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 397
+            }
+        },
+        {
+            "id": "3897c4c82c3f40d0a93a1b9eb2358cb6",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-26T00:00:00Z/2021-12-27T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 398
+            }
+        },
+        {
+            "id": "c7a6222ffcaf4852bc678109b1d9f74d",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 2.7,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-27T00:00:00Z/2021-12-28T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 403
+            }
+        },
+        {
+            "id": "d59f55a4ae864d54bd1c5d55f330863f",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": -1.2,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-27T00:00:00Z/2021-12-28T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 405
+            }
+        },
+        {
+            "id": "e521095336a744878e31a99ddd5e6dc3",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 0.9,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-27T00:00:00Z/2021-12-28T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 407
+            }
+        },
+        {
+            "id": "4282e0cd1c3342b2a877eb97f85ac00f",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": 2.5,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-27T00:00:00Z/2021-12-28T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 411
+            }
+        },
+        {
+            "id": "1c6f15510f524593ae567d6861574c40",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.02,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-27T00:00:00Z/2021-12-28T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 412
+            }
+        },
+        {
+            "id": "a145b20b74854d9dab170349f04d33b5",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-27T00:00:00Z/2021-12-28T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 413
+            }
+        },
+        {
+            "id": "b836314731b34856bed4a4344d2944d3",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 7.9,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-28T00:00:00Z/2021-12-29T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 418
+            }
+        },
+        {
+            "id": "208f73f97d6d4ddeb52b5752d8d34d0a",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 0.8,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-28T00:00:00Z/2021-12-29T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 420
+            }
+        },
+        {
+            "id": "0cceff8e63c24237ab07c9874df9c532",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 3.5,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-28T00:00:00Z/2021-12-29T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 422
+            }
+        },
+        {
+            "id": "5f24a88132274ad9973e1cba889f3948",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": -0.1,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-28T00:00:00Z/2021-12-29T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 426
+            }
+        },
+        {
+            "id": "06d2a085d53947a8b31b8d688fd41ad1",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-28T00:00:00Z/2021-12-29T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 427
+            }
+        },
+        {
+            "id": "faa77336aa8440d3a3c14e54b24e9928",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-28T00:00:00Z/2021-12-29T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 428
+            }
+        },
+        {
+            "id": "5f0eae9a933348a1b80aa530a8331b33",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 8.8,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-29T00:00:00Z/2021-12-30T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 433
+            }
+        },
+        {
+            "id": "c8aee15317e54e629b6abd045407d5b3",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": -0.1,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-29T00:00:00Z/2021-12-30T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 435
+            }
+        },
+        {
+            "id": "57b636d666894086b907c271ffb14cfa",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 4.0,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-29T00:00:00Z/2021-12-30T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 437
+            }
+        },
+        {
+            "id": "c5da8b2ab63c40bd92c6016a6aa2bdfa",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": -0.1,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-29T00:00:00Z/2021-12-30T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 441
+            }
+        },
+        {
+            "id": "f7fa292b7c604d91ba45aba05d5196dd",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-29T00:00:00Z/2021-12-30T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 442
+            }
+        },
+        {
+            "id": "492d9c3389d4449bbd14b9949c3c1faf",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-29T00:00:00Z/2021-12-30T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 443
+            }
+        },
+        {
+            "id": "3b57e94270cb441394ad6b7d91bd4033",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 11.0,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-30T00:00:00Z/2021-12-31T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 448
+            }
+        },
+        {
+            "id": "3db200d4b073494691428155ca8678be",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 2.1,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-30T00:00:00Z/2021-12-31T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 450
+            }
+        },
+        {
+            "id": "329fc6b1644d4db784be240a145e1f7b",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 5.8,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-30T00:00:00Z/2021-12-31T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 452
+            }
+        },
+        {
+            "id": "5072c20a61f84290bb689835cc87edd9",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": -0.1,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-30T00:00:00Z/2021-12-31T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 456
+            }
+        },
+        {
+            "id": "09691fe7fbb74164ac2223f82250840c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-30T00:00:00Z/2021-12-31T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 457
+            }
+        },
+        {
+            "id": "092f1d5afb0f445189c89e102bf23fb3",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-30T00:00:00Z/2021-12-31T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 458
+            }
+        },
+        {
+            "id": "436b3533087f49cba89104473396305b",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 5.0,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-31T00:00:00Z/2022-01-01T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+                "index": 463
+            }
+        },
+        {
+            "id": "813003dc9a104bd293870a6fa1d7a08c",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": -0.7,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-31T00:00:00Z/2022-01-01T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "7c3133632ec1b4f1422d759c5c12fa26",
+                "index": 465
+            }
+        },
+        {
+            "id": "614e94a364f24c64985e9f0602252d2f",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "air_temperature",
+                "value": 1.5,
+                "units": "Celsius",
+                "description": null,
+                "phenomenonTime": "2021-12-31T00:00:00Z/2022-01-01T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "35517ffca8eb8afca8b1e8140c51816f",
+                "index": 467
+            }
+        },
+        {
+            "id": "5559c4d0baff46428eb82cdb8b8cbd0b",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_accumulated_precipitation",
+                "value": 3.5,
+                "units": "kg m-2",
+                "description": null,
+                "phenomenonTime": "2021-12-31T00:00:00Z/2022-01-01T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 471
+            }
+        },
+        {
+            "id": "be35388975b24f259db9b46677969be5",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "depth_of_fresh_snow",
+                "value": 0.01,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-31T00:00:00Z/2022-01-01T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 472
+            }
+        },
+        {
+            "id": "1364f2664e6a465ab4fbda46592deb3d",
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    136.965,
+                    35.16666,
+                    51.1
+                ]
+            },
+            "properties": {
+                "key": "total_snow_depth",
+                "value": 0.0,
+                "units": "m",
+                "description": null,
+                "phenomenonTime": "2021-12-31T00:00:00Z/2022-01-01T00:00:00Z",
+                "resultTime": "2022-03-08T13:34:11+0",
+                "metadata": "0eaf7264a090d3487d6f4422c5306350",
+                "index": 473
+            }
+        }
+    ],
+    "metadata": [
+        {
+            "id": "a44e236f5dfb5d5fc5046bfa6eb2f477",
+            "metadata": [
+                {
+                    "name": "height_of_sensor_above_local_ground_or_deck_of_marine_platform",
+                    "value": 1.5,
+                    "units": "m",
+                    "description": null
+                },
+                {
+                    "name": "first_order_statistics",
+                    "value": 2,
+                    "units": "CODE TABLE",
+                    "description": "Maximum value"
+                }
+            ]
+        },
+        {
+            "id": "7c3133632ec1b4f1422d759c5c12fa26",
+            "metadata": [
+                {
+                    "name": "height_of_sensor_above_local_ground_or_deck_of_marine_platform",
+                    "value": 1.5,
+                    "units": "m",
+                    "description": null
+                },
+                {
+                    "name": "first_order_statistics",
+                    "value": 3,
+                    "units": "CODE TABLE",
+                    "description": "Minimum value"
+                }
+            ]
+        },
+        {
+            "id": "35517ffca8eb8afca8b1e8140c51816f",
+            "metadata": [
+                {
+                    "name": "height_of_sensor_above_local_ground_or_deck_of_marine_platform",
+                    "value": 1.5,
+                    "units": "m",
+                    "description": null
+                },
+                {
+                    "name": "first_order_statistics",
+                    "value": 4,
+                    "units": "CODE TABLE",
+                    "description": "Mean value"
+                }
+            ]
+        },
+        {
+            "id": "0eaf7264a090d3487d6f4422c5306350",
+            "metadata": [
+                {
+                    "name": "height_of_sensor_above_local_ground_or_deck_of_marine_platform",
+                    "value": 1.5,
+                    "units": "m",
+                    "description": null
+                }
+            ]
+        }
+    ],
+    "headers": {
+        "edition": 4,
+        "masterTableNumber": 0,
+        "bufrHeaderCentre": 34,
+        "bufrHeaderSubCentre": 0,
+        "updateSequenceNumber": 0,
+        "dataCategory": 0,
+        "internationalDataSubCategory": 21,
+        "dataSubCategory": 0,
+        "masterTablesVersionNumber": 30,
+        "localTablesVersionNumber": 0,
+        "typicalYear": 2021,
+        "typicalMonth": 12,
+        "typicalDay": 1,
+        "typicalHour": 0,
+        "typicalMinute": 0,
+        "typicalSecond": 0,
+        "typicalDate": "20211201",
+        "typicalTime": "000000",
+        "numberOfSubsets": 1,
+        "observedData": 1,
+        "compressedData": 0,
+        "subsetNumber": 1
+    }
+}
