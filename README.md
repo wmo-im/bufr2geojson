@@ -16,4 +16,6 @@ bufr2geojson transform A_ISSL01EGRR170600_C_EDZW_20220217063602_77195428.bin --o
 
 or with CSV:
 
+````
 bufr2geojson transform A_ISSL01EGRR170600_C_EDZW_20220217063602_77195428.bin --output-dir ./output/ --csv True
+````
