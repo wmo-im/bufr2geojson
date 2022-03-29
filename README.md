@@ -1,6 +1,7 @@
 # bufr2geojson
 
 Python module and CLI to convert from bufr to geoJSON.
+Please note, the geoJSON produced by this module is experimental and subject to change.
 
 ## Install
 Download and build Docker image
