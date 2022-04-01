@@ -1,0 +1,45 @@
+{
+  "$id": "https://github.com/wmo-im/bufr2geojson/tree/master/bufr2geojson/resources/schemas/observation.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type":"object",
+  "allOf": [
+    {
+      "$ref": "https://geojson.org/schema/Feature.json"
+    }
+  ],
+  "properties": {
+    "properties": {
+      "type": "object",
+      "properties": {
+        "identifier": {"type": "string", "description": "feature identifier"},
+        "wigos_station_identifier": {
+          "type": "string",
+          "format": "wsi" ,
+          "description": "WIGOS station identifier for station making observations"
+          },
+        "phenomenonTime": {"type": "string", "format": "date-time", "description":"date and time that feature was observed or measured"},
+        "resultTime": {"type": "string", "format": "date-time", "description": "date and time result first became available"},
+        "name": {"type": "string", "description":  "name of parameter observed or measured"},
+        "value": {"type": "number", "description":"value of the parameter reported if numeric, use description if non-numeric"},
+        "units": {"type": "string", "description": "units that value is reported in"},
+        "description": {"type": ["string","null"], "description": "text representation of value if non-numeric"},
+        "metadata": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string", "description": "name of metadata associated with observation"},
+              "value": {"type": ["number","null"], "description": "numerical value of metadata element, use description field if non-numeric"},
+              "units": {"type": "string", "description": "Units 'value' reported in if numeric"},
+              "description": {"type":  ["string","null"], "description": "text representation of value if non-numeric"}
+            }
+          }
+        }
+      },
+      "required": ["phenomenonTime","name","value", "units"]
+    },
+    "_meta": {
+      "type": "object"
+    }
+  }
+}
