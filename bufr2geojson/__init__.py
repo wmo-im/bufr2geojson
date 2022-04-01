@@ -58,7 +58,7 @@ pd.set_option('display.width', None)
 SUCCESS = True
 NUMBERS = (float, int, complex)
 MISSING = ("NA", "NaN", "NAN", "None")
-
+FAIL_ON_ERROR = False
 NULLIFY_INVALID = True  # TODO: move to env. variable
 
 LOGGER = logging.getLogger(__name__)
@@ -84,7 +84,9 @@ HEADERS = ["edition", "masterTableNumber", "bufrHeaderCentre",
            "typicalYear", "typicalMonth", "typicalDay", "typicalHour",
            "typicalMinute", "typicalSecond", "typicalDate", "typicalTime",
            "numberOfSubsets", "observedData", "compressedData",
-           "unexpandedDescriptors", "subsetNumber"]
+           "subsetNumber"]
+
+UNEXPANDED_DESCRIPTORS = ["unexpandedDescriptors"]
 
 ECMWF_HEADERS = ["rdb", "rdbType", "oldSubtype", "localYear", "localMonth",
                  "localDay", "localHour", "localMinute", "localSecond",
@@ -132,27 +134,34 @@ class BUFRParser:
         self.code_table = self.code_table.astype({"CodeFigure": "int"})
         # dict to store qualifiers in force and for accounting
         self.qualifiers = {
-            "00": {},
-            "01": {},
-            "02": {},
-            "03": {},
-            "04": {},
-            "05": {},
-            "06": {},
-            "07": {},
-            "08": {}
+            "01": {},  # identification
+            "02": {},  # instrumentation
+            "03": {},  # instrumenation
+            "04": {},  # location (time)
+            "05": {},  # location (horizontal 1)
+            "06": {},  # location (horizontal 2)
+            "07": {},  # location (vertical)
+            "08": {},  # significance qualifiers
+            "09": {}  # reserved
         }
 
-    def set_qualifier(self, fxxyyy: str, key: str, value: numeric,
-                      description: str, attributes: any, append: bool = False):
+    def set_qualifier(self, fxxyyy: str, key: str, value: Union[NUMBERS],
+                      description: str, attributes: any, append: bool = False) -> None:  # noqa
         """
         Sets qualifier specified.
+
+        :param fxxyyy: BUFR element descriptor of qualifier being set
+        :param key: Plain text key of fxxyyy qualifier based on ecCodes library  # noqa
+        :param value: Numeric value of the qualifier
+        :param description: Character value of the qualifier
+        :param attributes: BUFR attributes (scale, reference value, width, units etc) associated with element  # noqa
+        :param append: Flag to indicate whether to append qualifier on to list of values. Only valid for coordinates.  # noqa
+
+        :returns: None
         """
         # get class of descriptor
         xx = fxxyyy[1:3]
         # first check whether the value is None, if so remove and exit
-        if key == "ship_or_mobile_land_station_identifier":
-            LOGGER.debug(f"CALLSIGN: {xx} {key}")
         if value is None:
             if key in self.qualifiers[xx]:
                 del self.qualifiers[xx][key]
@@ -169,10 +178,20 @@ class BUFRParser:
                     "description": description
                 }
 
-    def set_time_displcaement(self, key, value, append=False):
+    def set_time_displacement(self, key, value, append=False):
         raise NotImplementedError
 
-    def get_qualifer(self, xx, key, default=None):
+    def get_qualifer(self, xx: str, key: str, default=None) -> Union[NUMBERS]:
+        """
+        Function to get specified qualifier
+
+        :param xx: class of the element to get
+        :param key: textual key of element
+        :param default: default value to use if qualifier is not set
+
+        :returns: numeric value of qualifier
+        """
+
         if key in self.qualifiers[xx]:
             value = self.qualifiers[xx][key]["value"]
         else:
@@ -180,8 +199,14 @@ class BUFRParser:
             value = default
         return value
 
-    def get_qualifiers(self):
-        # Function to return qualifiers in operation.
+    def get_qualifiers(self) -> list:
+        """
+        Function to return all qualifiers set (excluding special qualifiers
+        such as date and time)
+
+        :returns: List containing qualifiers, their values and units
+        """
+
         classes = ("01", "02", "03", "04", "05", "06", "07", "08")
         result = list()
         # name, value, units
@@ -208,7 +233,13 @@ class BUFRParser:
                 result.append(q)
         return result
 
-    def get_location(self):  # special rules for the definition of the location
+    def get_location(self) -> dict:  # special rules for the definition of the location
+        """
+        Function to get location from qualifiers and to apply any displacements
+        or increments
+
+        :returns: dictionary containing geosjon geom ({"type":"", "coordinates": [x,y,z?]})  # noqa
+        """
         # first get latitude
         #if not (("005001" in self.qualifiers["05"]) ^ ("005002" in self.qualifiers["05"])):  # noqa
         if "latitude" not in self.qualifiers["05"]:
@@ -265,7 +296,13 @@ class BUFRParser:
 
         return geom
 
-    def get_time(self):
+    def get_time(self) -> str:
+        """
+        Function to get time from qualifiers and to apply any displacements or
+        increments.
+
+        :returns: ISO 8601 formatted date/time string
+        """
         # class is always 04
         xx = "04"
         # get year
@@ -347,10 +384,21 @@ class BUFRParser:
 
         return time
 
-    def get_wsi(self):
+    def get_wsi(self) -> str:
+        """
+        Function returns WIGOS station ID as string
+
+        :returns: WIGOS station ID.
+        """
+
         return self.get_identification()["wsi"]
 
-    def get_identification(self):
+    def get_identification(self) -> dict:
+        """
+        Function extracts identification information from qualifiers.
+
+        :returns: dictionary containing any class 01 qualifiers and WSI as dict.  # noqa
+        """
         # see https://library.wmo.int/doc_num.php?explnum_id=11021
         # page 19 for allocation of WSI if not set
         # check to see what identification we have
@@ -385,7 +433,6 @@ class BUFRParser:
             }
         # ship or mobile land station identifier (001011)
         if "ship_or_mobile_land_station_identifier" in self.qualifiers["01"]:
-            LOGGER.debug("CALLSIGN")
             callsign = self.get_qualifer("01", "ship_or_mobile_land_station_identifier")  # noqa
             wsi_series = 0
             wsi_issuer = 20004
@@ -457,7 +504,15 @@ class BUFRParser:
 
         return station_id
 
-    def get_code_value(self, fxxyyy: str, code):
+    def get_code_value(self, fxxyyy: str, code: int) -> str:
+        """
+        Gets decoded value for BUFR element
+
+        :param fxxyyy: FXXYYY BUFR descriptor
+        :param code: value to decode and convert to string representation
+
+        :returns: string representation of coded value
+        """
         table = self.code_table.loc[(self.code_table["FXY"] == fxxyyy), ]
         decoded = table.loc[table["CodeFigure"] == code, ]
         decoded.reset_index(drop=True, inplace=True)
@@ -467,7 +522,15 @@ class BUFRParser:
             assert len(decoded) == 0
         return decoded
 
-    def as_geojson(self, bufr_handle, id, filter=None):
+    def as_geojson(self, bufr_handle: int, id: str) -> dict:  # noqa
+        """
+        Function to return geoJSON representation of BUFR message
+
+        :param bufr_handle: integer handle for BUFR data (used by eccodes)
+        :param id: id to assign to feature collection
+
+        :returns: dictionary containing feature collection
+        """
         # return data as geojson
 
         # check we have data
@@ -486,38 +549,37 @@ class BUFRParser:
         except:
             LOGGER.error(f"Too many subsets in call to as_geojson ({nsubsets})")  # noqa
 
+
+        # Load headers
+        headers = OrderedDict()
+        for header in HEADERS:
+            headers[header] = codes_get(bufr_handle, header)
+
+        characteristic_date = headers["typicalDate"]
+        characteristic_time = headers["typicalTime"]
+
         # now get key iterator
         key_iterator = codes_bufr_keys_iterator_new(bufr_handle)
 
         # set up data structures
-        data = list()
-        headers = OrderedDict()
-        metadata_list = list()
-        md5sums = list()
+        data = {}
         last_key = None
         index = 0
+
+
         # iterate over keys and add to dict
         while codes_bufr_keys_iterator_next(key_iterator):
             # get key
             key = codes_bufr_keys_iterator_get_name(key_iterator)
             # identify what we are processing
-            if key in HEADERS:
-                if key == "unexpandedDescriptors":
-                    LOGGER.debug(codes_get_array(bufr_handle, key))
-                    pass
-                else:
-                    headers[key] = codes_get(bufr_handle, key)
-                continue
-            if key in ECMWF_HEADERS:
+            if key in (HEADERS + ECMWF_HEADERS + UNEXPANDED_DESCRIPTORS):
                 continue
             else:  # data descriptor
                 fxxyyy = codes_get(bufr_handle, f"{key}->code")
 
             LOGGER.debug(key)
             # get class
-            f = int(fxxyyy[0])
             xx = int(fxxyyy[1:3])
-            yyy = int(fxxyyy[3:6])
 
             # get value and attributes
             value = codes_get_array(bufr_handle, key)  # noqa, get as array and convert to scalar if required
@@ -570,9 +632,6 @@ class BUFRParser:
             else:
                 if value is not None:
                     self.get_identification()
-                    if filter:
-                        if key not in filter:
-                            continue
                     metadata = self.get_qualifiers()
                     metadata_hash = hashlib.md5( json.dumps(metadata).encode("utf-8")).hexdigest()  # noqa
                     md = {
@@ -581,14 +640,16 @@ class BUFRParser:
                     }
                     for idx in range(len(metadata)):
                         md["metadata"].append(metadata[idx])
-                    feature_id = self.make_id()
-                    data.append({
+                    wsi = self.get_wsi()
+                    feature_id = f"WIGOS_{wsi}_{characteristic_date}T{characteristic_time}"  # noqa
+                    feature_id = f"{feature_id}-{id}-{index}"
+                    data[feature_id] = {
                         "id": feature_id,
                         "type": "Feature",
                         "geometry": self.get_location(),
                         "properties": {
                             "identifier": feature_id,
-                            "wigos_station_identifier": self.get_wsi(),
+                            "wigos_station_identifier": wsi,
                             "phenomenonTime": self.get_time(),
                             "resultTime": datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),  # noqa
                             "name": key,
@@ -597,46 +658,58 @@ class BUFRParser:
                             "description": description,
                             "metadata": metadata,
                             "index": index
-                        }
-                    })
-                    if metadata_hash not in md5sums:
-                        metadata_list.append(md)
-                        md5sums.append(metadata_hash)
+                        }}
                 else:
                     pass
             last_key = key
             index += 1
-        collection = {
-            "id": id,
-            "type": "FeatureCollection",
-            "station_id": self.get_identification(),
-            "features": deepcopy(data),
-            "headers": headers
-        }
         result = {
-            "geojson": collection
+            "geojson": data
         }
         return result
 
 
-def transform(input_file):
+def transform(input_file) -> Iterator[dict]:
     # check data type, only in situ supported
     # not yet implemented
     # split subsets into individual messages and process
+    error = False
     bufr_handle = codes_bufr_new_from_file(input_file)
-    codes_set(bufr_handle, "unpack", True)
-    nsubsets = codes_get(bufr_handle, "numberOfSubsets")
-    id = Path(input_file.name).stem
-    collections = dict()
-    for idx in range(nsubsets):
-        LOGGER.debug(f"Extracting subset {idx}")
-        codes_set(bufr_handle, "extractSubset", idx+1)
-        codes_set(bufr_handle, "doExtractSubsets", 1)
-        single_subset = codes_clone(bufr_handle)
-        codes_set(single_subset, "unpack", True)
-        parser = BUFRParser()
-        data = parser.as_geojson(single_subset, id=f"{id}-{idx}")
-        collections[f"{idx}"] = deepcopy(data)
-        codes_release(single_subset)
-    codes_release(bufr_handle)
-    return collections
+    try:
+        codes_set(bufr_handle, "unpack", True)
+    except Exception as e:
+        LOGGER.error("Error unpacking message")
+        LOGGER.error(e)
+        if FAIL_ON_ERROR:
+            raise e
+        error = True
+    if not error:
+        nsubsets = codes_get(bufr_handle, "numberOfSubsets")
+        id = Path(input_file.name).stem
+        collections = dict()
+        for idx in range(nsubsets):
+            LOGGER.debug(bufr_handle)
+            LOGGER.debug(f"Extracting subset {idx}")
+            codes_set(bufr_handle, "extractSubset", idx+1)
+            codes_set(bufr_handle, "doExtractSubsets", 1)
+            LOGGER.debug("Cloning subset to new message")
+            single_subset = codes_clone(bufr_handle)
+            LOGGER.debug("Unpacking")
+            codes_set(single_subset, "unpack", True)
+            parser = BUFRParser()
+            try:
+                data = parser.as_geojson(single_subset, id=f"{idx}")
+            except Exception as e:
+                LOGGER.error("Error parsing BUFR to geoJSON, no data written")
+                LOGGER.error(e)
+                if FAIL_ON_ERROR:
+                    raise e
+                data = {}
+            collections = deepcopy(data)
+            codes_release(single_subset)
+    else:
+        collections = {}
+    yield collections
+    if not error:
+        codes_release(bufr_handle)
+

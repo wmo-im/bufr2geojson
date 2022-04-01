@@ -65,22 +65,17 @@ def cli():
 @click.argument("bufr_file", type=click.File(errors="ignore"))
 @click.option("--output-dir", "output_dir", required=True,
               help="Name of output file")
-@click.option("--csv", "write_csv", required=False, default=False, help="write CSV output as well")  # noqa
 @cli_option_verbosity
-def transform(ctx, bufr_file, output_dir, write_csv, verbosity):
-    result = None
+def transform(ctx, bufr_file, output_dir, verbosity):
     LOGGER.info(f"Transforming {bufr_file.name} to geojson")
-    geojson = as_geojson(bufr_file)
-    outfile = Path(bufr_file.name).stem
-    for key in geojson:
-        outfile_key = f"{output_dir}{os.sep}{outfile}-{key}.json"
-        with open(outfile_key, "w") as fh:
-            fh.write(json.dumps(geojson[key]["geojson"], indent=4))
-        if write_csv:
-            outfile_key = f"{output_dir}{os.sep}{outfile}-{key}_metadata.csv"
-            geojson[key]["metadata.csv"].to_csv(outfile_key, index=False, quoting=QUOTE_NONNUMERIC, na_rep="NA")  # noqa
-            outfile_key = f"{output_dir}{os.sep}{outfile}-{key}_records.csv"
-            geojson[key]["records.csv"].to_csv(outfile_key, index=False, quoting=QUOTE_NONNUMERIC, na_rep="NA")  # noqa
+    result = as_geojson(bufr_file)
+    for item in result:
+        for key in item:
+            for key2 in item[key]:
+                outfile = f"{output_dir}{os.sep}{key2}.{key}"
+                data = item[key][key2]
+                with open(outfile, "w") as fh:
+                    fh.write(json.dumps(data, indent=4))
 
     LOGGER.info("Done")
 

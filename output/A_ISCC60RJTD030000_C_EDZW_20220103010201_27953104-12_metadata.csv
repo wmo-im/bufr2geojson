@@ -1,8 +1,0 @@
-"id","name","value","units","description"
-"a44e236f5dfb5d5fc5046bfa6eb2f477","height_of_sensor_above_local_ground_or_deck_of_marine_platform",1.5,"m","NA"
-"a44e236f5dfb5d5fc5046bfa6eb2f477","first_order_statistics",2.0,"CODE TABLE","Maximum value"
-"7c3133632ec1b4f1422d759c5c12fa26","height_of_sensor_above_local_ground_or_deck_of_marine_platform",1.5,"m","NA"
-"7c3133632ec1b4f1422d759c5c12fa26","first_order_statistics",3.0,"CODE TABLE","Minimum value"
-"35517ffca8eb8afca8b1e8140c51816f","height_of_sensor_above_local_ground_or_deck_of_marine_platform",1.5,"m","NA"
-"35517ffca8eb8afca8b1e8140c51816f","first_order_statistics",4.0,"CODE TABLE","Mean value"
-"0eaf7264a090d3487d6f4422c5306350","height_of_sensor_above_local_ground_or_deck_of_marine_platform",1.5,"m","NA"
