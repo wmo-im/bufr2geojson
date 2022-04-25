@@ -142,7 +142,8 @@ class BUFRParser:
             "06": {},  # location (horizontal 2)
             "07": {},  # location (vertical)
             "08": {},  # significance qualifiers
-            "09": {}  # reserved
+            "09": {},  # reserved
+            "22": {}  # some sst sensors in class 22
         }
 
     def set_qualifier(self, fxxyyy: str, key: str, value: Union[NUMBERS],
@@ -207,7 +208,7 @@ class BUFRParser:
         :returns: List containing qualifiers, their values and units
         """
 
-        classes = ("01", "02", "03", "04", "05", "06", "07", "08")
+        classes = ("01", "02", "03", "04", "05", "06", "07", "08", "22")
         result = list()
         # name, value, units
         for c in classes:
@@ -520,6 +521,7 @@ class BUFRParser:
             decoded = decoded.EntryName_en[0]
         else:
             assert len(decoded) == 0
+            decoded = None
         return decoded
 
     def as_geojson(self, bufr_handle: int, id: str) -> dict:  # noqa
@@ -630,9 +632,15 @@ class BUFRParser:
             elif xx == 31:
                 pass
             else:
+                if fxxyyy == "022067":
+                    append = False
+                    self.set_qualifier(fxxyyy, key, value, description,
+                                       attributes, append)  # noqa
+                    continue
                 if value is not None:
                     self.get_identification()
                     metadata = self.get_qualifiers()
+                    print(metadata)
                     metadata_hash = hashlib.md5( json.dumps(metadata).encode("utf-8")).hexdigest()  # noqa
                     md = {
                         "id": metadata_hash,
@@ -669,7 +677,7 @@ class BUFRParser:
         return result
 
 
-def transform(input_file) -> Iterator[dict]:
+def transform(input_file: str) -> Iterator[dict]:
     # check data type, only in situ supported
     # not yet implemented
     # split subsets into individual messages and process
