@@ -640,7 +640,6 @@ class BUFRParser:
                 if value is not None:
                     self.get_identification()
                     metadata = self.get_qualifiers()
-                    print(metadata)
                     metadata_hash = hashlib.md5( json.dumps(metadata).encode("utf-8")).hexdigest()  # noqa
                     md = {
                         "id": metadata_hash,
@@ -666,7 +665,12 @@ class BUFRParser:
                             "description": description,
                             "metadata": metadata,
                             "index": index
-                        }}
+                        },
+                        "_meta": {
+                            "data_date": self.get_time(),
+                            "identifier": feature_id
+                        }
+                        }
                 else:
                     pass
             last_key = key
