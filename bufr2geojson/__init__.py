@@ -651,20 +651,22 @@ class BUFRParser:
                     feature_id = f"WIGOS_{wsi}_{characteristic_date}T{characteristic_time}"  # noqa
                     feature_id = f"{feature_id}-{id}-{index}"
                     data[feature_id] = {
-                        "id": feature_id,
-                        "type": "Feature",
-                        "geometry": self.get_location(),
-                        "properties": {
-                            "identifier": feature_id,
-                            "wigos_station_identifier": wsi,
-                            "phenomenonTime": self.get_time(),
-                            "resultTime": datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),  # noqa
-                            "name": key,
-                            "value": value,
-                            "units": attributes["units"],
-                            "description": description,
-                            "metadata": metadata,
-                            "index": index
+                        "geojson": {
+                            "id": feature_id,
+                            "type": "Feature",
+                            "geometry": self.get_location(),
+                            "properties": {
+                                "identifier": feature_id,
+                                "wigos_station_identifier": wsi,
+                                "phenomenonTime": self.get_time(),
+                                "resultTime": datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),  # noqa
+                                "name": key,
+                                "value": value,
+                                "units": attributes["units"],
+                                "description": description,
+                                "metadata": metadata,
+                                "index": index
+                            }
                         },
                         "_meta": {
                             "data_date": self.get_time(),
@@ -675,10 +677,15 @@ class BUFRParser:
                     pass
             last_key = key
             index += 1
-        result = {
-            "geojson": data
-        }
-        return result
+        return data
+
+# data[uid]
+#     |--- geojson
+#     |--- _meta
+
+# data[uid]
+#     |--- geojson
+#          |---- feature id
 
 
 def transform(input_file: str) -> Iterator[dict]:
