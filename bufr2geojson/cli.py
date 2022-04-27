@@ -69,11 +69,12 @@ def cli():
 def transform(ctx, bufr_file, output_dir, verbosity):
     LOGGER.info(f"Transforming {bufr_file.name} to geojson")
     result = as_geojson(bufr_file)
-    for key, item in result.items():
-        outfile = f"{output_dir}{os.sep}{key}.json"
-        data = item['geojson']
-        with open(outfile, "w") as fh:
-            fh.write(json.dumps(data, indent=4))
+    for collection in result:
+        for key, item in collection.items():
+            outfile = f"{output_dir}{os.sep}{key}.json"
+            data = item['geojson']
+            with open(outfile, "w") as fh:
+                fh.write(json.dumps(data, indent=4))
 
     LOGGER.info("Done")
 

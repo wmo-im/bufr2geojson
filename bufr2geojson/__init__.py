@@ -540,6 +540,8 @@ class BUFRParser:
             LOGGER.warn("Empty BUFR")
             return {}
 
+        LOGGER.info(f"Processing {id}")
+
         # unpack the message
         codes_set(bufr_handle, "unpack", True)
 
@@ -649,7 +651,7 @@ class BUFRParser:
                         md["metadata"].append(metadata[idx])
                     wsi = self.get_wsi()
                     feature_id = f"WIGOS_{wsi}_{characteristic_date}T{characteristic_time}"  # noqa
-                    feature_id = f"{feature_id}-{id}-{index}"
+                    feature_id = f"{feature_id}{id}-{index}"
                     data[feature_id] = {
                         "geojson": {
                             "id": feature_id,
@@ -704,6 +706,7 @@ def transform(input_file: str) -> Iterator[dict]:
         error = True
     if not error:
         nsubsets = codes_get(bufr_handle, "numberOfSubsets")
+        LOGGER.info(f"{nsubsets} subsets in file {input_file}")
         id = Path(input_file.name).stem
         collections = dict()
         for idx in range(nsubsets):
@@ -716,19 +719,26 @@ def transform(input_file: str) -> Iterator[dict]:
             LOGGER.debug("Unpacking")
             codes_set(single_subset, "unpack", True)
             parser = BUFRParser()
+            # only include tag if more than 1 subset in file
+            tag = ""
+            if nsubsets > 1:
+                tag = f"-{idx}"
+
             try:
-                data = parser.as_geojson(single_subset, id=f"{idx}")
+                data = parser.as_geojson(single_subset, id=tag)
             except Exception as e:
                 LOGGER.error("Error parsing BUFR to geoJSON, no data written")
                 LOGGER.error(e)
                 if FAIL_ON_ERROR:
                     raise e
                 data = {}
-            collections = deepcopy(data)
+            yield data
+            #collections = deepcopy(data)
             codes_release(single_subset)
     else:
         collections = {}
-    yield collections
+        yield collections
+
     if not error:
         codes_release(bufr_handle)
 
