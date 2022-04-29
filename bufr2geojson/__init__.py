@@ -613,7 +613,7 @@ class BUFRParser:
                 description = self.get_code_value(attributes["code"], value)
             elif attributes["units"] == "CCITT IA5":
                 description = value
-
+                value = None
             if (units in PREFERRED_UNITS) and (value is not None):
                 value = Units.conform(value, Units(units),
                                       Units(PREFERRED_UNITS[units]))
@@ -658,7 +658,7 @@ class BUFRParser:
                             "type": "Feature",
                             "geometry": self.get_location(),
                             "properties": {
-                                "identifier": feature_id,
+                                # "identifier": feature_id,
                                 "wigos_station_identifier": wsi,
                                 "phenomenonTime": self.get_time(),
                                 "resultTime": datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),  # noqa
