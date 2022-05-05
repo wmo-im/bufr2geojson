@@ -163,7 +163,7 @@ class BUFRParser:
         # get class of descriptor
         xx = fxxyyy[1:3]
         # first check whether the value is None, if so remove and exit
-        if value is None:
+        if (value is None) and (description is None):
             if key in self.qualifiers[xx]:
                 del self.qualifiers[xx][key]
         else:
@@ -194,7 +194,10 @@ class BUFRParser:
         """
 
         if key in self.qualifiers[xx]:
-            value = self.qualifiers[xx][key]["value"]
+            if self.qualifiers[xx][key]["attributes"]["units"] == "CCITT IA5":
+                value = self.qualifiers[xx][key]["description"]
+            else:
+                value = self.qualifiers[xx][key]["value"]
         else:
             LOGGER.debug(f"No value found for requested qualifier ({key}), setting to default ({default})")  # noqa
             value = default
@@ -412,6 +415,7 @@ class BUFRParser:
             wsi_series = self.get_qualifer("01", "wigos_identifier_series")
             wsi_issuer = self.get_qualifer("01", "wigos_issuer_of_identifier")
             wsi_number = self.get_qualifer("01", "wigos_issue_number")
+            #wsi_local = self.qualifiers["01"]["wigos_local_identifier_character"]["description"]  # noqa
             wsi_local = self.get_qualifer("01", "wigos_local_identifier_character")  # noqa
             wigosID = f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}"
         else:
@@ -562,6 +566,13 @@ class BUFRParser:
         characteristic_date = headers["typicalDate"]
         characteristic_time = headers["typicalTime"]
 
+        sequence = codes_get_array(bufr_handle, UNEXPANDED_DESCRIPTORS[0])
+        sequence = sequence.tolist()
+        sequence = [f"{descriptor}" for descriptor in sequence]
+        sequence = ",".join(sequence)
+        headers["sequence"] = sequence
+        LOGGER.info(sequence)
+
         # now get key iterator
         key_iterator = codes_bufr_keys_iterator_new(bufr_handle)
 
@@ -570,11 +581,11 @@ class BUFRParser:
         last_key = None
         index = 0
 
-
         # iterate over keys and add to dict
         while codes_bufr_keys_iterator_next(key_iterator):
             # get key
             key = codes_bufr_keys_iterator_get_name(key_iterator)
+            LOGGER.debug(key)
             # identify what we are processing
             if key in (HEADERS + ECMWF_HEADERS + UNEXPANDED_DESCRIPTORS):
                 continue
@@ -654,7 +665,8 @@ class BUFRParser:
                     feature_id = f"{feature_id}{id}-{index}"
                     data[feature_id] = {
                         "geojson": {
-                            "id": feature_id,
+                            "id": uuid4().hex,
+                            "reportId": f"WIGOS_{wsi}_{characteristic_date}T{characteristic_time}{id}",  # noqa
                             "type": "Feature",
                             "geometry": self.get_location(),
                             "properties": {
@@ -667,18 +679,22 @@ class BUFRParser:
                                 "units": attributes["units"],
                                 "description": description,
                                 "metadata": metadata,
-                                "index": index
+                                "index": index,
+                                "fxxyyy": fxxyyy
                             }
                         },
                         "_meta": {
                             "data_date": self.get_time(),
-                            "identifier": feature_id
-                        }
+                            "identifier": feature_id,
+                            "metadata_hash": metadata_hash
+                        },
+                        "_headers": deepcopy(headers)
                         }
                 else:
                     pass
             last_key = key
             index += 1
+        LOGGER.info(json.dumps(data, indent=4))
         return data
 
 # data[uid]
