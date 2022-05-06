@@ -25,6 +25,7 @@ from collections import OrderedDict
 from copy import deepcopy
 import csv
 from datetime import timezone, datetime, timedelta
+import gc as gc
 import hashlib
 from io import StringIO, BytesIO
 import json
@@ -35,6 +36,8 @@ from typing import Any, Iterator, Union
 from uuid import uuid4
 from pathlib import Path
 
+import sys
+
 from cfunits import Units
 from eccodes import (codes_bufr_new_from_file, codes_clone,
                      codes_get_array, codes_set, codes_get_native_type,
@@ -42,6 +45,7 @@ from eccodes import (codes_bufr_new_from_file, codes_clone,
                      CODES_MISSING_LONG, CODES_MISSING_DOUBLE,
                      codes_bufr_keys_iterator_new,
                      codes_bufr_keys_iterator_next,
+                     codes_bufr_keys_iterator_delete,
                      codes_bufr_keys_iterator_get_name, CodesInternalError)
 from jsonpath_ng.ext import parser
 from jsonschema import validate
@@ -557,7 +561,6 @@ class BUFRParser:
         except:
             LOGGER.error(f"Too many subsets in call to as_geojson ({nsubsets})")  # noqa
 
-
         # Load headers
         headers = OrderedDict()
         for header in HEADERS:
@@ -694,6 +697,7 @@ class BUFRParser:
                     pass
             last_key = key
             index += 1
+        codes_bufr_keys_iterator_delete(key_iterator)
         LOGGER.info(json.dumps(data, indent=4))
         return data
 
@@ -734,12 +738,12 @@ def transform(input_file: str) -> Iterator[dict]:
             single_subset = codes_clone(bufr_handle)
             LOGGER.debug("Unpacking")
             codes_set(single_subset, "unpack", True)
+
             parser = BUFRParser()
             # only include tag if more than 1 subset in file
             tag = ""
             if nsubsets > 1:
                 tag = f"-{idx}"
-
             try:
                 data = parser.as_geojson(single_subset, id=tag)
             except Exception as e:
@@ -748,8 +752,10 @@ def transform(input_file: str) -> Iterator[dict]:
                 if FAIL_ON_ERROR:
                     raise e
                 data = {}
-            yield data
-            #collections = deepcopy(data)
+            del parser
+            collections = deepcopy(data)
+
+            yield collections
             codes_release(single_subset)
     else:
         collections = {}
