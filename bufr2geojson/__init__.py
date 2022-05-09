@@ -251,31 +251,37 @@ class BUFRParser:
         # first get latitude
         #if not (("005001" in self.qualifiers["05"]) ^ ("005002" in self.qualifiers["05"])):  # noqa
         if "latitude" not in self.qualifiers["05"]:
-            LOGGER.error("Invalid location in BUFR message, no latitude")
-            LOGGER.error(self.qualifiers["05"])
-            raise
-        latitude = deepcopy(self.qualifiers["05"]["latitude"])
+            LOGGER.warn("Invalid location in BUFR message, no latitude")
+            LOGGER.warn(self.qualifiers["05"])
+            LOGGER.warn("latitude set to None")
+            latitude = None
+            #raise
+        else:
+            latitude = deepcopy(self.qualifiers["05"]["latitude"])
 
-        # check if we need to add a displacement
-        if "latitude_displacement" in self.qualifiers["05"]:  # noqa
-            y_displacement = deepcopy(self.qualifiers["05"]["latitude_displacement"])  # noqa
-            latitude["value"] += y_displacement["value"]
-        latitude = round(latitude["value"], latitude["attributes"]["scale"])
+        if latitude is not None:
+            # check if we need to add a displacement
+            if "latitude_displacement" in self.qualifiers["05"]:  # noqa
+                y_displacement = deepcopy(self.qualifiers["05"]["latitude_displacement"])  # noqa
+                latitude["value"] += y_displacement["value"]
+            latitude = round(latitude["value"], latitude["attributes"]["scale"])
 
         # now get longitude
         if "longitude" not in self.qualifiers["06"]:
-            LOGGER.error("Invalid location in BUFR message, no longitude")
-            LOGGER.error(self.qualifiers["06"])
-            raise
-        longitude = self.qualifiers["06"]["longitude"]
+            LOGGER.warn("Invalid location in BUFR message, no longitude")
+            LOGGER.warn(self.qualifiers["06"])
+            LOGGER.warn("longitude set to None")
+            longitude = None
+        else:
+            longitude = self.qualifiers["06"]["longitude"]
 
-        # check if we need to add a displacement
-        if "longitude_displacement" in self.qualifiers["06"]:
-            x_displacement = deepcopy(self.qualifiers["06"]["longitude_displacement"])  # noqa
-            longitude["value"] += x_displacement["value"]
-
-        # round to avoid extraneous digits
-        longitude = round(longitude["value"], longitude["attributes"]["scale"])  # noqa
+        if longitude is not None:
+            # check if we need to add a displacement
+            if "longitude_displacement" in self.qualifiers["06"]:
+                x_displacement = deepcopy(self.qualifiers["06"]["longitude_displacement"])  # noqa
+                longitude["value"] += x_displacement["value"]
+            # round to avoid extraneous digits
+            longitude = round(longitude["value"], longitude["attributes"]["scale"])  # noqa
 
         # now station elevation
         if "height_of_station_ground_above_mean_sea_level" in self.qualifiers["07"]:  # noqa
@@ -564,12 +570,24 @@ class BUFRParser:
         # Load headers
         headers = OrderedDict()
         for header in HEADERS:
-            headers[header] = codes_get(bufr_handle, header)
+            try:
+                headers[header] = codes_get(bufr_handle, header)
+            except Exception as e:
+                if header == "subsetNumber":
+                    LOGGER.warning("subsetNumber not found, continuing")
+                    continue
+                LOGGER.error(f"Error reading {header}")
+                raise e
 
         characteristic_date = headers["typicalDate"]
         characteristic_time = headers["typicalTime"]
 
-        sequence = codes_get_array(bufr_handle, UNEXPANDED_DESCRIPTORS[0])
+        try:
+            sequence = codes_get_array(bufr_handle, UNEXPANDED_DESCRIPTORS[0])
+        except Exception as e:
+            LOGGER.error(f"Error reading {UNEXPANDED_DESCRIPTORS}")
+            raise e
+
         sequence = sequence.tolist()
         sequence = [f"{descriptor}" for descriptor in sequence]
         sequence = ",".join(sequence)
@@ -588,17 +606,21 @@ class BUFRParser:
         while codes_bufr_keys_iterator_next(key_iterator):
             # get key
             key = codes_bufr_keys_iterator_get_name(key_iterator)
+
             LOGGER.debug(key)
             # identify what we are processing
             if key in (HEADERS + ECMWF_HEADERS + UNEXPANDED_DESCRIPTORS):
                 continue
             else:  # data descriptor
-                fxxyyy = codes_get(bufr_handle, f"{key}->code")
-
+                try:
+                    fxxyyy = codes_get(bufr_handle, f"{key}->code")
+                except Exception as e:
+                    LOGGER.error(f"Error reading {key}->code")
+                    raise e
             LOGGER.debug(key)
+
             # get class
             xx = int(fxxyyy[1:3])
-
             # get value and attributes
             value = codes_get_array(bufr_handle, key)  # noqa, get as array and convert to scalar if required
             if (len(value) == 1) and (not isinstance(value, str)):
@@ -618,7 +640,11 @@ class BUFRParser:
             attributes = {}
             for attribute in ATTRIBUTES:
                 attribute_key = f"{key}->{attribute}"
-                attributes[attribute] = codes_get(bufr_handle, attribute_key)
+                try:
+                    attributes[attribute] = codes_get(bufr_handle, attribute_key)  # noqa
+                except Exception as e:
+                    LOGGER.error(f"Error reading {attribute_key}")
+                    raise e
 
             units = attributes["units"]
             # next decoded value if from code table

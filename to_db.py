@@ -70,7 +70,7 @@ def main(argv):
     obsIdx = 0
     mdIdx = 0
     repIdx = 0
-
+    print("START: reading file list from file_list.txt")
     with open("file_list.txt") as fh:
         files = fh.readlines()
     nfiles = len(files)
