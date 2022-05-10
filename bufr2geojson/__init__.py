@@ -730,7 +730,6 @@ class BUFRParser:
             last_key = key
             index += 1
         codes_bufr_keys_iterator_delete(key_iterator)
-        LOGGER.info(json.dumps(data, indent=4))
         if serialize:
             data = json.dumps(data, indent=4)
         return data
