@@ -538,7 +538,7 @@ class BUFRParser:
             decoded = None
         return decoded
 
-    def as_geojson(self, bufr_handle: int, id: str) -> dict:  # noqa
+    def as_geojson(self, bufr_handle: int, id: str, serialize: bool = False) -> dict:  # noqa
         """
         Function to return geoJSON representation of BUFR message
 
@@ -692,6 +692,12 @@ class BUFRParser:
                     wsi = self.get_wsi()
                     feature_id = f"WIGOS_{wsi}_{characteristic_date}T{characteristic_time}"  # noqa
                     feature_id = f"{feature_id}{id}-{index}"
+                    phenomenon_time = self.get_time()
+                    if "/" in phenomenon_time:
+                        result_time = phenomenon_time.split("/")
+                        result_time = result_time[1]
+                    else:
+                        result_time = phenomenon_time
                     data[feature_id] = {
                         "geojson": {
                             "id": uuid4().hex,
@@ -701,8 +707,8 @@ class BUFRParser:
                             "properties": {
                                 # "identifier": feature_id,
                                 "wigos_station_identifier": wsi,
-                                "phenomenonTime": self.get_time(),
-                                "resultTime": datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),  # noqa
+                                "phenomenonTime": phenomenon_time,
+                                "resultTime": result_time,  # noqa
                                 "name": key,
                                 "value": value,
                                 "units": attributes["units"],
@@ -725,8 +731,10 @@ class BUFRParser:
             index += 1
         codes_bufr_keys_iterator_delete(key_iterator)
         LOGGER.info(json.dumps(data, indent=4))
+        if serialize:
+            data = json.dumps(data, indent=4)
         return data
-
+    
 # data[uid]
 #     |--- geojson
 #     |--- _meta
@@ -736,7 +744,7 @@ class BUFRParser:
 #          |---- feature id
 
 
-def transform(input_file: str) -> Iterator[dict]:
+def transform(input_file: str, serialize: bool = False) -> Iterator[dict]:
     # check data type, only in situ supported
     # not yet implemented
     # split subsets into individual messages and process
@@ -771,7 +779,7 @@ def transform(input_file: str) -> Iterator[dict]:
             if nsubsets > 1:
                 tag = f"-{idx}"
             try:
-                data = parser.as_geojson(single_subset, id=tag)
+                data = parser.as_geojson(single_subset, id=tag, serialize=serialize)  # noqa
             except Exception as e:
                 LOGGER.error("Error parsing BUFR to geoJSON, no data written")
                 LOGGER.error(e)
