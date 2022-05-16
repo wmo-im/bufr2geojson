@@ -75,7 +75,7 @@ def main(argv):
         files = fh.readlines()
     nfiles = len(files)
 
-    data_dir = "/local/gts_data/"
+    data_dir = "/local/gts_sample/"
 
     # iterate over files
     for fileIdx in range(0,nfiles):

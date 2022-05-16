@@ -251,9 +251,9 @@ class BUFRParser:
         # first get latitude
         #if not (("005001" in self.qualifiers["05"]) ^ ("005002" in self.qualifiers["05"])):  # noqa
         if "latitude" not in self.qualifiers["05"]:
-            LOGGER.warn("Invalid location in BUFR message, no latitude")
-            LOGGER.warn(self.qualifiers["05"])
-            LOGGER.warn("latitude set to None")
+            LOGGER.warning("Invalid location in BUFR message, no latitude")
+            LOGGER.warning(self.qualifiers["05"])
+            LOGGER.warning("latitude set to None")
             latitude = None
             #raise
         else:
@@ -268,9 +268,9 @@ class BUFRParser:
 
         # now get longitude
         if "longitude" not in self.qualifiers["06"]:
-            LOGGER.warn("Invalid location in BUFR message, no longitude")
-            LOGGER.warn(self.qualifiers["06"])
-            LOGGER.warn("longitude set to None")
+            LOGGER.warning("Invalid location in BUFR message, no longitude")
+            LOGGER.warning(self.qualifiers["06"])
+            LOGGER.warning("longitude set to None")
             longitude = None
         else:
             longitude = self.qualifiers["06"]["longitude"]
@@ -378,7 +378,6 @@ class BUFRParser:
                 if units not in ("years", "months"):
                     kwargs = dict()
                     kwargs[units] = value[tidx]
-                    LOGGER.debug(kwargs)
                     time_list[tidx] = time_list[tidx] + timedelta(**kwargs)
                 elif units == "years":
                     time_list[tidx].year += value[tidx]
@@ -551,10 +550,10 @@ class BUFRParser:
 
         # check we have data
         if not bufr_handle:
-            LOGGER.warn("Empty BUFR")
+            LOGGER.warninging("Empty BUFR")
             return {}
 
-        LOGGER.info(f"Processing {id}")
+        LOGGER.debug(f"Processing {id}")
 
         # unpack the message
         codes_set(bufr_handle, "unpack", True)
@@ -574,7 +573,7 @@ class BUFRParser:
                 headers[header] = codes_get(bufr_handle, header)
             except Exception as e:
                 if header == "subsetNumber":
-                    LOGGER.warning("subsetNumber not found, continuing")
+                    LOGGER.warninging("subsetNumber not found, continuing")
                     continue
                 LOGGER.error(f"Error reading {header}")
                 raise e
@@ -592,7 +591,7 @@ class BUFRParser:
         sequence = [f"{descriptor}" for descriptor in sequence]
         sequence = ",".join(sequence)
         headers["sequence"] = sequence
-        LOGGER.info(sequence)
+        LOGGER.debug(sequence)
 
         # now get key iterator
         key_iterator = codes_bufr_keys_iterator_new(bufr_handle)
@@ -606,8 +605,6 @@ class BUFRParser:
         while codes_bufr_keys_iterator_next(key_iterator):
             # get key
             key = codes_bufr_keys_iterator_get_name(key_iterator)
-
-            LOGGER.debug(key)
             # identify what we are processing
             if key in (HEADERS + ECMWF_HEADERS + UNEXPANDED_DESCRIPTORS):
                 continue
@@ -617,7 +614,6 @@ class BUFRParser:
                 except Exception as e:
                     LOGGER.error(f"Error reading {key}->code")
                     raise e
-            LOGGER.debug(key)
 
             # get class
             xx = int(fxxyyy[1:3])
@@ -665,7 +661,6 @@ class BUFRParser:
             key = re.sub("#[0-9]+#", "", key)
             key = re.sub("([a-z])([A-Z])", r"\1_\2", key)
             key = key.lower()
-            LOGGER.debug(key)
             append = False
             if xx < 9:
                 if ((xx >= 4) and (xx < 8)) and (key == last_key):
@@ -763,7 +758,6 @@ def transform(input_file: str, serialize: bool = False) -> Iterator[dict]:
         id = Path(input_file.name).stem
         collections = dict()
         for idx in range(nsubsets):
-            LOGGER.debug(bufr_handle)
             LOGGER.debug(f"Extracting subset {idx}")
             codes_set(bufr_handle, "extractSubset", idx+1)
             codes_set(bufr_handle, "doExtractSubsets", 1)
