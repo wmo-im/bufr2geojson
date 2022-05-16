@@ -653,7 +653,7 @@ class BUFRParser:
             if (units in PREFERRED_UNITS) and (value is not None):
                 value = Units.conform(value, Units(units),
                                       Units(PREFERRED_UNITS[units]))
-                value = round(value, attributes["scale"])
+                value = round(value, -attributes["scale"])
                 units = PREFERRED_UNITS[units]
                 attributes["units"] = units
             # now process
