@@ -550,7 +550,7 @@ class BUFRParser:
 
         # check we have data
         if not bufr_handle:
-            LOGGER.warninging("Empty BUFR")
+            LOGGER.warning("Empty BUFR")
             return {}
 
         LOGGER.debug(f"Processing {id}")
@@ -573,7 +573,7 @@ class BUFRParser:
                 headers[header] = codes_get(bufr_handle, header)
             except Exception as e:
                 if header == "subsetNumber":
-                    LOGGER.warninging("subsetNumber not found, continuing")
+                    LOGGER.warning("subsetNumber not found, continuing")
                     continue
                 LOGGER.error(f"Error reading {header}")
                 raise e
