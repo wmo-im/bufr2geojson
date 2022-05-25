@@ -1,6 +1,7 @@
 # bufr2geojson
 
 Python module and CLI to convert from bufr to geoJSON.
+Please note, the geoJSON produced by this module is experimental and subject to change.
 
 ## Install
 Download and build Docker image
@@ -25,11 +26,5 @@ bufr2geojson transform <input_file> --output-dir <output_directory> --csv <True|
 e.g.
 
 ````
-bufr2geojson transform ./example_data/A_ISSL01EGRR170600_C_EDZW_20220217063602_77195428.bin --output-dir ./output/
-````
-
-or with CSV:
-
-````
-bufr2geojson transform ./example_data/A_ISSL01EGRR170600_C_EDZW_20220217063602_77195428.bin --output-dir ./output/ --csv True
+bufr2geojson transform ./example_data/A_ISIA21EIDB202100_C_EDZW_20220320210902_11839953.bin  --output-dir ./output/
 ````

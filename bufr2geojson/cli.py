@@ -32,6 +32,7 @@ from bufr2geojson import __version__, BUFRParser, transform as as_geojson
 LOGGER = logging.getLogger(__name__)
 THISDIR = os.path.dirname(os.path.realpath(__file__))
 
+
 def cli_option_verbosity(f):
     logging_options = ["ERROR", "WARNING", "INFO", "DEBUG", "NOTSET"]
 
@@ -58,29 +59,24 @@ def cli():
     """bufr2geojson"""
     pass
 
+
 @click.command()
 @click.pass_context
 @click.argument("bufr_file", type=click.File(errors="ignore"))
 @click.option("--output-dir", "output_dir", required=True,
               help="Name of output file")
-@click.option("--csv", "write_csv", required=False, default=False, help=
-              "write CSV output as well")
 @cli_option_verbosity
-def transform(ctx, bufr_file, output_dir, write_csv, verbosity):
-    result = None
+def transform(ctx, bufr_file, output_dir, verbosity):
     LOGGER.info(f"Transforming {bufr_file.name} to geojson")
-    geojson = as_geojson(bufr_file)
-    outfile = Path(bufr_file.name).stem
-    for key in geojson:
-        outfile_key = f"{output_dir}{os.sep}{outfile}-{key}.json"
-        with open(outfile_key,"w") as fh:
-            fh.write(json.dumps(geojson[key]["geojson"], indent=4))
-        if write_csv:
-            outfile_key = f"{output_dir}{os.sep}{outfile}-{key}_metadata.csv"
-            geojson[key]["metadata.csv"].to_csv(outfile_key, index=False, quoting=QUOTE_NONNUMERIC, na_rep="NA")  # noqa
-            outfile_key = f"{output_dir}{os.sep}{outfile}-{key}_records.csv"
-            geojson[key]["records.csv"].to_csv(outfile_key, index=False, quoting=QUOTE_NONNUMERIC, na_rep="NA")  # noqa
+    result = as_geojson(bufr_file)
+    for collection in result:
+        for key, item in collection.items():
+            outfile = f"{output_dir}{os.sep}{key}.json"
+            data = item['geojson']
+            with open(outfile, "w") as fh:
+                fh.write(json.dumps(data, indent=4))
 
     LOGGER.info("Done")
-    
+
+
 cli.add_command(transform)

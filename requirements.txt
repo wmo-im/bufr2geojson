@@ -1,7 +1,7 @@
+cfunits
 click
 eccodes
 jsonschema
 jsonpath_ng
-pyoscar
-cfunits
 pandas
+pyoscar
