@@ -612,8 +612,8 @@ class BUFRParser:
                 try:
                     fxxyyy = codes_get(bufr_handle, f"{key}->code")
                 except Exception as e:
-                    LOGGER.error(f"Error reading {key}->code")
-                    raise e
+                    LOGGER.warning(f"Error reading {key}->code, skipping element")
+                    continue
 
             # get class
             xx = int(fxxyyy[1:3])
@@ -637,10 +637,12 @@ class BUFRParser:
             for attribute in ATTRIBUTES:
                 attribute_key = f"{key}->{attribute}"
                 try:
-                    attributes[attribute] = codes_get(bufr_handle, attribute_key)  # noqa
+                    attribute_value = codes_get(bufr_handle, attribute_key)  # noqa
                 except Exception as e:
-                    LOGGER.error(f"Error reading {attribute_key}")
-                    raise e
+                    LOGGER.warning(f"Error reading {attribute_key}")
+                    attribute_value = None
+                if attribute_value is not None:
+                    attributes[attribute] = attribute_value
 
             units = attributes["units"]
             # next decoded value if from code table
