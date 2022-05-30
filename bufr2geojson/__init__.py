@@ -23,32 +23,26 @@ __version__ = "0.0.1"
 
 from collections import OrderedDict
 from copy import deepcopy
-import csv
 from datetime import timezone, datetime, timedelta
-import gc as gc
 import hashlib
-from io import StringIO, BytesIO
 import json
 import logging
 import os.path
 import re
 from typing import Any, Iterator, Union
-from uuid import uuid4
 from pathlib import Path
 
-import sys
 
 from cfunits import Units
 from eccodes import (codes_bufr_new_from_file, codes_clone,
-                     codes_get_array, codes_set, codes_get_native_type,
-                     codes_write, codes_release, codes_get,
+                     codes_get_array, codes_set,
+                     codes_release, codes_get,
                      CODES_MISSING_LONG, CODES_MISSING_DOUBLE,
                      codes_bufr_keys_iterator_new,
                      codes_bufr_keys_iterator_next,
                      codes_bufr_keys_iterator_delete,
-                     codes_bufr_keys_iterator_get_name, CodesInternalError)
-from jsonpath_ng.ext import parser
-from jsonschema import validate
+                     codes_bufr_keys_iterator_get_name)
+
 import numpy as np
 import pandas as pd
 
