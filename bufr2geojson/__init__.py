@@ -697,7 +697,7 @@ class BUFRParser:
                         result_time = phenomenon_time
                     data[feature_id] = {
                         "geojson": {
-                            "id": "",
+                            "id": feature_id,
                             "reportId": f"WIGOS_{wsi}_{characteristic_date}T{characteristic_time}{id}",  # noqa
                             "type": "Feature",
                             "geometry": self.get_location(),
@@ -722,8 +722,6 @@ class BUFRParser:
                         },
                         "_headers": deepcopy(headers)
                         }
-                    md5 = hashlib.md5(json.dumps(data[feature_id]['geojson']).encode("utf-8")).hexdigest()
-                    data[feature_id]['geojson']['id'] = md5
                 else:
                     pass
             last_key = key
