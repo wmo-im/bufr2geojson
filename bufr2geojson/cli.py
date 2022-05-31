@@ -58,13 +58,13 @@ def cli():
 
 @click.command()
 @click.pass_context
-@click.argument("bufr_file", type=click.File(errors="ignore"))
+@click.argument("bufr_file", type=click.File(mode="rb", errors="ignore"))
 @click.option("--output-dir", "output_dir", required=True,
               help="Name of output file")
 @cli_option_verbosity
 def transform(ctx, bufr_file, output_dir, verbosity):
     click.echo(f"Transforming {bufr_file.name} to geojson")
-    result = as_geojson(bufr_file)
+    result = as_geojson(bufr_file.read())
     for collection in result:
         for key, item in collection.items():
             outfile = f"{output_dir}{os.sep}{key}.json"

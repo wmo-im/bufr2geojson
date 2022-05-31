@@ -128,6 +128,7 @@ class BUFRParser:
         # load BUFR tables
         csv_code_table = f"{TABLES}{os.sep}BUFRCREX_CodeFlag_en.txt"
         self.code_table = pd.read_csv(csv_code_table, dtype="object")
+
         # strip out non numeric rows, these typically give a range
         numeric_rows = self.code_table["CodeFigure"].apply(
             lambda x: (not np.isnan(x)) if isinstance(x, (int, float)) else x.isnumeric() )  # noqa
