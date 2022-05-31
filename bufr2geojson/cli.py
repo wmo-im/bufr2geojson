@@ -22,15 +22,11 @@
 import json
 import logging
 import os.path
-from pathlib import Path
 import sys
-from csv import QUOTE_NONNUMERIC
+
 import click
 
-from bufr2geojson import __version__, BUFRParser, transform as as_geojson
-
-LOGGER = logging.getLogger(__name__)
-THISDIR = os.path.dirname(os.path.realpath(__file__))
+from bufr2geojson import __version__, transform as as_geojson
 
 
 def cli_option_verbosity(f):
@@ -67,7 +63,7 @@ def cli():
               help="Name of output file")
 @cli_option_verbosity
 def transform(ctx, bufr_file, output_dir, verbosity):
-    LOGGER.info(f"Transforming {bufr_file.name} to geojson")
+    click.echo(f"Transforming {bufr_file.name} to geojson")
     result = as_geojson(bufr_file)
     for collection in result:
         for key, item in collection.items():
@@ -76,7 +72,7 @@ def transform(ctx, bufr_file, output_dir, verbosity):
             with open(outfile, "w") as fh:
                 fh.write(json.dumps(data, indent=4))
 
-    LOGGER.info("Done")
+    click.echo("Done")
 
 
 cli.add_command(transform)
