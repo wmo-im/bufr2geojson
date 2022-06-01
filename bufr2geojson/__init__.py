@@ -41,7 +41,7 @@ from eccodes import (codes_bufr_new_from_file, codes_clone,
                      CODES_MISSING_LONG, CODES_MISSING_DOUBLE,
                      codes_bufr_keys_iterator_new,
                      codes_bufr_keys_iterator_next,
-                     codes_bufr_keys_iterator_delete,
+                     codes_bufr_keys_iterator_delete, codes_definition_path,
                      codes_bufr_keys_iterator_get_name)
 
 import numpy as np
@@ -59,8 +59,8 @@ BUFR_TABLE_VERSION = 37  # default BUFR table version
 THISDIR = os.path.dirname(os.path.realpath(__file__))
 RESOURCES = f"{THISDIR}{os.sep}resources"
 
-ECCODES = os.environ.get("ECCODES_DIR")
-TABLEDIR = f"{ECCODES}{os.sep}share{os.sep}eccodes{os.sep}definitions{os.sep}bufr{os.sep}tables{os.sep}0{os.sep}wmo{os.sep}"  # noqa {BUFR_TABLE_VERSION}{os.sep}codetables{os.sep}"  # noqa
+ECCODES = codes_definition_path()
+TABLEDIR = f"{ECCODES}{os.sep}bufr{os.sep}tables{os.sep}0{os.sep}wmo{os.sep}"  # noqa {BUFR_TABLE_VERSION}{os.sep}codetables{os.sep}"  # noqa
 CODETABLES = {}
 
 # PREFERRED UNITS
