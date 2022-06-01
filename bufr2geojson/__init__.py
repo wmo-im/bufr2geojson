@@ -23,6 +23,7 @@ __version__ = "0.2.dev0"
 
 from collections import OrderedDict
 from copy import deepcopy
+import csv
 from datetime import datetime, timedelta
 import hashlib
 import json
@@ -44,13 +45,6 @@ from eccodes import (codes_bufr_new_from_file, codes_clone,
                      codes_bufr_keys_iterator_get_name)
 
 import numpy as np
-import pandas as pd
-
-# only used in dev version
-# pandas config
-pd.set_option('display.max_columns', None)
-pd.set_option('display.max_colwidth', None)
-pd.set_option('display.width', None)
 
 # some 'constants'
 SUCCESS = True
@@ -125,16 +119,7 @@ jsonpath_parsers = dict()
 # class to act as parser for BUFR data
 class BUFRParser:
     def __init__(self):
-        # load BUFR tables
-        csv_code_table = f"{TABLES}{os.sep}BUFRCREX_CodeFlag_en.txt"
-        self.code_table = pd.read_csv(csv_code_table, dtype="object")
 
-        # strip out non numeric rows, these typically give a range
-        numeric_rows = self.code_table["CodeFigure"].apply(
-            lambda x: (not np.isnan(x)) if isinstance(x, (int, float)) else x.isnumeric() )  # noqa
-        self.code_table = self.code_table.loc[numeric_rows, ]
-        # now convert to integers for matching
-        self.code_table = self.code_table.astype({"CodeFigure": "int"})
         # dict to store qualifiers in force and for accounting
         self.qualifiers = {
             "01": {},  # identification
@@ -148,6 +133,21 @@ class BUFRParser:
             "09": {},  # reserved
             "22": {}  # some sst sensors in class 22
         }
+
+        self.code_table = {}
+        csv_code_table = f"{TABLES}{os.sep}BUFRCREX_CodeFlag_en.txt"
+
+        with open(csv_code_table) as csvfile:
+            reader = csv.DictReader(csvfile)
+
+            # keep only numeric rows, strip out non numeric rows,
+            # these typically give a range
+            for row in reader:
+                try:
+                    row['CodeFigure'] = int(row['CodeFigure'])
+                    self.code_table[row['FXY']] = row
+                except ValueError:
+                    pass
 
     def set_qualifier(self, fxxyyy: str, key: str, value: Union[NUMBERS],
                       description: str, attributes: any, append: bool = False) -> None:  # noqa
@@ -539,14 +539,11 @@ class BUFRParser:
         :returns: string representation of coded value
         """
 
-        table = self.code_table.loc[(self.code_table["FXY"] == fxxyyy), ]
-        decoded = table.loc[table["CodeFigure"] == code, ]
-        decoded.reset_index(drop=True, inplace=True)
-        if len(decoded) == 1:
-            decoded = decoded.EntryName_en[0]
-        else:
-            assert len(decoded) == 0
-            decoded = None
+        table = {k: v for k, v in self.code_table.items() if k == fxxyyy}
+        decoded = None
+        if table[fxxyyy]['CodeFigure'] == code:
+            decoded = table[fxxyyy]['EntryName_en']
+
         return decoded
 
     def as_geojson(self, bufr_handle: int, id: str,

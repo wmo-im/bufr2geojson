@@ -3,6 +3,5 @@ click
 eccodes
 jsonschema
 jsonpath_ng
-pandas
 pyoscar
 PyYAML
