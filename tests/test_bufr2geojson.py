@@ -20,6 +20,7 @@
 ###############################################################################
 
 from __future__ import annotations
+import itertools
 
 from jsonschema import validate, FormatChecker
 import pytest
@@ -36,6 +37,54 @@ def geojson_schema():
         return yaml.load(fh, Loader=yaml.SafeLoader)
 
 
+@pytest.fixture
+def geojson_output():
+    return {
+        'id': 'WIGOS_0-20000-0-03951_20220320T210000-0-13',
+        'reportId': 'WIGOS_0-20000-0-03951_20220320T210000-0',
+        'type': 'Feature',
+        'geometry': {
+            'type': 'Point',
+            'coordinates': [
+                -9.42,
+                51.47,
+                20.0
+            ]
+        },
+        'properties': {
+            'wigos_station_identifier': '0-20000-0-03951',
+            'phenomenonTime': '2022-03-20T21:00:00Z',
+            'resultTime': '2022-03-20T21:00:00Z',
+            'name': 'non_coordinate_pressure',
+            'value': 1019.3,
+            'units': 'hPa',
+            'description': None,
+            'metadata': [
+                {
+                    'name': 'station_or_site_name',
+                    'value': None,
+                    'units': 'CCITT IA5',
+                    'description': 'SHERKIN ISLAND      '
+                },
+                {
+                    'name': 'station_type',
+                    'value': 0,
+                    'units': 'CODE TABLE',
+                    'description': None
+                },
+                {
+                    'name': 'height_of_barometer_above_mean_sea_level',
+                    'value': 21.0,
+                    'units': 'm',
+                    'description': None
+                }
+            ],
+            'index': 13,
+            'fxxyyy': '010004'
+        }
+    }
+
+
 @WSI_FORMATCHECKER.checks("wsi", ValueError)
 def is_wsi(instance):
     assert isinstance(instance, str)
@@ -49,14 +98,24 @@ def is_wsi(instance):
     return True
 
 
-def test_transform(geojson_schema):
+def test_transform(geojson_schema, geojson_output):
     test_bufr_file = 'A_ISIA21EIDB202100_C_EDZW_20220320210902_11839953.bin'
     with open(test_bufr_file, 'rb') as fh:
-        geojson_messages = transform(fh.read())
+        messages1, messages2 = itertools.tee(transform(fh.read()))
 
-        for geojson_message in geojson_messages:
-            geojson_dict = list(geojson_message.values())[0]['geojson']
+        # validate against JSON Schema
+        for message in messages1:
+            geojson_dict = list(message.values())[0]['geojson']
             assert isinstance(geojson_dict, dict)
             print("Validating GeoJSON")
             _ = validate(geojson_dict, geojson_schema,
                          format_checker=WSI_FORMATCHECKER)
+
+        # validate content
+        message = next(messages2)
+
+        assert 'WIGOS_0-20000-0-03951_20220320T210000-0-13' in message
+
+        geojson = message['WIGOS_0-20000-0-03951_20220320T210000-0-13']['geojson']  # noqa
+
+        assert geojson == geojson_output
