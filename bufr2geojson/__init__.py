@@ -533,11 +533,11 @@ class BUFRParser:
 
         if fxxyyy not in CODETABLES[self.table_version]:
             CODETABLES[self.table_version][fxxyyy] = {}
-            tablefile = f"{TABLEDIR}{os.sep}{self.table_version}{os.sep}codetables{os.sep}{table}.table"
+            tablefile = f"{TABLEDIR}{os.sep}{self.table_version}{os.sep}codetables{os.sep}{table}.table"  # noqa
             with open(tablefile) as csvfile:
                 reader = csv.reader(csvfile, delimiter=" ")
                 for row in reader:
-                    CODETABLES[self.table_version][fxxyyy][int(row[0])] = row[2]
+                    CODETABLES[self.table_version][fxxyyy][int(row[0])] = row[2]  # noqa
 
         if code not in CODETABLES[self.table_version][fxxyyy]:
             LOGGER.warning(f"Invalid entry for value {code} in code table {fxxyyy}, table version {self.table_version}")  # noqa
@@ -571,7 +571,8 @@ class BUFRParser:
 
         # get table version
         try:
-            self.table_version = codes_get(bufr_handle, "masterTablesVersionNumber")
+            self.table_version = codes_get(bufr_handle,
+                                           "masterTablesVersionNumber")
         except Exception as e:
             LOGGER.error("Unable to read table version number")
             LOGGER.error(e)

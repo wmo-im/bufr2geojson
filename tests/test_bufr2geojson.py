@@ -98,7 +98,6 @@ def geojson_output():
     }
 
 
-
 def test_transform(geojson_schema, geojson_output):
     test_bufr_file = 'A_ISIA21EIDB202100_C_EDZW_20220320210902_11839953.bin'
     with open(test_bufr_file, 'rb') as fh:
@@ -109,8 +108,11 @@ def test_transform(geojson_schema, geojson_output):
             geojson_dict = list(message.values())[0]['geojson']
             assert isinstance(geojson_dict, dict)
             print("Validating GeoJSON")
-            _ = validate(geojson_dict, geojson_schema, format_checker=WSI_FORMATCHECKER)
+            _ = validate(geojson_dict, geojson_schema,
+                         format_checker=WSI_FORMATCHECKER)
+
         print("Messages validated against schema")
+
         # validate content
         message = next(messages2)
         assert 'WIGOS_0-20000-0-03951_20220320T210000-0-13' in message
