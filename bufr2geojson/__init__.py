@@ -58,8 +58,10 @@ LOGGER = logging.getLogger(__name__)
 BUFR_TABLE_VERSION = 37  # default BUFR table version
 THISDIR = os.path.dirname(os.path.realpath(__file__))
 RESOURCES = f"{THISDIR}{os.sep}resources"
-TABLES = f"{THISDIR}{os.sep}resources{os.sep}bufr{os.sep}{BUFR_TABLE_VERSION}"  # noqa
 
+ECCODES = os.environ.get("ECCODES_DIR")
+TABLEDIR = f"{ECCODES}{os.sep}share{os.sep}eccodes{os.sep}definitions{os.sep}bufr{os.sep}tables{os.sep}0{os.sep}wmo{os.sep}"  # noqa {BUFR_TABLE_VERSION}{os.sep}codetables{os.sep}"  # noqa
+CODETABLES = {}
 
 # PREFERRED UNITS
 PREFERRED_UNITS = {
@@ -119,7 +121,6 @@ jsonpath_parsers = dict()
 # class to act as parser for BUFR data
 class BUFRParser:
     def __init__(self):
-
         # dict to store qualifiers in force and for accounting
         self.qualifiers = {
             "01": {},  # identification
@@ -133,21 +134,6 @@ class BUFRParser:
             "09": {},  # reserved
             "22": {}  # some sst sensors in class 22
         }
-
-        self.code_table = {}
-        csv_code_table = f"{TABLES}{os.sep}BUFRCREX_CodeFlag_en.txt"
-
-        with open(csv_code_table) as csvfile:
-            reader = csv.DictReader(csvfile)
-
-            # keep only numeric rows, strip out non numeric rows,
-            # these typically give a range
-            for row in reader:
-                try:
-                    row['CodeFigure'] = int(row['CodeFigure'])
-                    self.code_table[row['FXY']] = row
-                except ValueError:
-                    pass
 
     def set_qualifier(self, fxxyyy: str, key: str, value: Union[NUMBERS],
                       description: str, attributes: any, append: bool = False) -> None:  # noqa
@@ -538,11 +524,26 @@ class BUFRParser:
 
         :returns: string representation of coded value
         """
+        if code is None:
+            return None
+        table = int(fxxyyy)
 
-        table = {k: v for k, v in self.code_table.items() if k == fxxyyy}
-        decoded = None
-        if table[fxxyyy]['CodeFigure'] == code:
-            decoded = table[fxxyyy]['EntryName_en']
+        if self.table_version not in CODETABLES:
+            CODETABLES[self.table_version] = {}
+
+        if fxxyyy not in CODETABLES[self.table_version]:
+            CODETABLES[self.table_version][fxxyyy] = {}
+            tablefile = f"{TABLEDIR}{os.sep}{self.table_version}{os.sep}codetables{os.sep}{table}.table"
+            with open(tablefile) as csvfile:
+                reader = csv.reader(csvfile, delimiter=" ")
+                for row in reader:
+                    CODETABLES[self.table_version][fxxyyy][int(row[0])] = row[2]
+
+        if code not in CODETABLES[self.table_version][fxxyyy]:
+            LOGGER.warning(f"Invalid entry for value {code} in code table {fxxyyy}, table version {self.table_version}")  # noqa
+            decoded = "Invalid"
+        else:
+            decoded = CODETABLES[self.table_version][fxxyyy][code]
 
         return decoded
 
@@ -558,8 +559,6 @@ class BUFRParser:
         :returns: dictionary containing GeoJSON feature collection
         """
 
-        # return data as GeoJSON
-
         # check we have data
         if not bufr_handle:
             LOGGER.warning("Empty BUFR")
@@ -569,6 +568,14 @@ class BUFRParser:
 
         # unpack the message
         codes_set(bufr_handle, "unpack", True)
+
+        # get table version
+        try:
+            self.table_version = codes_get(bufr_handle, "masterTablesVersionNumber")
+        except Exception as e:
+            LOGGER.error("Unable to read table version number")
+            LOGGER.error(e)
+            raise e
 
         # get number of subsets
         nsubsets = codes_get(bufr_handle, "numberOfSubsets")
