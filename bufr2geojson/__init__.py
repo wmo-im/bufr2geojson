@@ -66,7 +66,7 @@ ECCODES_DEFINITION_PATH = codes_definition_path()
 if not os.path.exists(ECCODES_DEFINITION_PATH):
     LOGGER.debug('ecCodes definition path does not exist, trying environment')
     ECCODES_DEFINITION_PATH = os.environ.get('ECCODES_DEFINITION_PATH')
-    print(ECCODES_DEFINITION_PATH)
+    LOGGER.debug(f'ECCODES_DEFINITION_PATH: {ECCODES_DEFINITION_PATH}')
     if ECCODES_DEFINITION_PATH is None:
         raise EnvironmentError('Cannot find ecCodes definition path')
 

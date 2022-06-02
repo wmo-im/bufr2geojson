@@ -2,7 +2,6 @@ cfunits
 click
 eccodes
 jsonschema @ git+https://github.com/tomkralidis/jsonschema@ref-yaml#egg=jsonschema
-jsonschema
 jsonpath_ng
 pyoscar
 PyYAML
