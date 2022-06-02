@@ -31,6 +31,19 @@ from bufr2geojson import RESOURCES, transform
 WSI_FORMATCHECKER = FormatChecker()
 
 
+@WSI_FORMATCHECKER.checks("wsi", ValueError)
+def is_wsi(instance):
+    assert isinstance(instance, str)
+    words = instance.split("-")
+    assert words[0] == "0"
+    assert int(words[1]) <= 65534
+    assert int(words[2]) <= 65534
+    local_id = words[3]
+    assert len(local_id) <= 16
+    assert local_id.isalnum()
+    return True
+
+
 @pytest.fixture
 def geojson_schema():
     with open(f"{RESOURCES}/schemas/wmo-om-profile-geojson.yaml") as fh:
@@ -70,7 +83,7 @@ def geojson_output():
                     'name': 'station_type',
                     'value': 0,
                     'units': 'CODE TABLE',
-                    'description': None
+                    'description': 'AUTOMATIC'
                 },
                 {
                     'name': 'height_of_barometer_above_mean_sea_level',
@@ -83,19 +96,6 @@ def geojson_output():
             'fxxyyy': '010004'
         }
     }
-
-
-@WSI_FORMATCHECKER.checks("wsi", ValueError)
-def is_wsi(instance):
-    assert isinstance(instance, str)
-    words = instance.split("-")
-    assert words[0] == "0"
-    assert int(words[1]) <= 65534
-    assert int(words[2]) <= 65534
-    local_id = words[3]
-    assert len(local_id) <= 16
-    assert local_id.isalnum()
-    return True
 
 
 def test_transform(geojson_schema, geojson_output):
@@ -111,11 +111,12 @@ def test_transform(geojson_schema, geojson_output):
             _ = validate(geojson_dict, geojson_schema,
                          format_checker=WSI_FORMATCHECKER)
 
+        print("Messages validated against schema")
+
         # validate content
         message = next(messages2)
-
         assert 'WIGOS_0-20000-0-03951_20220320T210000-0-13' in message
-
+        print("Message found in result")
         geojson = message['WIGOS_0-20000-0-03951_20220320T210000-0-13']['geojson']  # noqa
-
         assert geojson == geojson_output
+        print("Message matches expected value")
