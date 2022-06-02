@@ -28,7 +28,9 @@ from datetime import datetime, timedelta
 import hashlib
 import json
 import logging
+import os
 import os.path
+from pathlib import Path
 import re
 import tempfile
 from typing import Iterator, Union
@@ -46,6 +48,8 @@ from eccodes import (codes_bufr_new_from_file, codes_clone,
 
 import numpy as np
 
+LOGGER = logging.getLogger(__name__)
+
 # some 'constants'
 SUCCESS = True
 NUMBERS = (float, int, complex)
@@ -53,15 +57,20 @@ MISSING = ("NA", "NaN", "NAN", "None")
 FAIL_ON_ERROR = False
 NULLIFY_INVALID = True  # TODO: move to env. variable
 
-LOGGER = logging.getLogger(__name__)
-
 BUFR_TABLE_VERSION = 37  # default BUFR table version
 THISDIR = os.path.dirname(os.path.realpath(__file__))
 RESOURCES = f"{THISDIR}{os.sep}resources"
-
-ECCODES = codes_definition_path()
-TABLEDIR = f"{ECCODES}{os.sep}bufr{os.sep}tables{os.sep}0{os.sep}wmo{os.sep}"  # noqa {BUFR_TABLE_VERSION}{os.sep}codetables{os.sep}"  # noqa
 CODETABLES = {}
+
+ECCODES_DEFINITION_PATH = codes_definition_path()
+if not os.path.exists(ECCODES_DEFINITION_PATH):
+    LOGGER.debug('ecCodes definition path does not exist, trying environment')
+    ECCODES_DEFINITION_PATH = os.environ.get('ECCODES_DEFINITION_PATH')
+    print(ECCODES_DEFINITION_PATH)
+    if ECCODES_DEFINITION_PATH is None:
+        raise EnvironmentError('Cannot find ecCodes definition path')
+
+TABLEDIR = Path(ECCODES_DEFINITION_PATH) / 'bufr' / 'tables' / '0' / 'wmo'
 
 # PREFERRED UNITS
 PREFERRED_UNITS = {
@@ -533,8 +542,8 @@ class BUFRParser:
 
         if fxxyyy not in CODETABLES[self.table_version]:
             CODETABLES[self.table_version][fxxyyy] = {}
-            tablefile = f"{TABLEDIR}{os.sep}{self.table_version}{os.sep}codetables{os.sep}{table}.table"  # noqa
-            with open(tablefile) as csvfile:
+            tablefile = TABLEDIR / str(self.table_version) / 'codetables' / f'{table}.table'  # noqa
+            with tablefile.open() as csvfile:
                 reader = csv.reader(csvfile, delimiter=" ")
                 for row in reader:
                     CODETABLES[self.table_version][fxxyyy][int(row[0])] = row[2]  # noqa
