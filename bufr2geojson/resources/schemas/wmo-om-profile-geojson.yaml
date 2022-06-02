@@ -1,45 +1,102 @@
-$schema: https://json-schema.org/draft/2020-12/schema
-$id: https://raw.githubusercontent.com/wmo-im/bufr2geojson/main/bufr2geojson/resources/schemas/wmo-om-profile-geojson.yaml
+$schema: 'https://json-schema.org/draft/2020-12/schema'
+$id: 'https://raw.githubusercontent.com/wmo-im/bufr2geojson/main/bufr2geojson/resources/schemas/wmo-om-profile-geojson.yaml'
 title: WMO GeoJSON profile for observations and measurements
 description: WMO GeoJSON profile for observations and measurements
-
 allOf:
-  - $ref: https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/schemas/featureGeoJSON.yaml
+  - $ref: 'https://raw.githubusercontent.com/opengeospatial/ogcapi-features/master/core/openapi/schemas/featureGeoJSON.yaml'
 properties:
-  allOf:
-    - $ref: https://raw.githubusercontent.com/opengeospatial/ogcapi-common/master/core/openapi/schemas/confClasses.yaml
   conformsTo:
-    $ref: "https://raw.githubusercontent.com/opengeospatial/ogcapi-common/master/core/openapi/schemas/confClasses.yaml#/properties/conformsTo"
     items:
       enum:
-        - http://www.wmo.int/spec/om-profile-1/1.0/req/geojson
+        - 'http://www.wmo.int/spec/om-profile-1/1.0/req/geojson'
   properties:
     type: object
     properties:
+      identifier:
+        type: string
+        description: feature identifier
+      wigos_station_identifier:
+        type: string
+        description: WIGOS station identifier for station making observations
       phenomenonTime:
         type: string
-        format: date
-        description: TODO
+        format: date-time
+        description: Date and time that feature was observed or measured
       resultTime:
         type: string
-        format: date
-        description: TODO
+        format: date-time
+        description: Date and time result first became available
       name:
         type: string
-        description: TODO
+        description: Name of parameter observed or measured
       description:
-        type: string
-        description: TODO
+        type:
+          - string
+          - 'null'
+        description: Text representation of value if non-numeric
       units:
         type: string
-        description: TODO
+        description: Units that value is reported in
       value:
         type: number
-        description: TODO
+        description: 'Value of the parameter reported if numeric, use description if non-numeric'
       metadata:
-        type: object
-        description: TODO
+        type: array
+        items:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Name of metadata associated with observation
+            description:
+              type:
+                - string
+                - 'null'
+              description: Text representation of value if non-numeric
+            units:
+              type: string
+              description: Units value report in if numeric
+            value:
+              type:
+                - number
+                - 'null'
+              description: 'Numerical value of metadata element, use description field if non-numeric'
     required:
-      - phenomemonTime
+      - phenomenonTime
       - name
       - value
+      - units
+  _meta:
+    type: object
+examples:
+  - conformsTo:
+      - 'http://www.wmo.int/spec/om-profile-1/1.0/req/geojson'
+    properties:
+      identifier: string
+      wigos_station_identifier: string
+      phenomenonTime: '2019-08-24T14:15:22Z'
+      resultTime: '2019-08-24T14:15:22Z'
+      name: string
+      description: string
+      units: string
+      value: 0
+      metadata:
+        - name: string
+          description: string
+          units: string
+          value: 0
+    _meta: {}
+    type: Feature
+    geometry:
+      type: Point
+      coordinates:
+        - 0
+        - 0
+    id: string
+    links:
+      - href: 'http://data.example.com/buildings/123'
+        rel: alternate
+        type: application/geo+json
+        hreflang: en
+        title: 'Trierer Strasse 70, 53115 Bonn'
+        length: 0
