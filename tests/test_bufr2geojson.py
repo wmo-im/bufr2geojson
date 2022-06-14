@@ -54,6 +54,7 @@ def geojson_schema():
 def geojson_output():
     return {
         'id': 'WIGOS_0-20000-0-03951_20220320T210000-0-13',
+        'conformsTo': ['http://www.wmo.int/spec/om-profile-1/1.0/req/geojson'],
         'reportId': 'WIGOS_0-20000-0-03951_20220320T210000-0',
         'type': 'Feature',
         'geometry': {
