@@ -731,6 +731,7 @@ class BUFRParser:
                     data[feature_id] = {
                         "geojson": {
                             "id": feature_id,
+                            "conformsTo": ["http://www.wmo.int/spec/om-profile-1/1.0/req/geojson"],  # noqa
                             "reportId": f"WIGOS_{wsi}_{characteristic_date}T{characteristic_time}{id}",  # noqa
                             "type": "Feature",
                             "geometry": self.get_location(),
