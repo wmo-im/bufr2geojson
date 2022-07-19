@@ -752,6 +752,7 @@ class BUFRParser:
                         "_meta": {
                             "data_date": self.get_time(),
                             "identifier": feature_id,
+                            "geometry": self.get_location(),
                             "metadata_hash": metadata_hash
                         },
                         "_headers": deepcopy(headers)
