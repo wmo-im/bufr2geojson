@@ -164,7 +164,7 @@ class BUFRParser:
         # get class of descriptor
         xx = fxxyyy[1:3]
         # first check whether the value is None, if so remove and exit
-        if (value is None) and (description is None):
+        if [value, description] == [None, None]:
             if key in self.qualifiers[xx]:
                 del self.qualifiers[xx][key]
         else:
@@ -230,6 +230,10 @@ class BUFRParser:
                 value = self.qualifiers[c][k]["value"]
                 units = self.qualifiers[c][k]["attributes"]["units"]
                 description = self.qualifiers[c][k]["description"]
+                try:
+                    description = description.strip()
+                except AttributeError:
+                    pass
                 q = {
                     "name": name,
                     "value": value,
@@ -520,7 +524,7 @@ class BUFRParser:
             LOGGER.debug(self.qualifiers["01"])
 
         # now set wsi in return value
-        station_id["wsi"] = wigosID
+        station_id["wsi"] = wigosID.strip()
 
         return station_id
 
