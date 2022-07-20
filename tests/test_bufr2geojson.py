@@ -78,7 +78,7 @@ def geojson_output():
                     'name': 'station_or_site_name',
                     'value': None,
                     'units': 'CCITT IA5',
-                    'description': 'SHERKIN ISLAND      '
+                    'description': 'SHERKIN ISLAND'
                 },
                 {
                     'name': 'station_type',
