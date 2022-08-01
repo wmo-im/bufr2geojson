@@ -19,7 +19,7 @@
 #
 ###############################################################################
 
-__version__ = "0.3.dev0"
+__version__ = "0.3.0"
 
 from collections import OrderedDict
 from copy import deepcopy
