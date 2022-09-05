@@ -141,6 +141,7 @@ class BUFRParser:
             "07": {},  # location (vertical)
             "08": {},  # significance qualifiers
             "09": {},  # reserved
+            "19": {},  # wind speed thresholds
             "22": {}  # some sst sensors in class 22
         }
 
@@ -213,7 +214,7 @@ class BUFRParser:
         :returns: List containing qualifiers, their values and units
         """
 
-        classes = ("01", "02", "03", "04", "05", "06", "07", "08", "22")
+        classes = ("01", "02", "03", "04", "05", "06", "07", "08", "19", "22")
         result = list()
         # name, value, units
         for c in classes:
@@ -413,6 +414,22 @@ class BUFRParser:
 
         return self.get_identification()["wsi"]
 
+    def get_identification_other(self) -> dict:
+        # 0 01 021 synoptic feature identifier
+        # 0 01 026 WMO storm name
+        # 0 01 022 Name of feature
+        # 0 01 025 Storm identifier
+        # 0 01 027 WMO long storm name
+        # 0 19 150 Typhoon International Common Number
+        # 0 19 106 Identification number of tropical cyclone
+
+        identifier = None
+        if all(x in self.qualifiers["01"] for x in ("storm_identifier", "long_storm_name")):
+            identifier = self.get_qualifer("01", "long_storm_name") + "-" + self.get_qualifer("01", "storm_identifier")
+            if identifier is not None:
+                identifier = identifier.strip()
+        return identifier
+
     def get_identification(self) -> dict:
         """
         Function extracts identification information from qualifiers.
@@ -524,7 +541,11 @@ class BUFRParser:
             LOGGER.debug(self.qualifiers["01"])
 
         # now set wsi in return value
-        station_id["wsi"] = wigosID.strip()
+        if wigosID is not None:
+            LOGGER.debug("Stripping whitespace from WSI")
+            wigosID = wigosID.strip()
+
+        station_id["wsi"] = wigosID
 
         return station_id
 
@@ -560,13 +581,12 @@ class BUFRParser:
 
         return decoded
 
-    def as_geojson(self, bufr_handle: int, id: str,
-                   serialize: bool = False) -> dict:
+    def as_geojson(self, bufr_handle: int, isubset: int = 0, serialize: bool = False) -> dict:
         """
         Function to return GeoJSON representation of BUFR message
 
         :param bufr_handle: integer handle for BUFR data (used by eccodes)
-        :param id: id to assign to feature collection
+        :param isubset: subset that we are processing, will also be used in feature ID
         :param serialize: whether to return as JSON string (default is False)
 
         :returns: dictionary containing GeoJSON feature collection
@@ -577,7 +597,7 @@ class BUFRParser:
             LOGGER.warning("Empty BUFR")
             return {}
 
-        LOGGER.debug(f"Processing {id}")
+        LOGGER.debug(f"Processing {isubset}")
 
         # unpack the message
         codes_set(bufr_handle, "unpack", True)
@@ -595,9 +615,9 @@ class BUFRParser:
         nsubsets = codes_get(bufr_handle, "numberOfSubsets")
         LOGGER.debug(f"as_geojson.nsubsets: {nsubsets}")
         try:
-            assert nsubsets == 1
+            assert nsubsets >= isubset
         except Exception:
-            LOGGER.error(f"Too many subsets in call to as_geojson ({nsubsets})")  # noqa
+            LOGGER.error(f"Subset requested not found ({isubset})")  # noqa
 
         # Load headers
         headers = OrderedDict()
@@ -610,6 +630,10 @@ class BUFRParser:
                     continue
                 LOGGER.error(f"Error reading {header}")
                 raise e
+
+        print(headers['dataCategory'])
+        print(headers['compressedData'])
+        print(headers['observedData'])
 
         characteristic_date = headers["typicalDate"]
         characteristic_time = headers["typicalTime"]
@@ -638,8 +662,14 @@ class BUFRParser:
         while codes_bufr_keys_iterator_next(key_iterator):
             # get key
             key = codes_bufr_keys_iterator_get_name(key_iterator)
+            LOGGER.debug(key)
             # identify what we are processing
             if key in (HEADERS + ECMWF_HEADERS + UNEXPANDED_DESCRIPTORS):
+                try:
+                    value = codes_get(bufr_handle, key)
+                except Exception as e:
+                    LOGGER.warning(f"Error reading {key}, skipping element: {e}")  # noqa
+                    continue
                 continue
             else:  # data descriptor
                 try:
@@ -653,8 +683,11 @@ class BUFRParser:
             # get value and attributes
             # get as array and convert to scalar if required
             value = codes_get_array(bufr_handle, key)
-            if (len(value) == 1) and (not isinstance(value, str)):
-                value = value[0]
+            if not isinstance(value, str):
+                if len(value) > 1:
+                    value = value[isubset]
+                else:
+                    value = value[0]
                 if value in (CODES_MISSING_DOUBLE, CODES_MISSING_LONG):
                     value = None
                 # now convert to regular python types as json.dumps doesn't
@@ -664,6 +697,7 @@ class BUFRParser:
                 elif isinstance(value, np.int64):
                     value = int(value)
             else:
+                print(value)
                 assert False
 
             # get attributes
@@ -713,8 +747,21 @@ class BUFRParser:
                     self.set_qualifier(fxxyyy, key, value, description,
                                        attributes, append)
                     continue
+                if fxxyyy == "019003":
+                    append = False
+                    self.set_qualifier(fxxyyy, key, value, description,
+                                       attributes, append)
+                    continue
                 if value is not None:
-                    self.get_identification()
+                    if headers["observedData"] == 0: # not observations, WIGOS ID not applicable
+                        wsi = self.get_identification_other()
+                        feature_id = f"{wsi}_{characteristic_date}T{characteristic_time}"  # noqa
+                        feature_id = f"{feature_id}_{isubset}"
+                    else:
+                        wsi = self.get_wsi()
+                        feature_id = f"WIGOS_{wsi}_{characteristic_date}T{characteristic_time}"  # noqa
+                        feature_id = f"{feature_id}_{isubset}"
+
                     metadata = self.get_qualifiers()
                     metadata_hash = hashlib.md5(json.dumps(metadata).encode("utf-8")).hexdigest()  # noqa
                     md = {
@@ -723,20 +770,19 @@ class BUFRParser:
                     }
                     for idx in range(len(metadata)):
                         md["metadata"].append(metadata[idx])
-                    wsi = self.get_wsi()
-                    feature_id = f"WIGOS_{wsi}_{characteristic_date}T{characteristic_time}"  # noqa
-                    feature_id = f"{feature_id}{id}-{index}"
+
+
                     phenomenon_time = self.get_time()
                     if "/" in phenomenon_time:
                         result_time = phenomenon_time.split("/")
                         result_time = result_time[1]
                     else:
                         result_time = phenomenon_time
-                    data[feature_id] = {
+                    data[f"{feature_id}_{index}"] = {
                         "geojson": {
-                            "id": feature_id,
+                            "id": f"{feature_id}_{index}",
                             "conformsTo": ["http://www.wmo.int/spec/om-profile-1/1.0/req/geojson"],  # noqa
-                            "reportId": f"WIGOS_{wsi}_{characteristic_date}T{characteristic_time}{id}",  # noqa
+                            "reportId": feature_id,  # noqa
                             "type": "Feature",
                             "geometry": self.get_location(),
                             "properties": {
@@ -750,7 +796,8 @@ class BUFRParser:
                                 "description": description,
                                 "metadata": metadata,
                                 "index": index,
-                                "fxxyyy": fxxyyy
+                                "fxxyyy": fxxyyy,
+                                "subset": isubset
                             }
                         },
                         "_meta": {
@@ -808,23 +855,9 @@ def transform(data: bytes, serialize: bool = False) -> Iterator[dict]:
             LOGGER.info(f"{nsubsets} subsets")
             collections = dict()
             for idx in range(nsubsets):
-                LOGGER.debug(f"Extracting subset {idx}")
-                codes_set(bufr_handle, "extractSubset", idx+1)
-                codes_set(bufr_handle, "doExtractSubsets", 1)
-                LOGGER.debug("Cloning subset to new message")
-                single_subset = codes_clone(bufr_handle)
-                LOGGER.debug("Unpacking")
-                codes_set(single_subset, "unpack", True)
-
                 parser = BUFRParser()
-                # only include tag if more than 1 subset in file
-                tag = ""
-                if nsubsets > 1:
-                    tag = f"-{idx}"
                 try:
-                    data = parser.as_geojson(single_subset, id=tag,
-                                             serialize=serialize)
-
+                    data = parser.as_geojson(bufr_handle, isubset=idx, serialize=serialize)
                 except Exception as e:
                     LOGGER.error("Error parsing BUFR to GeoJSON, no data written")  # noqa
                     LOGGER.error(e)
@@ -835,7 +868,7 @@ def transform(data: bytes, serialize: bool = False) -> Iterator[dict]:
                 collections = deepcopy(data)
 
                 yield collections
-                codes_release(single_subset)
+                #codes_release(single_subset)
         else:
             collections = {}
             yield collections
