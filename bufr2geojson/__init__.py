@@ -413,6 +413,15 @@ class BUFRParser:
 
         return self.get_identification()["wsi"]
 
+    def get_tsi(self) -> str:
+        """
+        Function returns Traditional station identifier as string
+
+        :returns: Traditional station ID.
+        """
+
+        return self.get_identification()["tsi"]
+
     def get_identification(self) -> dict:
         """
         Function extracts identification information from qualifiers.
@@ -425,7 +434,6 @@ class BUFRParser:
         # check to see what identification we have
         # WIGOS id
         # 001125, 001126, 001127, 001128
-        station_id = dict()
         if all(x in self.qualifiers["01"] for x in ("wigos_identifier_series",
                                                     "wigos_issuer_of_identifier",  # noqa
                                                     "wigos_issue_number", "wigos_local_identifier_character")):  # noqa
@@ -433,100 +441,94 @@ class BUFRParser:
             wsi_issuer = self.get_qualifer("01", "wigos_issuer_of_identifier")
             wsi_number = self.get_qualifer("01", "wigos_issue_number")
             #wsi_local = self.qualifiers["01"]["wigos_local_identifier_character"]["description"]  # noqa
-            wsi_local = self.get_qualifer("01", "wigos_local_identifier_character")  # noqa
-            wigosID = f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}"
-        else:
-            wigosID = None
+            wsi_local = self.get_qualifer("01", "wigos_local_identifier_character").strip()  # noqa
+            return {
+                "wsi": f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}",
+                "tsi": wsi_local,
+                "type": "wigos_station_identifier"
+            }
 
         # block number and station number
         # 001001, 001002
-        if all(x in self.qualifiers["01"] for x in ("block_number", "station_number")):  # noqa
+        _types = ("block_number", "station_number")
+        if all(x in self.qualifiers["01"] for x in _types):  # noqa
             block = self.get_qualifer("01", "block_number")
             station = self.get_qualifer("01", "station_number")
             wsi_series = 0
             wsi_issuer = 20000
             wsi_number = 0
-            wsi_local = f"{block:02d}{station:03d}"
-            if wigosID is None:
-                wigosID = f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}"  # noqa
-
-            station_id["tsi"] = {
-                "block": block,
-                "station": station
+            wsi_local = f"{block:02d}{station:03d}".strip()
+            return {
+                "wsi": f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}",
+                "tsi": wsi_local,
+                "type": "{}_and_{}".format(*_types)
             }
 
         # ship or mobile land station identifier (001011)
-        if "ship_or_mobile_land_station_identifier" in self.qualifiers["01"]:
-            callsign = self.get_qualifer("01", "ship_or_mobile_land_station_identifier")  # noqa
+        _type = "ship_or_mobile_land_station_identifier"
+        if _type in self.qualifiers["01"]:
+            callsign = self.get_qualifer("01", _type)
             wsi_series = 0
             wsi_issuer = 20004
             wsi_number = 0
             wsi_local = callsign.strip()
-            if wigosID is None:
-                wigosID = f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}"  # noqa
-
-            station_id["tsi"] = {
-                "station_id": wsi_local
+            return {
+                "wsi": f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}",
+                "tsi": wsi_local,
+                "type": _type
             }
 
         # 5 digit buoy number
         # 001003, 001020, 001005
-        if all(x in self.qualifiers["01"] for x in ("region_number",
-                                                    "wmo_region_sub_area",
-                                                    "buoy_or_platform_identifier")):  # noqa
+        _types = ("region_number", "wmo_region_sub_area",
+                  "buoy_or_platform_identifier")
+        if all(x in self.qualifiers["01"] for x in _types):
             wmo_region = self.get_qualifer("region_number")
             wmo_subregion = self.get_qualifer("wmo_region_sub_area")
             wmo_number = self.get_qualifer("buoy_or_platform_identifier")
             wsi_series = 0
             wsi_issuer = 20002
             wsi_number = 0
-            wsi_local = f"{wmo_region:01d}{wmo_subregion:01d}{wmo_number:05d}"
-            if wigosID is None:
-                wigosID = f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}"  # noqa
-
-            station_id["tsi"] = {
-                "buoy_number": wsi_local
+            wsi_local = f"{wmo_region:01d}{wmo_subregion:01d}{wmo_number:05d}".strip() # noqa
+            return {
+                "wsi": f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}",
+                "tsi": wsi_local,
+                "type": "5_digit_marine_observing_platform_identifier"
             }
 
         # station buoy identifier
         # 001010
-        if "stationary_buoy_platform_identifier_e_g_c_man_buoys" in self.qualifiers["01"]:  # noqa
-            id = self.get_qualifer("01", "stationary_buoy_platform_identifier_e_g_c_man_buoys")  # noqa
+        _type = "stationary_buoy_platform_identifier_e_g_c_man_buoys"
+        if _type in self.qualifiers["01"]:
+            id = self.get_qualifer("01", _type)
             wsi_series = 0
             wsi_issuer = 20002
             wsi_number = 0
             wsi_local = id.strip()
-            if wigosID is None:
-                wigosID = f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}"  # noqa
-
-            station_id["tsi"] = {
-                "station_id": wsi_local
+            return {
+                "wsi": f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}",
+                "tsi": wsi_local,
+                "type": _type
             }
 
         # 7 digit buoy number
         # 001087
-        if "marine_observing_platform_identifier" in self.qualifiers["01"]:
-            id = self.get_qualifer("01","marine_observing_platform_identifier")  # noqa
+        _type = "marine_observing_platform_identifier"
+        if _type in self.qualifiers["01"]:
+            id = self.get_qualifer("01", _type)
             wsi_series = 0
             wsi_issuer = 20002
             wsi_number = 0
-            wsi_local = id
-
-            if wigosID is None:
-                wigosID = f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}"  # noqa
-
-            station_id["tsi"] = {
-                "buoy_number": wsi_local
+            wsi_local = id.strip()
+            return {
+                "wsi": f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}",
+                "tsi": wsi_local,
+                "type": "7_digit_marine_observing_platform_identifier"
             }
 
         # flag if we do not have WSI
-        if wigosID is None:
-            LOGGER.debug(self.qualifiers["01"])
-
-        # now set wsi in return value
-        station_id["wsi"] = wigosID.strip()
-
-        return station_id
+        LOGGER.debug(self.qualifiers["01"])
+        return {"wsi": None, "tsi": None, "type": None}
 
     def get_code_value(self, fxxyyy: str, code: int) -> str:
         """
