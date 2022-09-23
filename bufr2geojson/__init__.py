@@ -231,7 +231,7 @@ class BUFRParser:
                 units = self.qualifiers[c][k]["attributes"]["units"]
                 description = self.qualifiers[c][k]["description"]
                 try:
-                    description = description.strip()
+                    description = strip2(description)
                 except AttributeError:
                     pass
                 q = {
@@ -441,7 +441,7 @@ class BUFRParser:
             wsi_issuer = self.get_qualifer("01", "wigos_issuer_of_identifier")
             wsi_number = self.get_qualifer("01", "wigos_issue_number")
             #wsi_local = self.qualifiers["01"]["wigos_local_identifier_character"]["description"]  # noqa
-            wsi_local = self.get_qualifer("01", "wigos_local_identifier_character").strip()  # noqa
+            wsi_local = strip2(self.get_qualifer("01", "wigos_local_identifier_character"))  # noqa
             return {
                 "wsi": f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}",
                 "tsi": wsi_local,
@@ -457,7 +457,7 @@ class BUFRParser:
             wsi_series = 0
             wsi_issuer = 20000
             wsi_number = 0
-            wsi_local = f"{block:02d}{station:03d}".strip()
+            wsi_local = strip2(f"{block:02d}{station:03d}")
             return {
                 "wsi": f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}",
                 "tsi": wsi_local,
@@ -471,7 +471,7 @@ class BUFRParser:
             wsi_series = 0
             wsi_issuer = 20004
             wsi_number = 0
-            wsi_local = callsign.strip()
+            wsi_local = strip2(callsign)
             return {
                 "wsi": f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}",
                 "tsi": wsi_local,
@@ -489,7 +489,7 @@ class BUFRParser:
             wsi_series = 0
             wsi_issuer = 20002
             wsi_number = 0
-            wsi_local = f"{wmo_region:01d}{wmo_subregion:01d}{wmo_number:05d}".strip() # noqa
+            wsi_local = strip2(f"{wmo_region:01d}{wmo_subregion:01d}{wmo_number:05d}")  # noqa
             return {
                 "wsi": f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}",
                 "tsi": wsi_local,
@@ -500,11 +500,11 @@ class BUFRParser:
         # 001010
         _type = "stationary_buoy_platform_identifier_e_g_c_man_buoys"
         if _type in self.qualifiers["01"]:
-            id = self.get_qualifer("01", _type)
+            id_ = self.get_qualifer("01", _type)
             wsi_series = 0
             wsi_issuer = 20002
             wsi_number = 0
-            wsi_local = id.strip()
+            wsi_local = strip2(id_)
             return {
                 "wsi": f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}",
                 "tsi": wsi_local,
@@ -515,11 +515,11 @@ class BUFRParser:
         # 001087
         _type = "marine_observing_platform_identifier"
         if _type in self.qualifiers["01"]:
-            id = self.get_qualifer("01", _type)
+            id_ = self.get_qualifer("01", _type)
             wsi_series = 0
             wsi_issuer = 20002
             wsi_number = 0
-            wsi_local = id.strip()
+            wsi_local = strip2(id_)
             return {
                 "wsi": f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}",
                 "tsi": wsi_local,
@@ -844,3 +844,23 @@ def transform(data: bytes, serialize: bool = False) -> Iterator[dict]:
 
         if not error:
             codes_release(bufr_handle)
+
+
+def strip2(value) -> str:
+    """
+    Strip string and throw warning if space padded
+
+    :returns: `str` of stripped value
+    """
+
+    space = None
+
+    if isinstance(value, str):
+        space = ' '
+    elif isinstance(value, bytes):
+        space = b' '
+
+    if value.startswith(space) or value.endswith(space):
+        LOGGER.warning("value '{value}' is space padded; upstream data should be fixed")  # noqa
+
+    return value.strip()

@@ -26,7 +26,7 @@ from jsonschema import validate, FormatChecker
 import pytest
 import yaml
 
-from bufr2geojson import RESOURCES, transform
+from bufr2geojson import RESOURCES, strip2, transform
 
 WSI_FORMATCHECKER = FormatChecker()
 
@@ -121,3 +121,12 @@ def test_transform(geojson_schema, geojson_output):
         geojson = message['WIGOS_0-20000-0-03951_20220320T210000-0-13']['geojson']  # noqa
         assert geojson == geojson_output
         print("Message matches expected value")
+
+
+def test_strip2():
+
+    for value in ['test', ' test', 'test ', ' test ', '  test    ']:
+        assert strip2(value) == 'test'
+
+    for value in [b'test', b' test', b'test ', b' test ', b'  test    ']:
+        assert strip2(value) == b'test'
