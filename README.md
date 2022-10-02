@@ -11,7 +11,7 @@ More information on the BUFR format can be found in the [WMO Manual on Codes, Vo
 
 ### Dependencies
 
-Dependencies are listed in [requirements.txt](https://github.com/wmo-im/bufr2geojson/blob/main/requirements.txt]. Dependencies are automatically installed during bufr2geojson installation.
+Dependencies are listed in [requirements.txt](https://github.com/wmo-im/bufr2geojson/blob/main/requirements.txt). Dependencies are automatically installed during bufr2geojson installation.
 
 ```bash
 # download and build Docker image
