@@ -610,8 +610,9 @@ class BUFRParser:
                 if header == "subsetNumber":
                     LOGGER.warning("subsetNumber not found, continuing")
                     continue
-                LOGGER.error(f"Error reading {header}")
-                raise e
+                else:
+                    LOGGER.warning(f"Error reading {header}")
+                    continue
 
         characteristic_date = headers["typicalDate"]
         characteristic_time = headers["typicalTime"]
