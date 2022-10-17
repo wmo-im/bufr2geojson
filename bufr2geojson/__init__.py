@@ -614,9 +614,12 @@ class BUFRParser:
                     LOGGER.warning(f"Error reading {header}")
                     LOGGER.warning(e)
                     continue
-
-        characteristic_date = headers["typicalDate"]
-        characteristic_time = headers["typicalTime"]
+        try:
+            characteristic_date = headers["typicalDate"]
+            characteristic_time = headers["typicalTime"]
+        except Exception as e:
+            LOGGER.error("Characteristic time header not found")
+            raise e
 
         try:
             sequence = codes_get_array(bufr_handle, UNEXPANDED_DESCRIPTORS[0])
