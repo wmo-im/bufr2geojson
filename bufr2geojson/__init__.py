@@ -612,6 +612,7 @@ class BUFRParser:
                     continue
                 else:
                     LOGGER.warning(f"Error reading {header}")
+                    LOGGER.warning(e)
                     continue
 
         characteristic_date = headers["typicalDate"]
