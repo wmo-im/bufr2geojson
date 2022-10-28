@@ -1,10 +1,10 @@
 .. _index:
 
-csv2bufr |release| documentation
+bufr2geojson |release| documentation
 ====================================
 
 :Author: World Meteorological Organization (WMO)
-:Contact: https://github.com/wmo-im/csv2bufr
+:Contact: https://github.com/wmo-im/bufr2geojson
 :Release: |release|
 :Date: |today|
 
