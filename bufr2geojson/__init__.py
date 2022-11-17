@@ -795,13 +795,13 @@ def transform(data: bytes, serialize: bool = False) -> Iterator[dict]:
     # split subsets into individual messages and process
     imsg = 0
     with open(tmp.name, 'rb') as fh:
-        while 1:            
+        while 1:
             bufr_handle = codes_bufr_new_from_file(fh)
             if bufr_handle is None:
                 break
             imsg += 1
             LOGGER.info(f"Processing message {imsg} from file")
-            
+
             try:
                 codes_set(bufr_handle, "unpack", True)
             except Exception as e:
@@ -823,7 +823,7 @@ def transform(data: bytes, serialize: bool = False) -> Iterator[dict]:
                     single_subset = codes_clone(bufr_handle)
                     LOGGER.debug("Unpacking")
                     codes_set(single_subset, "unpack", True)
-    
+
                     parser = BUFRParser()
                     # only include tag if more than 1 subset in file
                     tag = ""
@@ -832,7 +832,7 @@ def transform(data: bytes, serialize: bool = False) -> Iterator[dict]:
                     try:
                         data = parser.as_geojson(single_subset, id=tag,
                                                  serialize=serialize)
-    
+
                     except Exception as e:
                         LOGGER.error("Error parsing BUFR to GeoJSON, no data written")  # noqa
                         LOGGER.error(e)
@@ -841,13 +841,13 @@ def transform(data: bytes, serialize: bool = False) -> Iterator[dict]:
                         data = {}
                     del parser
                     collections = deepcopy(data)
-    
+
                     yield collections
                     codes_release(single_subset)
             else:
                 collections = {}
                 yield collections
-    
+
             if not error:
                 codes_release(bufr_handle)
         LOGGER.info(f"{imsg} messages processed from file")
