@@ -794,11 +794,15 @@ def transform(data: bytes, serialize: bool = False) -> Iterator[dict]:
     # not yet implemented
     # split subsets into individual messages and process
     imsg = 0
+    messages_remaining = True
     with open(tmp.name, 'rb') as fh:
-        while 1:
-            bufr_handle = codes_bufr_new_from_file(fh)
-            if bufr_handle is None:
-                break
+        # get first message
+        bufr_handle = codes_bufr_new_from_file(fh)
+        if bufr_handle is None:
+            LOGGER.warning("No messages in file")
+            messages_remaining = False
+        while messages_remaining:
+            messages_remaining = False  # set to false to prevent infinite loop by accident
             imsg += 1
             LOGGER.info(f"Processing message {imsg} from file")
 
@@ -850,6 +854,12 @@ def transform(data: bytes, serialize: bool = False) -> Iterator[dict]:
 
             if not error:
                 codes_release(bufr_handle)
+
+            bufr_handle = codes_bufr_new_from_file(fh)
+
+            if bufr_handle is not None:
+                messages_remaining = True
+
         LOGGER.info(f"{imsg} messages processed from file")
 
 
