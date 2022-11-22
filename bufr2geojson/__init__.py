@@ -802,7 +802,7 @@ def transform(data: bytes, serialize: bool = False) -> Iterator[dict]:
             LOGGER.warning("No messages in file")
             messages_remaining = False
         while messages_remaining:
-            messages_remaining = False  # set to false to prevent infinite loop by accident
+            messages_remaining = False  # noqa set to false to prevent infinite loop by accident
             imsg += 1
             LOGGER.info(f"Processing message {imsg} from file")
 

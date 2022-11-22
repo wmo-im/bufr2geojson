@@ -20,6 +20,7 @@
 ###############################################################################
 
 from __future__ import annotations
+import base64
 import itertools
 
 from jsonschema import validate, FormatChecker
@@ -42,6 +43,21 @@ def is_wsi(instance):
     assert len(local_id) <= 16
     assert local_id.isalnum()
     return True
+
+
+@pytest.fixture
+def multimsg_bufr():
+    bufr_b64 = "QlVGUgAA5wQAABYAABUAAAAAAAEADgAH5gMUDwAAAAAJAAABgMdQAAC8AHivpTS1MrYQILG0N7qw" \
+        "uhAQEBAQEBAvzGo8BgvHQjc9SA/wCAJ//z8z2t//////+AZDi1t7bIAMgu4AZH////8sdQyTLlAQ" \
+        "JkBkCMYQQAP/yP+T/////////////////////H/VKf//+/R/8AyP////////AMj/////////////" \
+        "A+jBP7B4C77+3///////////v0f/7///////////////////9+j//////////////////////+A3" \
+        "Nzc3QlVGUgAA5wQAABYAABUAAAAAAAEADgAH5gMUCQAAAAAJAAABgMdQAAC8AHixqbW0tbIwkBAQ" \
+        "EBAQEBAQEBAQEBAvzGokBgzdYjpfoA+0B99//z8kCF//////+AZDg9t5jRAMgfQAZH////8sdgyT" \
+        "qFAQgkhkBYgQQAP/yP+T/////////////////////H/VKf//+/R/8AyP////////AMj/////////" \
+        "////A+jBP7G4Cn7+3///////////v0f/7///////////////////9+j/////////////////////" \
+        "/+A3Nzc3"
+    msg = base64.b64decode(bufr_b64.encode("ascii"))
+    return msg
 
 
 @pytest.fixture
@@ -97,6 +113,16 @@ def geojson_output():
             'fxxyyy': '010004'
         }
     }
+
+
+def test_multi(multimsg_bufr):
+    results = transform(multimsg_bufr)
+    # count number of geojsons
+    icount = 0
+    for res in results:
+        for key, val in res.items():
+            icount += 1
+    assert icount == 48
 
 
 def test_transform(geojson_schema, geojson_output):
