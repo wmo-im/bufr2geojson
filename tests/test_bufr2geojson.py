@@ -47,14 +47,26 @@ def is_wsi(instance):
 
 @pytest.fixture
 def multimsg_bufr():
-    bufr_b64 = "QlVGUgAA5wQAABYAABUAAAAAAAEADgAH5gMUDwAAAAAJAAABgMdQAAC8AHivpTS1MrYQILG0N7qw" \
-        "uhAQEBAQEBAvzGo8BgvHQjc9SA/wCAJ//z8z2t//////+AZDi1t7bIAMgu4AZH////8sdQyTLlAQ" \
-        "JkBkCMYQQAP/yP+T/////////////////////H/VKf//+/R/8AyP////////AMj/////////////" \
-        "A+jBP7B4C77+3///////////v0f/7///////////////////9+j//////////////////////+A3" \
-        "Nzc3QlVGUgAA5wQAABYAABUAAAAAAAEADgAH5gMUCQAAAAAJAAABgMdQAAC8AHixqbW0tbIwkBAQ" \
-        "EBAQEBAQEBAQEBAvzGokBgzdYjpfoA+0B99//z8kCF//////+AZDg9t5jRAMgfQAZH////8sdgyT" \
-        "qFAQgkhkBYgQQAP/yP+T/////////////////////H/VKf//+/R/8AyP////////AMj/////////" \
-        "////A+jBP7G4Cn7+3///////////v0f/7///////////////////9+j/////////////////////" \
+    bufr_b64 = \
+        "QlVGUgAA5wQAABYAABUAAAAAAAEADgAH" \
+        "5gMUDwAAAAAJAAABgMdQAAC8AHivpTS1" \
+        "MrYQILG0N7qwuhAQEBAQEBAvzGo8BgvH" \
+        "Qjc9SA/wCAJ//z8z2t//////+AZDi1t7" \
+        "bIAMgu4AZH////8sdQyTLlAQJkBkCMYQ" \
+        "QAP/yP+T/////////////////////H/V" \
+        "Kf//+/R/8AyP////////AMj/////////" \
+        "////A+jBP7B4C77+3///////////v0f/" \
+        "7///////////////////9+j/////////" \
+        "/////////////+A3Nzc3QlVGUgAA5wQA" \
+        "ABYAABUAAAAAAAEADgAH5gMUCQAAAAAJ" \
+        "AAABgMdQAAC8AHixqbW0tbIwkBAQEBAQ" \
+        "EBAQEBAQEBAvzGokBgzdYjpfoA+0B99/" \
+        "/z8kCF//////+AZDg9t5jRAMgfQAZH//" \
+        "//8sdgyTqFAQgkhkBYgQQAP/yP+T////" \
+        "/////////////////H/VKf//+/R/8AyP" \
+        "////////AMj/////////////A+jBP7G4" \
+        "Cn7+3///////////v0f/7///////////" \
+        "////////9+j/////////////////////" \  
         "/+A3Nzc3"
     msg = base64.b64decode(bufr_b64.encode("ascii"))
     return msg
