@@ -20,6 +20,7 @@
 ###############################################################################
 
 from __future__ import annotations
+import base64
 import itertools
 
 from jsonschema import validate, FormatChecker
@@ -42,6 +43,33 @@ def is_wsi(instance):
     assert len(local_id) <= 16
     assert local_id.isalnum()
     return True
+
+
+@pytest.fixture
+def multimsg_bufr():
+    bufr_b64 = \
+        "QlVGUgAA5wQAABYAABUAAAAAAAEADgAH" \
+        "5gMUDwAAAAAJAAABgMdQAAC8AHivpTS1" \
+        "MrYQILG0N7qwuhAQEBAQEBAvzGo8BgvH" \
+        "Qjc9SA/wCAJ//z8z2t//////+AZDi1t7" \
+        "bIAMgu4AZH////8sdQyTLlAQJkBkCMYQ" \
+        "QAP/yP+T/////////////////////H/V" \
+        "Kf//+/R/8AyP////////AMj/////////" \
+        "////A+jBP7B4C77+3///////////v0f/" \
+        "7///////////////////9+j/////////" \
+        "/////////////+A3Nzc3QlVGUgAA5wQA" \
+        "ABYAABUAAAAAAAEADgAH5gMUCQAAAAAJ" \
+        "AAABgMdQAAC8AHixqbW0tbIwkBAQEBAQ" \
+        "EBAQEBAQEBAvzGokBgzdYjpfoA+0B99/" \
+        "/z8kCF//////+AZDg9t5jRAMgfQAZH//" \
+        "//8sdgyTqFAQgkhkBYgQQAP/yP+T////" \
+        "/////////////////H/VKf//+/R/8AyP" \
+        "////////AMj/////////////A+jBP7G4" \
+        "Cn7+3///////////v0f/7///////////" \
+        "////////9+j/////////////////////" \
+        "/+A3Nzc3"
+    msg = base64.b64decode(bufr_b64.encode("ascii"))
+    return msg
 
 
 @pytest.fixture
@@ -97,6 +125,16 @@ def geojson_output():
             'fxxyyy': '010004'
         }
     }
+
+
+def test_multi(multimsg_bufr):
+    results = transform(multimsg_bufr)
+    # count number of geojsons
+    icount = 0
+    for res in results:
+        for key, val in res.items():
+            icount += 1
+    assert icount == 48
 
 
 def test_transform(geojson_schema, geojson_output):

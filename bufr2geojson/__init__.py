@@ -793,57 +793,74 @@ def transform(data: bytes, serialize: bool = False) -> Iterator[dict]:
     # check data type, only in situ supported
     # not yet implemented
     # split subsets into individual messages and process
-
+    imsg = 0
+    messages_remaining = True
     with open(tmp.name, 'rb') as fh:
+        # get first message
         bufr_handle = codes_bufr_new_from_file(fh)
-        try:
-            codes_set(bufr_handle, "unpack", True)
-        except Exception as e:
-            LOGGER.error("Error unpacking message")
-            LOGGER.error(e)
-            if FAIL_ON_ERROR:
-                raise e
-            error = True
+        if bufr_handle is None:
+            LOGGER.warning("No messages in file")
+            messages_remaining = False
+        while messages_remaining:
+            messages_remaining = False  # noqa set to false to prevent infinite loop by accident
+            imsg += 1
+            LOGGER.info(f"Processing message {imsg} from file")
 
-        if not error:
-            nsubsets = codes_get(bufr_handle, "numberOfSubsets")
-            LOGGER.info(f"{nsubsets} subsets")
-            collections = dict()
-            for idx in range(nsubsets):
-                LOGGER.debug(f"Extracting subset {idx}")
-                codes_set(bufr_handle, "extractSubset", idx+1)
-                codes_set(bufr_handle, "doExtractSubsets", 1)
-                LOGGER.debug("Cloning subset to new message")
-                single_subset = codes_clone(bufr_handle)
-                LOGGER.debug("Unpacking")
-                codes_set(single_subset, "unpack", True)
+            try:
+                codes_set(bufr_handle, "unpack", True)
+            except Exception as e:
+                LOGGER.error("Error unpacking message")
+                LOGGER.error(e)
+                if FAIL_ON_ERROR:
+                    raise e
+                error = True
 
-                parser = BUFRParser()
-                # only include tag if more than 1 subset in file
-                tag = ""
-                if nsubsets > 1:
-                    tag = f"-{idx}"
-                try:
-                    data = parser.as_geojson(single_subset, id=tag,
-                                             serialize=serialize)
+            if not error:
+                nsubsets = codes_get(bufr_handle, "numberOfSubsets")
+                LOGGER.info(f"{nsubsets} subsets")
+                collections = dict()
+                for idx in range(nsubsets):
+                    LOGGER.debug(f"Extracting subset {idx}")
+                    codes_set(bufr_handle, "extractSubset", idx+1)
+                    codes_set(bufr_handle, "doExtractSubsets", 1)
+                    LOGGER.debug("Cloning subset to new message")
+                    single_subset = codes_clone(bufr_handle)
+                    LOGGER.debug("Unpacking")
+                    codes_set(single_subset, "unpack", True)
 
-                except Exception as e:
-                    LOGGER.error("Error parsing BUFR to GeoJSON, no data written")  # noqa
-                    LOGGER.error(e)
-                    if FAIL_ON_ERROR:
-                        raise e
-                    data = {}
-                del parser
-                collections = deepcopy(data)
+                    parser = BUFRParser()
+                    # only include tag if more than 1 subset in file
+                    tag = ""
+                    if nsubsets > 1:
+                        tag = f"-{idx}"
+                    try:
+                        data = parser.as_geojson(single_subset, id=tag,
+                                                 serialize=serialize)
 
+                    except Exception as e:
+                        LOGGER.error("Error parsing BUFR to GeoJSON, no data written")  # noqa
+                        LOGGER.error(e)
+                        if FAIL_ON_ERROR:
+                            raise e
+                        data = {}
+                    del parser
+                    collections = deepcopy(data)
+
+                    yield collections
+                    codes_release(single_subset)
+            else:
+                collections = {}
                 yield collections
-                codes_release(single_subset)
-        else:
-            collections = {}
-            yield collections
 
-        if not error:
-            codes_release(bufr_handle)
+            if not error:
+                codes_release(bufr_handle)
+
+            bufr_handle = codes_bufr_new_from_file(fh)
+
+            if bufr_handle is not None:
+                messages_remaining = True
+
+        LOGGER.info(f"{imsg} messages processed from file")
 
 
 def strip2(value) -> str:
