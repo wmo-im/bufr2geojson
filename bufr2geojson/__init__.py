@@ -878,6 +878,6 @@ def strip2(value) -> str:
         space = b' '
 
     if value.startswith(space) or value.endswith(space):
-        LOGGER.warning("value '{value}' is space padded; upstream data should be fixed")  # noqa
+        LOGGER.warning(f"value '{value}' is space padded; upstream data should be fixed")  # noqa
 
     return value.strip()
