@@ -5,3 +5,4 @@ jsonschema @ git+https://github.com/tomkralidis/jsonschema@ref-yaml#egg=jsonsche
 jsonpath_ng
 pyoscar
 PyYAML
+pandas

@@ -22,7 +22,7 @@
 FROM ubuntu:focal
 
 ARG BUILD_PACKAGES="build-essential curl cmake gfortran" \
-    ECCODES_VER=2.26.0
+    ECCODES_VER=2.27.1
 
 ENV DEBIAN_FRONTEND="noninteractive" \
     TZ="Etc/UTC" \
@@ -42,12 +42,11 @@ RUN echo "Acquire::Check-Valid-Until \"false\";\nAcquire::Check-Date \"false\";"
     && apt-get remove --purge -y ${BUILD_PACKAGES} \
     && apt autoremove -y  \
     && apt-get -q clean \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf build
 
 COPY . /tmp/bufr2geojson
 
 RUN cd /tmp/bufr2geojson && python3 setup.py install
 
-
 WORKDIR /
-

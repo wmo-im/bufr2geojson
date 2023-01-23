@@ -736,24 +736,30 @@ class BUFRParser:
                         result_time = phenomenon_time
                     data[feature_id] = {
                         "geojson": {
+                            "type": "Feature",
+                            "geometry": self.get_location(),
+                            "properties":{
+                                "observationType":"",
+                                "parameter": deepcopy(metadata),
+                                "phenomenonTime": phenomenon_time,
+                                "resultQuality": None,
+                                "resultTime": result_time,
+                                "validTime": None,
+                                "featureOfInterest": None,
+                                "observedProperty": key,
+                                "resultValue": value,
+                                "resultUoM": attributes['units'],
+                                "resultDescription": description,
+                                "procedure": None,
+                                "observer": None,
+                                "index": index,
+                                "fxxyyy": fxxyyy,
+                                "host": f"https://oscar.wmo.int/surface/#/search/station/stationReportDetails/{wsi}",  # noqa
+                                "wigos_station_identifier": f"{wsi}"
+                            },
                             "id": feature_id,
                             "conformsTo": ["http://www.wmo.int/spec/om-profile-1/1.0/req/geojson"],  # noqa
                             "reportId": f"WIGOS_{wsi}_{characteristic_date}T{characteristic_time}{id}",  # noqa
-                            "type": "Feature",
-                            "geometry": self.get_location(),
-                            "properties": {
-                                # "identifier": feature_id,
-                                "wigos_station_identifier": wsi,
-                                "phenomenonTime": phenomenon_time,
-                                "resultTime": result_time,
-                                "name": key,
-                                "value": value,
-                                "units": attributes["units"],
-                                "description": description,
-                                "metadata": metadata,
-                                "index": index,
-                                "fxxyyy": fxxyyy
-                            }
                         },
                         "_meta": {
                             "data_date": self.get_time(),
@@ -801,6 +807,7 @@ def transform(data: bytes, serialize: bool = False) -> Iterator[dict]:
         if bufr_handle is None:
             LOGGER.warning("No messages in file")
             messages_remaining = False
+
         while messages_remaining:
             messages_remaining = False  # noqa set to false to prevent infinite loop by accident
             imsg += 1
