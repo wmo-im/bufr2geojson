@@ -822,8 +822,6 @@ def transform(data: bytes, serialize: bool = False) -> Iterator[dict]:
             except Exception as e:
                 LOGGER.error("Error unpacking message")
                 LOGGER.error(e)
-                if FAIL_ON_ERROR:
-                    raise e
                 error = True
 
             if not error:
@@ -851,8 +849,6 @@ def transform(data: bytes, serialize: bool = False) -> Iterator[dict]:
                     except Exception as e:
                         LOGGER.error("Error parsing BUFR to GeoJSON, no data written")  # noqa
                         LOGGER.error(e)
-                        if FAIL_ON_ERROR:
-                            raise e
                         data = {}
                     del parser
                     collections = deepcopy(data)
