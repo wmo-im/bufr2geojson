@@ -331,10 +331,10 @@ class BUFRParser:
         hour = self.get_qualifier(xx, "hour", 0)
         minute = self.get_qualifier(xx, "minute", 0)
         second = self.get_qualifier(xx, "second", 0)
-        if (year == None) or (month == None):
+        if (year is None) or (month is None):
             LOGGER.error("Invalid date in BUFR file")
             if FAIL_ON_ERROR:
-                raise valueError
+                raise ValueError
             else:
                 return "INVALID DATE"
         if hour == 24:
