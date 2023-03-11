@@ -183,7 +183,7 @@ class BUFRParser:
     def set_time_displacement(self, key, value, append=False):
         raise NotImplementedError()
 
-    def get_qualifer(self, xx: str, key: str, default=None) -> Union[NUMBERS]:
+    def get_qualifier(self, xx: str, key: str, default=None) -> Union[NUMBERS]:
         """
         Function to get specified qualifier
 
@@ -325,12 +325,18 @@ class BUFRParser:
         # class is always 04
         xx = "04"
         # get year
-        year = self.get_qualifer(xx, "year")
-        month = self.get_qualifer(xx, "month")
-        day = self.get_qualifer(xx, "day", 1)
-        hour = self.get_qualifer(xx, "hour", 0)
-        minute = self.get_qualifer(xx, "minute", 0)
-        second = self.get_qualifer(xx, "second", 0)
+        year = self.get_qualifier(xx, "year")
+        month = self.get_qualifier(xx, "month")
+        day = self.get_qualifier(xx, "day", 1)
+        hour = self.get_qualifier(xx, "hour", 0)
+        minute = self.get_qualifier(xx, "minute", 0)
+        second = self.get_qualifier(xx, "second", 0)
+        if (year == None) or (month == None):
+            LOGGER.error("Invalid date in BUFR file")
+            if FAIL_ON_ERROR:
+                raise valueError
+            else:
+                return "INVALID DATE"
         if hour == 24:
             hour = 0
             offset = 1
@@ -437,11 +443,11 @@ class BUFRParser:
         if all(x in self.qualifiers["01"] for x in ("wigos_identifier_series",
                                                     "wigos_issuer_of_identifier",  # noqa
                                                     "wigos_issue_number", "wigos_local_identifier_character")):  # noqa
-            wsi_series = self.get_qualifer("01", "wigos_identifier_series")
-            wsi_issuer = self.get_qualifer("01", "wigos_issuer_of_identifier")
-            wsi_number = self.get_qualifer("01", "wigos_issue_number")
+            wsi_series = self.get_qualifier("01", "wigos_identifier_series")
+            wsi_issuer = self.get_qualifier("01", "wigos_issuer_of_identifier")
+            wsi_number = self.get_qualifier("01", "wigos_issue_number")
             #wsi_local = self.qualifiers["01"]["wigos_local_identifier_character"]["description"]  # noqa
-            wsi_local = strip2(self.get_qualifer("01", "wigos_local_identifier_character"))  # noqa
+            wsi_local = strip2(self.get_qualifier("01", "wigos_local_identifier_character"))  # noqa
             return {
                 "wsi": f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}",
                 "tsi": wsi_local,
@@ -452,8 +458,8 @@ class BUFRParser:
         # 001001, 001002
         _types = ("block_number", "station_number")
         if all(x in self.qualifiers["01"] for x in _types):  # noqa
-            block = self.get_qualifer("01", "block_number")
-            station = self.get_qualifer("01", "station_number")
+            block = self.get_qualifier("01", "block_number")
+            station = self.get_qualifier("01", "station_number")
             wsi_series = 0
             wsi_issuer = 20000
             wsi_number = 0
@@ -467,7 +473,7 @@ class BUFRParser:
         # ship or mobile land station identifier (001011)
         _type = "ship_or_mobile_land_station_identifier"
         if _type in self.qualifiers["01"]:
-            callsign = self.get_qualifer("01", _type)
+            callsign = self.get_qualifier("01", _type)
             wsi_series = 0
             wsi_issuer = 20004
             wsi_number = 0
@@ -483,9 +489,9 @@ class BUFRParser:
         _types = ("region_number", "wmo_region_sub_area",
                   "buoy_or_platform_identifier")
         if all(x in self.qualifiers["01"] for x in _types):
-            wmo_region = self.get_qualifer("region_number")
-            wmo_subregion = self.get_qualifer("wmo_region_sub_area")
-            wmo_number = self.get_qualifer("buoy_or_platform_identifier")
+            wmo_region = self.get_qualifier("region_number")
+            wmo_subregion = self.get_qualifier("wmo_region_sub_area")
+            wmo_number = self.get_qualifier("buoy_or_platform_identifier")
             wsi_series = 0
             wsi_issuer = 20002
             wsi_number = 0
@@ -500,7 +506,7 @@ class BUFRParser:
         # 001010
         _type = "stationary_buoy_platform_identifier_e_g_c_man_buoys"
         if _type in self.qualifiers["01"]:
-            id_ = self.get_qualifer("01", _type)
+            id_ = self.get_qualifier("01", _type)
             wsi_series = 0
             wsi_issuer = 20002
             wsi_number = 0
@@ -515,7 +521,7 @@ class BUFRParser:
         # 001087
         _type = "marine_observing_platform_identifier"
         if _type in self.qualifiers["01"]:
-            id_ = self.get_qualifer("01", _type)
+            id_ = self.get_qualifier("01", _type)
             wsi_series = 0
             wsi_issuer = 20002
             wsi_number = 0
