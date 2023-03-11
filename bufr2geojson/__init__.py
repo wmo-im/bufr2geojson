@@ -54,7 +54,6 @@ LOGGER = logging.getLogger(__name__)
 SUCCESS = True
 NUMBERS = (float, int, complex)
 MISSING = ("NA", "NaN", "NAN", "None")
-FAIL_ON_ERROR = False
 NULLIFY_INVALID = True  # TODO: move to env. variable
 
 BUFR_TABLE_VERSION = 37  # default BUFR table version
@@ -129,7 +128,10 @@ jsonpath_parsers = dict()
 
 # class to act as parser for BUFR data
 class BUFRParser:
-    def __init__(self):
+    def __init__(self, raise_on_error=False):
+
+        self.raise_on_error = raise_on_error
+
         # dict to store qualifiers in force and for accounting
         self.qualifiers = {
             "01": {},  # identification
@@ -335,7 +337,7 @@ class BUFRParser:
         if None in [year, month, day, hour, minute, second]:
             msg = f"Invalid date ({year}-{month}-{day} {hour}:{minute}:{second}) in BUFR data"  # noqa
             LOGGER.error(msg)
-            if FAIL_ON_ERROR:
+            if self.raise_on_error:
                 raise ValueError(msg)
             else:
                 return msg
