@@ -333,7 +333,7 @@ class BUFRParser:
         second = self.get_qualifier(xx, "second", 0)
         # check we have valid date
         if None in [year, month, day, hour, minute, second]:
-            msg = ("Invalid year/month in BUFR data")
+            msg = f"Invalid date ({year}-{month}-{day} {hour}:{minute}:{second}) in BUFR data"  # noqa
             LOGGER.error(msg)
             if FAIL_ON_ERROR:
                 raise ValueError(msg)
