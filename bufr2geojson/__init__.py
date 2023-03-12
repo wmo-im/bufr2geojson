@@ -245,12 +245,13 @@ class BUFRParser:
                 result.append(q)
         return result
 
-    def get_location(self) -> dict:
+    def get_location(self) -> Union[dict, None]:
         """
         Function to get location from qualifiers and to apply any displacements
         or increments
 
-        :returns: dictionary containing GeoJSON geometry
+        :returns: dictionary containing GeoJSON geometry or None
+                  (if geometry contains null values/cannot be derived)
                   example: `{"type":"", "coordinates": [x,y,z?]}`
         """
 
@@ -309,12 +310,14 @@ class BUFRParser:
         if elevation is not None:
             location.append(elevation)
 
-        geom = {
+        if None in location:
+            LOGGER.debug('geometry contains null values; setting to None')
+            return None
+
+        return {
             "type": "Point",
             "coordinates": location
         }
-
-        return geom
 
     def get_time(self) -> str:
         """
