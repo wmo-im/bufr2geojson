@@ -880,12 +880,16 @@ def strip2(value) -> str:
     :returns: `str` of stripped value
     """
 
-    space = None
+    if value is None:
+        return None
 
     if isinstance(value, str):
         space = ' '
     elif isinstance(value, bytes):
         space = b' '
+    else:  # make sure we have a string
+        space = ' '
+        value = f"{value}"
 
     if value.startswith(space) or value.endswith(space):
         LOGGER.warning(f"value '{value}' is space padded; upstream data should be fixed")  # noqa
