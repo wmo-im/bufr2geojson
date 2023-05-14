@@ -870,6 +870,9 @@ def strip2(value) -> str:
     :returns: `str` of stripped value
     """
 
+    if value is None:
+        return None
+
     if isinstance(value, str):
         space = ' '
     elif isinstance(value, bytes):
