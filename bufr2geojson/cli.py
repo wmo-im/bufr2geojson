@@ -56,6 +56,12 @@ def cli():
     pass
 
 
+@click.group()
+def data():
+    """data utilities"""
+    pass
+
+
 @click.command()
 @click.pass_context
 @click.argument("bufr_file", type=click.File(mode="rb", errors="ignore"))
@@ -75,4 +81,5 @@ def transform(ctx, bufr_file, output_dir, verbosity):
     click.echo("Done")
 
 
-cli.add_command(transform)
+data.add_command(transform)
+cli.add_command(data)
