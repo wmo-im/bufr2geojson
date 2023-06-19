@@ -27,13 +27,13 @@ cd /app
 ## Running
 
 ```bash
-bufr2geojson transform <input_file> --output-dir <output_directory> --csv <True|False>
+bufr2geojson data transform <input_file> --output-dir <output_directory> --csv <True|False>
 ```
 
 e.g.
 
 ```bash
-bufr2geojson transform ./tests/A_ISIA21EIDB202100_C_EDZW_20220320210902_11839953.bin  --output-dir ./output/
+bufr2geojson data transform ./tests/A_ISIA21EIDB202100_C_EDZW_20220320210902_11839953.bin  --output-dir ./output/
 ```
 
 ## Releasing
