@@ -566,7 +566,7 @@ class BUFRParser:
             with tablefile.open() as csvfile:
                 reader = csv.reader(csvfile, delimiter=" ")
                 for row in reader:
-                    CODETABLES[self.table_version][fxxyyy][int(row[0])] = row[2]  # noqa
+                    CODETABLES[self.table_version][fxxyyy][int(row[0])] = " ".join(row[2:])  # noqa
 
         if code not in CODETABLES[self.table_version][fxxyyy]:
             LOGGER.warning(f"Invalid entry for value {code} in code table {fxxyyy}, table version {self.table_version}")  # noqa
