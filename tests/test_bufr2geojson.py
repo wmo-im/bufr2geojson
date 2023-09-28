@@ -112,7 +112,7 @@ def geojson_output():
                     'name': 'station_type',
                     'value': 0,
                     'units': 'CODE TABLE',
-                    'description': 'AUTOMATIC'
+                    'description': 'AUTOMATIC STATION'
                 },
                 {
                     'name': 'height_of_barometer_above_mean_sea_level',
