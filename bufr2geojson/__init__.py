@@ -564,9 +564,9 @@ class BUFRParser:
             CODETABLES[self.table_version][fxxyyy] = {}
             tablefile = TABLEDIR / str(self.table_version) / 'codetables' / f'{table}.table'  # noqa
             with tablefile.open() as csvfile:
-                reader = csv.reader(csvfile, delimiter=" ")
+                reader = csv.reader(csvfile, delimiter=" ")  # why does was space used as a delimiter? -\o/-
                 for row in reader:
-                    CODETABLES[self.table_version][fxxyyy][int(row[0])] = row[2]  # noqa
+                    CODETABLES[self.table_version][fxxyyy][int(row[0])] = " ".join(row[2:])  # noqa
 
         if code not in CODETABLES[self.table_version][fxxyyy]:
             LOGGER.warning(f"Invalid entry for value {code} in code table {fxxyyy}, table version {self.table_version}")  # noqa
@@ -748,25 +748,57 @@ class BUFRParser:
                         result_time = result_time[1]
                     else:
                         result_time = phenomenon_time
+                    location = self.get_location()
+                    print(location)
+                    if len(location['coordinates']) == 3:
+                        elevation = location['coordinates'][2]
+                    else:
+                        elevation = None
+
+                    if wsi is not None:
+                        host = f"https://oscar.wmo.int/surface/#/search/station/stationReportDetails/{wsi}"  # noqa
+                    else:
+                        host = None
+
                     data[feature_id] = {
                         "geojson": {
                             "id": feature_id,
-                            "conformsTo": ["http://www.wmo.int/spec/om-profile-1/1.0/req/geojson"],  # noqa
-                            "reportId": f"WIGOS_{wsi}_{characteristic_date}T{characteristic_time}{id}",  # noqa
                             "type": "Feature",
-                            "geometry": self.get_location(),
+                            "geometry": location,
                             "properties": {
-                                # "identifier": feature_id,
-                                "wigos_station_identifier": wsi,
-                                "phenomenonTime": phenomenon_time,
-                                "resultTime": result_time,
-                                "name": key,
-                                "value": value,
-                                "units": attributes["units"],
-                                "description": description,
-                                "metadata": metadata,
-                                "index": index,
-                                "fxxyyy": fxxyyy
+                                "elevation": elevation,
+                                "observation_type": f"https://example.com/observation_type/{headers['dataCategory']}/{headers['internationalDataSubCategory']}",  # noqa
+                                "phenomenon_time": phenomenon_time,
+                                "result": {
+                                    "value": value,
+                                    "uom": attributes["units"],
+                                    "description": description
+                                },
+                                "result_quality": [],
+                                "result_time": result_time,
+                                "valid_time": None,
+                                "host": host,
+                                "observer": None,
+                                "observed_property": 'https://codes.wmo.int/bufr4/b/'+fxxyyy[1:3]+'/'+fxxyyy[3:],  # noqa
+                                "observing_procedure": None,
+                                "collection": f"{wsi}_{characteristic_date}T{characteristic_time}",  # noqa
+                                "metadata": None,
+                                "featureOfInterest": None,
+                                "parameters": {
+                                    "version": f"{headers['updateSequenceNumber']}",
+                                    "previousVersion": None,
+                                    "changeDate": datetime.now().isoformat(),
+                                    "user": None,
+                                    "source": None,
+                                    "sourceID": None,
+                                    "cell_methods": None,
+                                    "status": "draft",
+                                    "comments": "automatic decoding from BUFR",  # noqa
+                                    "wigos_station_identifier": wsi,
+                                    "metadata": metadata,
+                                    "index": index,
+                                    "fxxyyy": fxxyyy
+                                }
                             }
                         },
                         "_meta": {

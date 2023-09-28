@@ -75,6 +75,7 @@ def transform(ctx, bufr_file, output_dir, verbosity):
         for key, item in collection.items():
             outfile = f"{output_dir}{os.sep}{key}.json"
             data = item['geojson']
+            click.echo(item['_headers'])
             with open(outfile, "w") as fh:
                 fh.write(json.dumps(data, indent=4))
 
