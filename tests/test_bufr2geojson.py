@@ -22,6 +22,7 @@
 from __future__ import annotations
 import base64
 import itertools
+
 from jsonschema import validate, FormatChecker
 import pytest
 import yaml
