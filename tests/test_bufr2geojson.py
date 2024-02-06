@@ -128,7 +128,7 @@ def geojson_output():
 
 
 def test_multi(multimsg_bufr):
-    results = transform(multimsg_bufr)
+    results = transform(multimsg_bufr, guess_wsi=True)
     # count number of geojsons
     icount = 0
     for res in results:
@@ -140,7 +140,8 @@ def test_multi(multimsg_bufr):
 def test_transform(geojson_schema, geojson_output):
     test_bufr_file = 'A_ISIA21EIDB202100_C_EDZW_20220320210902_11839953.bin'
     with open(test_bufr_file, 'rb') as fh:
-        messages1, messages2 = itertools.tee(transform(fh.read()))
+        messages1, messages2 = itertools.tee(transform(fh.read(),
+                                                       guess_wsi=True))
 
         # validate against JSON Schema
         for message in messages1:

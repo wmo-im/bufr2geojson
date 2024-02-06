@@ -417,14 +417,14 @@ class BUFRParser:
 
         return time_
 
-    def get_wsi(self) -> str:
+    def get_wsi(self, guess_wsi: bool = False) -> str:
         """
         Function returns WIGOS station ID as string
 
         :returns: WIGOS station ID.
         """
 
-        return self.get_identification()["wsi"]
+        return self.get_identification(guess_wsi)["wsi"]
 
     def get_tsi(self) -> str:
         """
@@ -435,12 +435,15 @@ class BUFRParser:
 
         return self.get_identification()["tsi"]
 
-    def get_identification(self) -> dict:
+    def get_identification(self, guess_wsi: bool = False) -> dict:
         """
         Function extracts identification information from qualifiers.
 
         :returns: dictionary containing any class 01 qualifiers and WSI as dict.  # noqa
         """
+
+        # default WSI value
+        wsi = None
 
         # see https://library.wmo.int/doc_num.php?explnum_id=11021
         # page 19 for allocation of WSI if not set
@@ -467,13 +470,17 @@ class BUFRParser:
         if all(x in self.qualifiers["01"] for x in _types):  # noqa
             block = self.get_qualifier("01", "block_number")
             station = self.get_qualifier("01", "station_number")
-            wsi_series = 0
-            wsi_issuer = 20000
-            wsi_number = 0
-            wsi_local = strip2(f"{block:02d}{station:03d}")
+            tsi = strip2(f"{block:02d}{station:03d}")
+            if guess_wsi:
+                wsi_series = 0
+                wsi_issuer = 20000
+                wsi_number = 0
+                wsi_local = tsi
+                wsi = f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}"
+
             return {
-                "wsi": f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}",
-                "tsi": wsi_local,
+                "wsi": wsi,
+                "tsi": tsi,
                 "type": "{}_and_{}".format(*_types)
             }
 
@@ -481,13 +488,17 @@ class BUFRParser:
         _type = "ship_or_mobile_land_station_identifier"
         if _type in self.qualifiers["01"]:
             callsign = self.get_qualifier("01", _type)
-            wsi_series = 0
-            wsi_issuer = 20004
-            wsi_number = 0
-            wsi_local = strip2(callsign)
+            tsi = strip2(callsign)
+            if guess_wsi:
+                wsi_series = 0
+                wsi_issuer = 20004
+                wsi_number = 0
+                wsi_local = tsi
+                wsi = f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}"
+
             return {
-                "wsi": f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}",
-                "tsi": wsi_local,
+                "wsi": wsi,
+                "tsi": tsi,
                 "type": _type
             }
 
@@ -499,13 +510,17 @@ class BUFRParser:
             wmo_region = self.get_qualifier("region_number")
             wmo_subregion = self.get_qualifier("wmo_region_sub_area")
             wmo_number = self.get_qualifier("buoy_or_platform_identifier")
-            wsi_series = 0
-            wsi_issuer = 20002
-            wsi_number = 0
-            wsi_local = strip2(f"{wmo_region:01d}{wmo_subregion:01d}{wmo_number:05d}")  # noqa
+            tsi = strip2(f"{wmo_region:01d}{wmo_subregion:01d}{wmo_number:05d}")  # noqa
+            if guess_wsi:
+                wsi_series = 0
+                wsi_issuer = 20002
+                wsi_number = 0
+                wsi_local = tsi  # noqa
+                wsi = f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}"
+
             return {
-                "wsi": f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}",
-                "tsi": wsi_local,
+                "wsi": wsi,
+                "tsi": tsi,
                 "type": "5_digit_marine_observing_platform_identifier"
             }
 
@@ -514,13 +529,17 @@ class BUFRParser:
         _type = "stationary_buoy_platform_identifier_e_g_c_man_buoys"
         if _type in self.qualifiers["01"]:
             id_ = self.get_qualifier("01", _type)
-            wsi_series = 0
-            wsi_issuer = 20002
-            wsi_number = 0
-            wsi_local = strip2(id_)
+            tsi = strip2(id_)
+            if guess_wsi:
+                wsi_series = 0
+                wsi_issuer = 20002
+                wsi_number = 0
+                wsi_local = tsi
+                wsi = f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}"
+
             return {
-                "wsi": f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}",
-                "tsi": wsi_local,
+                "wsi": wsi,
+                "tsi": tsi,
                 "type": _type
             }
 
@@ -529,13 +548,17 @@ class BUFRParser:
         _type = "marine_observing_platform_identifier"
         if _type in self.qualifiers["01"]:
             id_ = self.get_qualifier("01", _type)
-            wsi_series = 0
-            wsi_issuer = 20002
-            wsi_number = 0
-            wsi_local = strip2(id_)
+            tsi = strip2(id_)
+            if guess_wsi:
+                wsi_series = 0
+                wsi_issuer = 20002
+                wsi_number = 0
+                wsi_local = tsi
+                wsi = f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}"
+
             return {
-                "wsi": f"{wsi_series}-{wsi_issuer}-{wsi_number}-{wsi_local}",
-                "tsi": wsi_local,
+                "wsi": wsi,
+                "tsi": tsi,
                 "type": "7_digit_marine_observing_platform_identifier"
             }
 
@@ -576,7 +599,7 @@ class BUFRParser:
         return decoded
 
     def as_geojson(self, bufr_handle: int, id: str,
-                   serialize: bool = False) -> dict:
+                   serialize: bool = False, guess_wsi: bool = False) -> dict:
         """
         Function to return GeoJSON representation of BUFR message
 
@@ -729,7 +752,7 @@ class BUFRParser:
                                        attributes, append)
                     continue
                 if value is not None:
-                    self.get_identification()
+                    # self.get_identification()
                     metadata = self.get_qualifiers()
                     metadata_hash = hashlib.md5(json.dumps(metadata).encode("utf-8")).hexdigest()  # noqa
                     md = {
@@ -738,7 +761,7 @@ class BUFRParser:
                     }
                     for idx in range(len(metadata)):
                         md["metadata"].append(metadata[idx])
-                    wsi = self.get_wsi()
+                    wsi = self.get_wsi(guess_wsi)
                     feature_id = f"WIGOS_{wsi}_{characteristic_date}T{characteristic_time}"  # noqa
                     feature_id = f"{feature_id}{id}-{index}"
                     phenomenon_time = self.get_time()
@@ -786,12 +809,14 @@ class BUFRParser:
         return data
 
 
-def transform(data: bytes, serialize: bool = False) -> Iterator[dict]:
+def transform(data: bytes, serialize: bool = False,
+              guess_wsi: bool = False) -> Iterator[dict]:
     """
     Main transformation
 
     :param data: byte string of BUFR data
     :param serialize: whether to return as JSON string (default is False)
+    :param guess_wsi: whether to 'guess' WSI based on TSI and allocaiotn rules
 
     :returns: `generator` of GeoJSON features
     """
@@ -803,8 +828,7 @@ def transform(data: bytes, serialize: bool = False) -> Iterator[dict]:
     with open(tmp.name, 'wb') as f:
         f.write(data)
 
-    # check data type, only in situ supported
-    # not yet implemented
+    # check data type, only in situ supported (not yet implemented)
     # split subsets into individual messages and process
     imsg = 0
     messages_remaining = True
@@ -846,7 +870,8 @@ def transform(data: bytes, serialize: bool = False) -> Iterator[dict]:
                         tag = f"-{idx}"
                     try:
                         data = parser.as_geojson(single_subset, id=tag,
-                                                 serialize=serialize)
+                                                 serialize=serialize,
+                                                 guess_wsi=guess_wsi)  # noqa
 
                     except Exception as e:
                         LOGGER.error("Error parsing BUFR to GeoJSON, no data written")  # noqa
