@@ -280,7 +280,7 @@ class BUFRParser:
             LOGGER.warning("longitude set to None")
             longitude = None
         else:
-            longitude = self.qualifiers["06"]["longitude"]
+            longitude = deepcopy(self.qualifiers["06"]["longitude"])
 
         if longitude is not None:
             # check if we need to add a displacement
@@ -292,7 +292,7 @@ class BUFRParser:
 
         # now station elevation
         if "height_of_station_ground_above_mean_sea_level" in self.qualifiers["07"]:  # noqa
-            elevation = self.qualifiers["07"]["height_of_station_ground_above_mean_sea_level"]  # noqa
+            elevation = deepcopy(self.qualifiers["07"]["height_of_station_ground_above_mean_sea_level"])  # noqa
             elevation = round(elevation["value"], elevation["attributes"]["scale"])  # noqa
         else:
             elevation = None
@@ -313,7 +313,6 @@ class BUFRParser:
         if None in location:
             LOGGER.debug('geometry contains null values; setting to None')
             return None
-
         return {
             "type": "Point",
             "coordinates": location
