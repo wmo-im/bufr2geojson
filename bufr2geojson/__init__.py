@@ -855,10 +855,12 @@ def transform(data: bytes, serialize: bool = False,
                 LOGGER.info(f"{nsubsets} subsets")
                 collections = dict()
                 for idx in range(nsubsets):
-                    LOGGER.debug(f"Extracting subset {idx}")
-                    codes_set(bufr_handle, "extractSubset", idx+1)
-                    codes_set(bufr_handle, "doExtractSubsets", 1)
-                    LOGGER.debug("Cloning subset to new message")
+                    if nsubsets > 1:  # we need to specify which subset to extract
+                        LOGGER.debug(f"Extracting subset {idx}")
+                        codes_set(bufr_handle, "extractSubset", idx+1)
+                        codes_set(bufr_handle, "doExtractSubsets", 1)
+                        LOGGER.debug("Cloning subset to new message")
+
                     single_subset = codes_clone(bufr_handle)
                     LOGGER.debug("Unpacking")
                     codes_set(single_subset, "unpack", True)
