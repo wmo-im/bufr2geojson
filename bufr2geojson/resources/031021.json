@@ -1,0 +1,82 @@
+{
+  "1": {
+    "type": "int",
+    "label": "1-bit indicator of quality",
+    "values": {
+      "0": "Good",
+      "1": "Suspect or bad"
+    }
+  },
+  "2": {
+    "type": "int",
+    "label": "2-bit indicator of quality",
+    "values": {
+      "0" : "Good",
+      "1" : "Slightly suspect",
+      "2" : "Highly suspect",
+      "3" : "Bad"
+    }
+  },
+  "5": {
+    "type": "int",
+    "label": "8-bit indicator of quality",
+    "values": {
+      "0": "Data checked and declared good",
+      "1": "Data checked and declared suspect",
+      "2": "Data checked and declared aggregated",
+      "3": "Data checked and declared out of instrument range",
+      "4": "Data checked, declared aggregated, and out of instrument range",
+      "5": "Parameter is not measured at the station",
+      "6": "Daily value not provided",
+      "7": "Data unchecked",
+      "255": "Missing (QC info not available)"
+    }
+  },
+  "6": {
+    "type": "int",
+    "label": "4-bit indicator of quality control class according to GTSPP",
+    "values": {
+      "0": "Unqualified",
+      "1": "Correct value (all checks passed)",
+      "2": "Probably good but value inconsistent with statistics (differ from climatology)",
+      "3": "Probably bad (spike, gradient, ... if other tests passed)",
+      "4": "Bad value, impossible value (out of scale, vertical instability, constant profile)",
+      "5": "Value modified during quality control",
+      "8": "Interpolated value",
+      "9": "Missing value"
+    }
+  },
+  "7": {
+    "type": "float",
+    "label": "Percentage confidence",
+    "units": "%"
+  },
+  "8": {
+    "type": "int",
+    "label": "2-bit indicator of quality (alt)",
+    "values": {
+      "0": "Not suspected",
+      "1": "Suspected",
+      "2": "Reserved",
+      "3": "Information not required"
+    }
+  },
+  "9": {
+    "type": "int",
+    "label": "Status of ancillary data",
+    "values": {
+      "0": "Data present, good, collocated",
+      "1": "Data available but of degraded quality and not used",
+      "2": "No spatiotemporally collocated data available",
+      "15": "Missing value"
+    }
+  },
+  "21": {
+    "type": "int",
+    "label": "1-bit indicator of correction",
+    "values": {
+      "0": "Original value",
+      "1": "Substituted/corrected value"
+    }
+  }
+}

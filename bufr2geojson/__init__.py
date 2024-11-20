@@ -77,6 +77,9 @@ PREFERRED_UNITS = {
     "Pa": "hPa"
 }
 
+with open(f"{RESOURCES}{os.sep}031021.json") as fh:
+    ASSOCIATED_FIELDS = json.load(fh)
+
 # list of BUFR attributes
 ATTRIBUTES = ['code', 'units', 'scale', 'reference', 'width']
 
@@ -184,6 +187,7 @@ class BUFRParser:
             "09": {},  # reserved
             "22": {},  # some sst sensors in class 22
             "25": {},  # processing information
+            "31": {},  # associated field significance
             "33": {},  # BUFR/CREX quality information
             "35": {}  # data monitoring information
         }
@@ -258,7 +262,7 @@ class BUFRParser:
         """
 
         classes = ("01", "02", "03", "04", "05", "06",
-                   "07", "08", "22", "25", "35")
+                   "07", "08", "22", "25", "31", "33", "35")
 
         identification = {}
         wigos_md = {}
@@ -797,6 +801,10 @@ class BUFRParser:
         while codes_bufr_keys_iterator_next(key_iterator):
             # get key
             key = codes_bufr_keys_iterator_get_name(key_iterator)
+            if "associatedField" in key: # we've already processed, skip
+                last_key = key
+                continue
+
             # identify what we are processing
             if key in (HEADERS + ECMWF_HEADERS + UNEXPANDED_DESCRIPTORS):
                 continue
@@ -812,6 +820,41 @@ class BUFRParser:
             f = int(fxxyyy[0:1])
             xx = int(fxxyyy[1:3])
             yyy = int(fxxyyy[3:6])
+
+            # because of the way eccode works we need to check for associated
+            # fields. These are returned after
+            associated_field = None
+            try:
+                associated_field_value = codes_get(bufr_handle, f"{key}->associatedField")
+                associated_field = codes_get(bufr_handle, f"{key}->associatedField->associatedFieldSignificance")
+                associated_field = f"{associated_field}"
+                associated_field = ASSOCIATED_FIELDS.get(associated_field)
+            except:
+                pass
+
+            if associated_field is not None:
+                flabel = associated_field.get('label','')
+                ftype = associated_field.get('type','')
+                if ftype == 'int':
+                    associated_field_value = f"{int(associated_field_value)}"
+                    associated_field_value = \
+                        associated_field.get('values',{}).get(associated_field_value,'')
+                else:
+                    funits = associated_field.get('units', '')
+                    associated_field_value = f"{associated_field_value} {funits}"
+                quality_flag = {
+                    'inScheme': "https://codes.wmo.int/bufr4/codeflag/0-31-021",
+                    'flag': flabel,
+                    'flagValue': associated_field_value
+                }
+            else:
+                quality_flag = {
+                    'inScheme': None,
+                    'flag': None,
+                    'flagValue': None
+                }
+
+            assert f == 0
             # get value and attributes
             # get as array and convert to scalar if required
             value = codes_get_array(bufr_handle, key)
@@ -891,14 +934,23 @@ class BUFRParser:
 
             # determine whether we have data or metadata
             append = False
-            if xx < 9:
+            if xx < 9: # metadata / significance qualifiers
                 if ((xx >= 4) and (xx < 8)) and (key == last_key):
                     append = True
-                self.set_qualifier(fxxyyy, key, value, description,
+
+                if fxxyyy == "004023" and sequence == "307075":  # fix for broken DAYCLI sequence
+                    self.set_qualifier(fxxyyy, key, value, description,
+                                   attributes, append)
+                    self.set_qualifier(fxxyyy, key, value+1, description,
+                                   attributes, append)
+                else:
+                    self.set_qualifier(fxxyyy, key, value, description,
                                    attributes, append)
                 last_key = key
                 continue
             elif xx == 31:
+                if yyy in (12, 31):
+                    raise NotImplementedError
                 last_key = key
                 continue
             elif xx in (25, 33, 35):
@@ -920,16 +972,6 @@ class BUFRParser:
                 # self.get_identification()
                 metadata = self.get_qualifiers()
                 metadata["BUFR_element"] = fxxyyy
-                # metadata["provenance"] = headers.copy()
-
-
-                #metadata_hash = hashlib.md5(json.dumps(metadata).encode("utf-8")).hexdigest()  # noqa
-                #md = {
-                #    "id": metadata_hash,
-                #    "metadata": list()
-                #}
-                #for idx in range(len(metadata)):
-                #    md["metadata"].append(metadata[idx])
 
                 observing_procedure = "http://codes.wmo.int/wmdr/SourceOfObservation/unknown"  # noqa
 
@@ -957,6 +999,13 @@ class BUFRParser:
                 else:
                     result_time = phenomenon_time
 
+                # check if we have statistic, if so modify observed_property
+                fos = self.get_qualifier("08","first_order_statistics",None)
+                observed_property = f"{key}"
+                if fos is not None:
+                    fos = fos.get("description","")
+                    observed_property = f"{key} ({fos.lower()})"
+
                 data = {
                     "geojson": {
                         "id": feature_id,
@@ -971,7 +1020,7 @@ class BUFRParser:
                             "host": host_id,  # noqa
                             "observer": None,
                             "observationType": observation_type,  # noqa
-                            "observedProperty": key,
+                            "observedProperty": observed_property,
                             "observingProcedure": observing_procedure,
                             "phenomenonTime": phenomenon_time,
                             "resultTime": result_time,
@@ -982,11 +1031,7 @@ class BUFRParser:
                                 "standardUncertainty": None
                             },
                             "resultQuality": [
-                                {
-                                    "inScheme": None,
-                                    "flag": None,
-                                    "flagValue": None
-                                }
+                                quality_flag
                             ],
                             "parameter": {
                                 "hasProvenance": None,
@@ -1013,8 +1058,7 @@ class BUFRParser:
                     "_meta": {
                         "data_date": self.get_time(),
                         "identifier": feature_id,
-                        "geometry": self.get_location()  # ,
-                        # "metadata_hash": metadata_hash
+                        "geometry": self.get_location()
                     },
                     "_headers": headers.copy()
                 }
@@ -1040,16 +1084,14 @@ def transform(data: bytes, guess_wsi: bool = False,
 
 
     # get message
-    bulletins = []
-    position = 0
-    print(len(data))
-    while position < len(data):
-        bulletin_start = data.find(b"BUFR", position)
-        bulletin_end = data.find(b"7777", position)
-        print(bulletin_start, bulletin_end)
-        position = bulletin_end + 4
-        if -1 in (bulletin_start, bulletin_end):
-            break
+    #bulletins = []
+    #position = 0
+    #while position < len(data):
+    #    bulletin_start = data.find(b"BUFR", position)
+    #    bulletin_end = data.find(b"7777", position)
+    #    position = bulletin_end + 4
+    #    if -1 in (bulletin_start, bulletin_end):
+    #        break
 
     # eccodes needs to read from a file, create a temporary fiole
     tmp = tempfile.NamedTemporaryFile()
