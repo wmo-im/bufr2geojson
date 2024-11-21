@@ -27,6 +27,7 @@ import csv
 from datetime import datetime, timedelta
 import hashlib
 import io
+from io import StringIO, BytesIO
 import json
 import logging
 import os
