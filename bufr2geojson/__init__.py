@@ -1142,7 +1142,7 @@ def transform(data: bytes, guess_wsi: bool = False,
                 LOGGER.info(f"{nsubsets} subsets")
 
                 for idx in range(nsubsets):
-                    reportIdentifier = uuid.uuid4()
+                    # reportIdentifier = None
                     if nsubsets > 1:  # noqa this is only required if more than one subset (and will crash if only 1)
                         LOGGER.debug(f"Extracting subset {idx+1} of {nsubsets}")
                         codes_set(bufr_handle, "extractSubset", idx+1)
@@ -1150,6 +1150,14 @@ def transform(data: bytes, guess_wsi: bool = False,
                         LOGGER.debug("Cloning subset to new message")
 
                     single_subset = codes_clone(bufr_handle)
+
+                    with BytesIO() as bufr_bytes:
+                        codes_write(single_subset, bufr_bytes)
+                        bufr_bytes.seek(0)
+                        sha512 = hashlib.sha512()
+                        sha512.update(bufr_bytes.getvalue())
+                        reportIdentifier = sha512.hexdigest()
+
                     LOGGER.debug("Unpacking")
                     codes_set(single_subset, "unpack", True)
 
