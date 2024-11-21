@@ -40,7 +40,7 @@ import uuid
 
 from cfunits import Units
 from eccodes import (codes_bufr_new_from_file, codes_clone,
-                     codes_get_array, codes_set,
+                     codes_get_array, codes_set, codes_write,
                      codes_release, codes_get,
                      CODES_MISSING_LONG, CODES_MISSING_DOUBLE,
                      codes_bufr_keys_iterator_new,
