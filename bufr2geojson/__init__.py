@@ -1010,12 +1010,7 @@ class BUFRParser:
                         f"Error getting phenomenon time, skipping ({e})")
                     continue
 
-                # Get result time
-                if "/" in phenomenon_time:
-                    result_time = phenomenon_time.split("/")
-                    result_time = result_time[1]
-                else:
-                    result_time = phenomenon_time
+                result_time = datetime.now().strftime('%Y-%m-%d %H:%M')
 
                 # check if we have statistic, if so modify observed_property
                 fos = self.get_qualifier("08","first_order_statistics",None)
@@ -1155,9 +1150,9 @@ def transform(data: bytes, guess_wsi: bool = False,
                     with BytesIO() as bufr_bytes:
                         codes_write(single_subset, bufr_bytes)
                         bufr_bytes.seek(0)
-                        sha512 = hashlib.sha512()
-                        sha512.update(bufr_bytes.getvalue())
-                        reportIdentifier = sha512.hexdigest()
+                        bhash = hashlib.md5()
+                        bhash.update(bufr_bytes.getvalue())
+                        reportIdentifier = bhash.hexdigest()
 
                     LOGGER.debug("Unpacking")
                     codes_set(single_subset, "unpack", True)
