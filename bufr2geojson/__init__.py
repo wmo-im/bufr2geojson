@@ -121,6 +121,18 @@ LOCATION_DESCRIPTORS = ["latitude", "latitude_increment",
                         "latitude_displacement", "longitude",
                         "longitude_increment", "longitude_displacement"]
 
+ZLOCATION_DESCRIPTORS = ["height","flight_level","grid_point_altitude"]
+
+RELATIVE_OBS_HEIGHT = ["height_above_station",
+                       "height_of_sensor_above_local_ground_or_deck_of_marine_platform",  # noqa, land only
+                       "height_of_sensor_above_water_surface",  # noqa, marine only
+                       "depth_below_land_surface",
+                       "depth_below_water_surface"
+                       ]
+
+OTHER_Z_DESCRIPTORS = ["geopotential", "pressure", "geopotential_height",
+                       "water_pressure"]
+
 TIME_DESCRIPTORS = ["year", "month", "day", "hour", "minute",
                     "second", "time_increment", "time_period"]
 
@@ -322,7 +334,7 @@ class BUFRParser:
                 # now assign to type of qualifier
                 if c == "01":
                     identification[k] = q.copy()
-                if c in ("02", "03", "22"):
+                if c in ("02", "03", "07", "22"):
                     wigos_md[k] = q.copy()
                 if c in ("08", "09"):
                     qualifiers[k] = q.copy()
@@ -347,7 +359,7 @@ class BUFRParser:
 
         return result
 
-    def get_location(self) -> Union[dict, None]:
+    def get_location(self, BUFRclass = None) -> Union[dict, None]:
         """
         Function to get location from qualifiers and to apply any displacements
         or increments
@@ -390,13 +402,8 @@ class BUFRParser:
             # round to avoid extraneous digits
             longitude = round(longitude["value"], longitude["attributes"]["scale"])  # noqa
 
-        # now station elevation
-        # if "height_of_station_ground_above_mean_sea_level" in self.qualifiers["07"]:  # noqa
-        #    elevation = deepcopy(self.qualifiers["07"]["height_of_station_ground_above_mean_sea_level"])  # noqa
-        #    elevation = round(elevation["value"], elevation["attributes"]["scale"])  # noqa
-        #else:
-        #    elevation = None
-        # no elevation displacement in BUFR
+        z = self.get_zcoordinate(BUFRclass)
+        height = z.get('z_amsl',{}).get('value')
 
         # check for increments, not yet implemented
         if "005011" in self.qualifiers["05"] or \
@@ -407,8 +414,8 @@ class BUFRParser:
 
         location = [longitude, latitude]
 
-        #if elevation is not None:
-        #    location.append(elevation)
+        if height is not None:
+            location.append(height)
 
         if None in location:
             LOGGER.debug('geometry contains null values; setting to None')
@@ -418,9 +425,9 @@ class BUFRParser:
             "coordinates": location
         }
 
-    def get_zcoordinate(self):
+    def get_zcoordinate(self, BUFRclass=None):
         # class 07 gives vertical coordinate
-        result = list()
+        result = {}
 
         # 1) Height of sensor above local ground + height of station AMSL
         # 2) Height of barometer AMSL
@@ -432,24 +439,88 @@ class BUFRParser:
         # 8) Geopotential height
 
 
-        c = '07'
-        for k in self.qualifiers[c]:
-            name = k
-            value = self.qualifiers[c][k]["value"]
-            units = self.qualifiers[c][k]["attributes"]["units"]
-            description = self.qualifiers[c][k]["description"]
-            try:
-                description = strip2(description)
-            except AttributeError:
-                pass
+        station_ground = self.qualifiers["07"].get("height_of_station_ground_above_mean_sea_level",None)  # noqa
 
-            q = {
-                "name": name,
-                "value": value,
-                "units": units,
-                "description": description
+        abs_height = []
+        if BUFRclass == 10:
+            if "height_of_barometer_above_mean_sea_level" in self.qualifiers["07"]:
+                abs_height.append("height_of_barometer_above_mean_sea_level")
+        else:
+            for k in ZLOCATION_DESCRIPTORS:
+                if k in self.qualifiers["07"]:
+                    abs_height.append(k)
+
+        rel_height = []
+        for k in RELATIVE_OBS_HEIGHT:
+            if k in self.qualifiers["07"]:
+                rel_height.append(k)
+
+        other_height = []
+        for k in OTHER_Z_DESCRIPTORS:
+            if k in self.qualifiers["07"]:
+                other_height.append(k)
+
+        # if we have other heights we want to nullify abs and rel
+        if len(other_height) == 1:
+            abs_height = []
+            rel_height = []
+
+        # check we have as many heights as expected
+        if len(abs_height) > 1:
+            LOGGER.warning("Multiple absolute heights found, setting to None. See metadata")  # noqa
+            abs_height = []
+
+        if len(rel_height) > 1:
+            LOGGER.warning("Multiple relative heights found, setting to None. See metadata")  # noqa
+            rel_height = []
+
+        if len(other_height) > 1:
+            LOGGER.warning("Multiple other heights found, setting to None. See metadata")  # noqa
+            other_height = []
+
+        z_amsl = None
+        z_alg = None
+        z_other = None
+
+        if len(rel_height) == 1 and station_ground is not None:
+            assert station_ground.get('attributes').get('units') == \
+                   self.qualifiers["07"].get(rel_height[0]).get('attributes').get('units')
+            z_amsl = station_ground.get('value') + \
+                     self.qualifiers["07"].get(rel_height[0],{}).get('value')
+            z_alg = self.qualifiers["07"].get(rel_height[0],{}).get('value')
+            if 'depth' in rel_height[0]:
+                z_alg = -1 * z_alg
+        elif len(abs_height) == 1 and station_ground is not None:
+            z_amsl = self.qualifiers["07"].get(abs_height[0], {}).get('value')
+            z_alg = z_amsl - station_ground.get('value')
+        else:
+            if len(abs_height) == 1:
+                z_amsl = self.qualifiers["07"].get(abs_height[0],{}).get('value')
+            if len(rel_height) == 1:
+                z_alg = self.qualifiers["07"].get(rel_height[0],{}).get('value')
+
+        if len(other_height) == 1:
+            z_other = self.qualifiers["07"].get(other_height[0],{})
+
+        if z_amsl is not None:
+            result['z_amsl'] = {
+                'name': 'height_above_mean_sea_level',
+                'value': z_amsl,
+                'units': 'm'
             }
-            result.append(q)
+
+        if z_other is not None:
+            result['z'] = {
+                'name': z_other.get('key'),
+                'value': z_other.get('value'),
+                'units': z_other.get('attributes').get('units')
+            }
+        elif z_alg is not None:
+            result['z'] = {
+                'name': 'height_above_local_ground',
+                'value': z_alg,
+                'units': 'm'
+            }
 
         return result
 
@@ -792,6 +863,8 @@ class BUFRParser:
                 LOGGER.error(f"Error reading {header}")
                 raise e
 
+        self.reportType= headers.get('dataCategory')
+
         characteristic_date = headers["typicalDate"]
         characteristic_time = headers["typicalTime"]
 
@@ -811,7 +884,6 @@ class BUFRParser:
         key_iterator = codes_bufr_keys_iterator_new(bufr_handle)
 
         # set up data structures
-        data = {}
         last_key = None
         index = 0
 
@@ -952,7 +1024,7 @@ class BUFRParser:
 
             # determine whether we have data or metadata
             append = False
-            if xx < 9: # metadata / significance qualifiers
+            if xx < 9 and fxxyyy != '004053':  #  noqa - metadata / significance qualifiers. 0040552 is misplaced, it is not a time coordinate!
                 if ((xx >= 4) and (xx < 8)) and (key == last_key):
                     append = True
 
@@ -990,7 +1062,10 @@ class BUFRParser:
                 # self.get_identification()
                 metadata = self.get_qualifiers()
                 metadata["BUFR_element"] = fxxyyy
-
+                z = self.get_zcoordinate(BUFRclass=xx)
+                if z is not None:
+                    metadata["zCoordinate"] = z.get('z')
+                metadata['BUFRheaders'] = headers#.copy()
                 observing_procedure = "http://codes.wmo.int/wmdr/SourceOfObservation/unknown"  # noqa
 
                 wsi = self.get_wsi(guess_wsi)
@@ -998,9 +1073,6 @@ class BUFRParser:
                 if wsi is None:
                     wsi = "UNKNOWN"  #
                     host_id = self.get_tsi()
-
-                #feature_id = f"{host_id}_{characteristic_date}T{characteristic_time}"  # noqa
-                #feature_id = f"{feature_id}{id}-{index}"
                 feature_id = f"{index}"
 
                 try:
@@ -1022,13 +1094,9 @@ class BUFRParser:
                 data = {
                     "geojson": {
                         "id": feature_id,
-                        "conformsTo": [
-                            "https://schemas.wmo.int/wccdm-obs/2024/wccdm-obs.json"],
-                        # noqa
-                        # "reportId": f"WIGOS_{wsi}_{characteristic_date}T{characteristic_time}{id}",  # noqa
+                        "conformsTo": ["https://schemas.wmo.int/wccdm-obs/2024/wccdm-obs.json"],  # noqa
                         "type": "Feature",
-                        "geometry": self.get_location(),
-                        "zCoordinate": self.get_zcoordinate(),
+                        "geometry": self.get_location(BUFRclass=xx),
                         "properties": {
                             "host": host_id,  # noqa
                             "observer": None,
@@ -1051,12 +1119,10 @@ class BUFRParser:
                                 "status": None,
                                 "version": 0,
                                 "comment": None,
-                                "reportType": f"{headers['dataCategory']:03}{headers['internationalDataSubCategory']:03}",
-                                # noqa
-                                "reportIdentifier": None, # f"{id}",  #f"{host_id}_{characteristic_date}T{characteristic_time}{id}",
-                                # noqa
+                                "reportType": f"{headers['dataCategory']:03}{headers['internationalDataSubCategory']:03}",  # noqa
+                                "reportIdentifier": f"{id}",
                                 "isMemberOf": None,
-                                "additionalProperties": metadata.copy()
+                                "additionalProperties": metadata
                             },
                             "featureOfInterest": [
                                 {
@@ -1073,7 +1139,7 @@ class BUFRParser:
                         "identifier": feature_id,
                         "geometry": self.get_location()
                     },
-                    "_headers": headers.copy()
+                    "_headers": headers
                 }
                 yield data
                 last_key = key
@@ -1159,7 +1225,7 @@ def transform(data: bytes, guess_wsi: bool = False,
 
                     parser = BUFRParser()
 
-                    tag = ""
+                    tag = reportIdentifier
                     try:
                         data = parser.as_geojson(single_subset, id=tag,
                                                  guess_wsi=guess_wsi)  # noqa
@@ -1175,8 +1241,7 @@ def transform(data: bytes, guess_wsi: bool = False,
                         id = obs.get('geojson', {}).get('id', {})
                         if source_identifier in ("", None):
                             source_identifier = obs.get('geojson', {}).get('properties',{}).get('host', "")
-                        obs['geojson']['id'] = f"{source_identifier}-{imsg}-{idx}-{id}"
-                        obs['geojson']['properties']['parameter']['reportIdentifier'] = f"{reportIdentifier}"
+                        obs['geojson']['id'] = f"{reportIdentifier}-{id}"  # update feature id to include report id
                         # now set prov data
                         prov = {
                             "prefix": {
@@ -1189,14 +1254,14 @@ def transform(data: bytes, guess_wsi: bool = False,
                                     "prov:label": "Input data file",
                                     "schema:encodingFormat": "application/bufr"
                                 },
-                                f"{source_identifier}-{imsg}-{idx}-{id}": {
+                                f"{obs['geojson']['id']}": {
                                     "prov:type": "observation",
                                     "prov:label": f"Observation {id} from subset {idx} of message {imsg}"
                                 }
                             },
                             "wasDerivedFrom": {
                                 "_:wdf": {
-                                    "prov:generatedEntity": f"{source_identifier}-{imsg}-{idx}-{id}",
+                                    "prov:generatedEntity": f"{obs['geojson']['id']}",
                                     "prov:usedEntity": f"{source_identifier}",
                                     "prov:activity": "_:bufr2geojson"
                                 }
