@@ -60,6 +60,7 @@ NULLIFY_INVALID = os.environ.get("BUFR2GEOJSON_NULLIFY_INVALID", True)
 THISDIR = os.path.dirname(os.path.realpath(__file__))
 RESOURCES = f"{THISDIR}{os.sep}resources"
 CODETABLES = {}
+FLAGTABLES = {}
 ECCODES_DEFINITION_PATH = codes_definition_path()
 if not os.path.exists(ECCODES_DEFINITION_PATH):
     LOGGER.debug('ecCodes definition path does not exist, trying environment')
@@ -813,6 +814,35 @@ class BUFRParser:
 
         return decoded
 
+    def get_flag_value(self, fxxyyy: str, flags: str) -> str:
+        if flags is None:
+            return None
+        table = int(fxxyyy)
+        if self.table_version not in FLAGTABLES:
+            FLAGTABLES[self.table_version] = {}
+
+        if fxxyyy not in FLAGTABLES[self.table_version]:
+            FLAGTABLES[self.table_version][fxxyyy] = {}
+            tablefile = TABLEDIR / str(self.table_version) / 'codetables' / f'{table}.table'  # noqa
+            with tablefile.open() as csvfile:
+                reader = csv.reader(csvfile, delimiter=" ")
+                for row in reader:
+                    FLAGTABLES[self.table_version][fxxyyy][int(row[0])] = " ".join(row[2:])  # noqa
+
+        flag_table = FLAGTABLES[self.table_version][fxxyyy]
+
+        bits = [int(flag) for flag in flags]
+        nbits = len(bits)
+        values = []
+        for idx in range(nbits):
+            if bits[idx]:
+                key = idx+1
+                value = flag_table.get(key)
+                if value is not None:
+                    values.append(value)
+
+        return values
+
     def as_geojson(self, bufr_handle: int, id: str,
                    guess_wsi: bool = False) -> dict:
         """
@@ -996,9 +1026,11 @@ class BUFRParser:
             elif (attributes["units"] == "FLAG TABLE") and (value is not None):
                 observation_type = "http//www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation"
                 nbits = attributes['width']
+                description = self.get_flag_value(attributes["code"], "{0:0{1}b}".format(value, nbits))
                 _value = {
-                    'flags': f"http://codes.wmo.int/bufr4/codeflag/{f:1}-{xx:02}-{yyy:03}",  # noqa
-                    'entry': "{0:0{1}b}".format(value, nbits)
+                    'flagtable': f"http://codes.wmo.int/bufr4/codeflag/{f:1}-{xx:02}-{yyy:03}",  # noqa
+                    'entry': "{0:0{1}b}".format(value, nbits),
+                    'description': description
                 }
             elif attributes["units"] == "CCITT IA5":
                 description = value
