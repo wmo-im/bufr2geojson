@@ -34,10 +34,9 @@ jobs:
         pip3 install -e "git+https://github.com/tomkralidis/jsonschema@ref-yaml#egg=jsonschema"
         pip3 install -r requirements-dev.txt
         python3 setup.py install
-        codes_info
     - name: run tests ⚙️
       run: |
-        export ECCODES_DEFINITION_PATH=/opt/conda/share/eccodes/definitions 
+        export ECCODES_DEFINITION_PATH=/usr/share/miniconda/envs/__setup_conda/share/eccodes/definitions 
         cd tests
         pytest
     - name: run flake8 ⚙️
