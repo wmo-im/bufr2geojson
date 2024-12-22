@@ -26,7 +26,6 @@ import json
 
 from jsonschema import validate, FormatChecker
 import pytest
-import yaml
 
 from bufr2geojson import RESOURCES, strip2, transform
 
@@ -75,10 +74,8 @@ def multimsg_bufr():
 
 @pytest.fixture
 def geojson_schema():
-    #with open(f"{RESOURCES}/schemas/wmo-om-profile-geojson.yaml") as fh:
     with open(f"{RESOURCES}/schemas/wccdm-obs.json") as fh:
         return json.load(fh)
-        #return yaml.load(fh, Loader=yaml.SafeLoader)
 
 
 @pytest.fixture
@@ -129,6 +126,7 @@ def geojson_output():
         }
     }
 
+
 @pytest.fixture
 def geojson_output_new():
     return {
@@ -148,9 +146,9 @@ def geojson_output_new():
         "properties": {
             "host": "0-20000-0-03951",
             "observer": None,
-            "observationType": "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement",
+            "observationType": "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement",  # noqa
             "observedProperty": "non_coordinate_pressure",
-            "observingProcedure": "http://codes.wmo.int/wmdr/SourceOfObservation/unknown",
+            "observingProcedure": "http://codes.wmo.int/wmdr/SourceOfObservation/unknown",  # noqa
             "phenomenonTime": "2022-03-20T21:00:00Z",
             "resultTime": "2024-12-19 00:00:00",
             "validTime": None,
@@ -180,12 +178,12 @@ def geojson_output_new():
                         },
                         "1ec58338aab209c8ab22f05309315b71-0": {
                             "prov:type": "observation",
-                            "prov:label": "Observation 0 from subset 0 of message 1"
+                            "prov:label": "Observation 0 from subset 0 of message 1"  # noqa
                         }
                     },
                     "wasDerivedFrom": {
                         "_:wdf": {
-                            "prov:generatedEntity": "1ec58338aab209c8ab22f05309315b71-0",
+                            "prov:generatedEntity": "1ec58338aab209c8ab22f05309315b71-0",  # noqa
                             "prov:usedEntity": "0-20000-0-03951",
                             "prov:activity": "_:bufr2geojson"
                         }
@@ -193,7 +191,7 @@ def geojson_output_new():
                     "activity": {
                         "_:bufr2geojson": {
                             "prov:type": "prov:Activity",
-                            "prov:label": "Data transformation using version 0.7.dev0 of bufr2geojson",
+                            "prov:label": "Data transformation using version 0.7.dev0 of bufr2geojson",  # noqa
                             "prov:endTime": "2024-12-19 00:00:00"
                         }
                     }
@@ -213,7 +211,7 @@ def geojson_output_new():
                     "instrumentation": {
                         "station_type": {
                             "value": {
-                                "codetable": "http://codes.wmo.int/bufr4/codeflag/0-02-001",
+                                "codetable": "http://codes.wmo.int/bufr4/codeflag/0-02-001",  # noqa
                                 "entry": "0",
                                 "description": "AUTOMATIC STATION"
                             }
@@ -285,7 +283,7 @@ def test_multi(multimsg_bufr):
     icount = 0
     for res in results:
         for key, val in res.items():
-            if key != "geojson" :
+            if key != "geojson":
                 continue
             icount += 1
     assert icount == 48
@@ -304,16 +302,14 @@ def test_transform(geojson_schema, geojson_output_new):
             _ = validate(geojson_dict, geojson_schema,
                          format_checker=WSI_FORMATCHECKER)
 
-
         print("==========================================")
         print("Messages validated against schema")
         print("==========================================")
 
-
         # validate content
         message = next(messages2)
         geojson = message['geojson']  # noqa
-        geojson['properties']['parameter']['hasProvenance']['activity']['_:bufr2geojson']['prov:endTime'] = "2024-12-19 00:00:00"
+        geojson['properties']['parameter']['hasProvenance']['activity']['_:bufr2geojson']['prov:endTime'] = "2024-12-19 00:00:00"  # noqa
         geojson['properties']['resultTime'] = "2024-12-19 00:00:00"
         for k, v in geojson.items():
             assert v == geojson_output_new[k]
