@@ -29,7 +29,6 @@ jobs:
     - name: Install requirements 📦
       run: |
         conda install eccodes
-        export ECCODES_DEFINITION_PATH=/opt/eccodes/share/eccodes/definitions 
         python3 -m pip install --upgrade pip
         pip3 install -r requirements.txt
         pip3 install -e "git+https://github.com/tomkralidis/jsonschema@ref-yaml#egg=jsonschema"
@@ -37,6 +36,7 @@ jobs:
         python3 setup.py install
     - name: run tests ⚙️
       run: |
+        export ECCODES_DEFINITION_PATH=/opt/eccodes/share/eccodes/definitions 
         cd tests
         pytest
     - name: run flake8 ⚙️
