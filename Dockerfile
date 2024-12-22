@@ -19,28 +19,22 @@
 #
 ###############################################################################
 
-#FROM ubuntu:latest
-FROM wmoim/dim_eccodes_baseimage:2.28.0
-
+FROM wmoim/dim_eccodes_baseimage:jammy-2.36.0
 ENV DEBIAN_FRONTEND="noninteractive" \
     TZ="Etc/UTC" \
     ECCODES_DIR=/opt/eccodes \
+    ECCODES_DEFINITION_PATH=/opt/eccodes/share/eccodes/definitions \
     PATH="${PATH}:/opt/eccodes/bin"
 
-RUN echo "Acquire::Check-Valid-Until \"false\";\nAcquire::Check-Date \"false\";" | cat > /etc/apt/apt.conf.d/10no--check-valid-until \
-    && apt-get update -y \
-    && apt-get install -y ${BUILD_PACKAGES} libudunits2-0 \
-    && apt-get remove --purge -y ${BUILD_PACKAGES} \
-    && apt autoremove -y  \
-    && apt-get -q clean \
-    && rm -rf /var/lib/apt/lists/*
+# Install additional packges
+RUN echo apt-get update -y \
+    && apt-get upgrade -y \
+    && apt-get install -y libudunits2-0 curl
 
+WORKDIR /tmp
+COPY . /tmp
+RUN cd /tmp && python3 setup.py install
+RUN cd /tmp && rm -r ./*
 
-COPY . /tmp/bufr2geojson
-
-RUN cd /tmp/bufr2geojson && python3 setup.py install
-# clean up
-RUN cd /tmp && rm -r bufr2geojson
-
-WORKDIR /
+WORKDIR /local
 
