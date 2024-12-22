@@ -4,7 +4,7 @@ on: [ push, pull_request ]
 
 jobs:
   main:
-    runs-on: ubuntu-latest
+    runs-on: wmoim/dim_eccodes_baseimage:jammy-2.36.0
     strategy:
       matrix:
         python-version: ["3.9", "3.10", "3.11"]
@@ -28,7 +28,6 @@ jobs:
 
     - name: Install requirements 📦
       run: |
-        conda install eccodes
         python3 -m pip install --upgrade pip
         pip3 install -r requirements.txt
         pip3 install -e "git+https://github.com/tomkralidis/jsonschema@ref-yaml#egg=jsonschema"
