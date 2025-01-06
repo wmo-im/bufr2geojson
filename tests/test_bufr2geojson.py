@@ -82,7 +82,7 @@ def geojson_schema():
 def geojson_output():
     return {
         "id": "1ec58338aab209c8ab22f05309315b71-0",
-        "conformsTo": ["https://wis.wmo.int/spec/wccdm-obs/1/req/observation"],
+        "conformsTo": ["https://wis.wmo.int/spec/wccdm-obs/1/conf/observation"],
         "type": "Feature",
         "geometry": {
             "type": "Point",
