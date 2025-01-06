@@ -1123,7 +1123,7 @@ class BUFRParser:
                 data = {
                     "geojson": {
                         "id": feature_id,
-                        "conformsTo": ["https://wis.wmo.int/spec/wccdm-obs/1"],  # noqa
+                        "conformsTo": ["https://wis.wmo.int/spec/wccdm-obs/1/req/observation"],  # noqa
                         "type": "Feature",
                         "geometry": self.get_location(bufr_class=xx),
                         "properties": {
