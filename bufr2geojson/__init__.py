@@ -57,6 +57,7 @@ MISSING = ("NA", "NaN", "NAN", "None")
 NULLIFY_INVALID = os.environ.get("BUFR2GEOJSON_NULLIFY_INVALID", True)
 THISDIR = os.path.dirname(os.path.realpath(__file__))
 RESOURCES = f"{THISDIR}{os.sep}resources"
+ASSOCIATED_FIELDS_FILE = f"{RESOURCES}{os.sep}031021.json"
 CODETABLES = {}
 FLAGTABLES = {}
 ECCODES_DEFINITION_PATH = codes_definition_path()
@@ -68,7 +69,7 @@ if not os.path.exists(ECCODES_DEFINITION_PATH):
         raise EnvironmentError('Cannot find ecCodes definition path')
 TABLEDIR = Path(ECCODES_DEFINITION_PATH) / 'bufr' / 'tables' / '0' / 'wmo'
 
-# ToDo - read preferred units from config file
+# TODO - read preferred units from config file
 # PREFERRED UNITS
 PREFERRED_UNITS = {
     "K": "Celsius",
@@ -78,7 +79,7 @@ PREFERRED_UNITS = {
 # The following is required as the code table from ECMWF is incomplete
 # and that from github/wmo-im not very usable.
 try:
-    with open(f"{RESOURCES}{os.sep}031021.json") as fh:
+    with open(ASSOCIATED_FIELDS_FILE) as fh:
         ASSOCIATED_FIELDS = json.load(fh)
 except Exception as e:
     LOGGER.error(f"Error loading associated field table (031021) - {e}")
@@ -358,7 +359,7 @@ class BUFRParser:
 
         return result
 
-    def get_location(self, BUFRclass=None) -> Union[dict, None]:
+    def get_location(self, bufr_class: int = None) -> Union[dict, None]:
         """
         Function to get location from qualifiers and to apply any displacements
         or increments
@@ -401,7 +402,7 @@ class BUFRParser:
             # round to avoid extraneous digits
             longitude = round(longitude["value"], longitude["attributes"]["scale"])  # noqa
 
-        z = self.get_zcoordinate(BUFRclass)
+        z = self.get_zcoordinate(bufr_class)
         height = z.get('z_amsl', {}).get('value')
 
         # check for increments, not yet implemented
@@ -424,7 +425,7 @@ class BUFRParser:
             "coordinates": location
         }
 
-    def get_zcoordinate(self, BUFRclass=None):
+    def get_zcoordinate(self, bufr_class: int = None) -> Union[dict, None]:
         # class 07 gives vertical coordinate
         result = {}
 
@@ -441,7 +442,7 @@ class BUFRParser:
         station_ground = self.qualifiers["07"].get("height_of_station_ground_above_mean_sea_level",None)  # noqa
 
         abs_height = []
-        if BUFRclass == 10:
+        if bufr_class == 10:
             if "height_of_barometer_above_mean_sea_level" in self.qualifiers["07"]:  # noqa
                 abs_height.append("height_of_barometer_above_mean_sea_level")
         else:
@@ -1011,7 +1012,7 @@ class BUFRParser:
             # next decoded value if from code table
             description = None
             observation_type = "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"  # noqa default type
-            if (attributes["units"] == "CODE TABLE") and (value is not None):
+            if attributes["units"] == "CODE TABLE" and value is not None:
                 description = self.get_code_value(attributes["code"], value)
                 observation_type = "http//www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation"  # noqa
                 _value = {
@@ -1019,7 +1020,7 @@ class BUFRParser:
                     'entry': f"{value}",  # noqa
                     'description': description
                 }
-            elif (attributes["units"] == "FLAG TABLE") and (value is not None):
+            elif attributes["units"] == "FLAG TABLE" and value is not None:
                 observation_type = "http//www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation"  # noqa
                 nbits = attributes['width']
                 description = self.get_flag_value(attributes["code"], "{0:0{1}b}".format(value, nbits))  # noqa
@@ -1090,7 +1091,7 @@ class BUFRParser:
                 # self.get_identification()
                 metadata = self.get_qualifiers()
                 metadata["BUFR_element"] = fxxyyy
-                z = self.get_zcoordinate(BUFRclass=xx)
+                z = self.get_zcoordinate(bufr_class=xx)
                 if z is not None:
                     metadata["zCoordinate"] = z.get('z')
                 metadata['BUFRheaders'] = headers
@@ -1122,9 +1123,9 @@ class BUFRParser:
                 data = {
                     "geojson": {
                         "id": feature_id,
-                        "conformsTo": ["https://schemas.wmo.int/wccdm-obs/2024/wccdm-obs.json"],  # noqa
+                        "conformsTo": ["https://wis.wmo.int/spec/wccdm-obs/1"],  # noqa
                         "type": "Feature",
-                        "geometry": self.get_location(BUFRclass=xx),
+                        "geometry": self.get_location(bufr_class=xx),
                         "properties": {
                             "host": host_id,  # noqa
                             "observer": None,

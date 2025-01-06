@@ -81,59 +81,8 @@ def geojson_schema():
 @pytest.fixture
 def geojson_output():
     return {
-        'id': 'WIGOS_0-20000-0-03951_20220320T210000-0-13',
-        'conformsTo': ['http://www.wmo.int/spec/om-profile-1/1.0/req/geojson'],
-        'reportId': 'WIGOS_0-20000-0-03951_20220320T210000-0',
-        'type': 'Feature',
-        'geometry': {
-            'type': 'Point',
-            'coordinates': [
-                -9.42,
-                51.47,
-                20.0
-            ]
-        },
-        'properties': {
-            'wigos_station_identifier': '0-20000-0-03951',
-            'phenomenonTime': '2022-03-20T21:00:00Z',
-            'resultTime': '2022-03-20T21:00:00Z',
-            'name': 'non_coordinate_pressure',
-            'value': 1019.3,
-            'units': 'hPa',
-            'description': None,
-            'metadata': [
-                {
-                    'name': 'station_or_site_name',
-                    'value': None,
-                    'units': 'CCITT IA5',
-                    'description': 'SHERKIN ISLAND'
-                },
-                {
-                    'name': 'station_type',
-                    'value': 0,
-                    'units': 'CODE TABLE',
-                    'description': 'AUTOMATIC STATION'
-                },
-                {
-                    'name': 'height_of_barometer_above_mean_sea_level',
-                    'value': 21.0,
-                    'units': 'm',
-                    'description': None
-                }
-            ],
-            'index': 13,
-            'fxxyyy': '010004'
-        }
-    }
-
-
-@pytest.fixture
-def geojson_output_new():
-    return {
         "id": "1ec58338aab209c8ab22f05309315b71-0",
-        "conformsTo": [
-            "https://schemas.wmo.int/wccdm-obs/2024/wccdm-obs.json"
-        ],
+        "conformsTo": ["https://wis.wmo.int/spec/wccdm-obs/1"],
         "type": "Feature",
         "geometry": {
             "type": "Point",
@@ -289,7 +238,7 @@ def test_multi(multimsg_bufr):
     assert icount == 48
 
 
-def test_transform(geojson_schema, geojson_output_new):
+def test_transform(geojson_schema, geojson_output):
     test_bufr_file = 'A_ISIA21EIDB202100_C_EDZW_20220320210902_11839953.bin'
     with open(test_bufr_file, 'rb') as fh:
         messages1, messages2 = itertools.tee(transform(fh.read(),
@@ -312,8 +261,8 @@ def test_transform(geojson_schema, geojson_output_new):
         geojson['properties']['parameter']['hasProvenance']['activity']['_:bufr2geojson']['prov:endTime'] = "2024-12-19 00:00:00"  # noqa
         geojson['properties']['resultTime'] = "2024-12-19 00:00:00"
         for k, v in geojson.items():
-            assert v == geojson_output_new[k]
-        assert geojson == geojson_output_new
+            assert v == geojson_output[k]
+        assert geojson == geojson_output
 
         print("Message matches expected value")
 
