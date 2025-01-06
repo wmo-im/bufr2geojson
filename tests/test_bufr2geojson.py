@@ -22,10 +22,10 @@
 from __future__ import annotations
 import base64
 import itertools
+import json
 
 from jsonschema import validate, FormatChecker
 import pytest
-import yaml
 
 from bufr2geojson import RESOURCES, strip2, transform
 
@@ -74,55 +74,154 @@ def multimsg_bufr():
 
 @pytest.fixture
 def geojson_schema():
-    with open(f"{RESOURCES}/schemas/wmo-om-profile-geojson.yaml") as fh:
-        return yaml.load(fh, Loader=yaml.SafeLoader)
+    with open(f"{RESOURCES}/schemas/wccdm-obs.json") as fh:
+        return json.load(fh)
 
 
 @pytest.fixture
 def geojson_output():
     return {
-        'id': 'WIGOS_0-20000-0-03951_20220320T210000-0-13',
-        'conformsTo': ['http://www.wmo.int/spec/om-profile-1/1.0/req/geojson'],
-        'reportId': 'WIGOS_0-20000-0-03951_20220320T210000-0',
-        'type': 'Feature',
-        'geometry': {
-            'type': 'Point',
-            'coordinates': [
+        "id": "1ec58338aab209c8ab22f05309315b71-0",
+        "conformsTo": ["https://wis.wmo.int/spec/wccdm-obs/1/conf/observation"],  # noqa
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
                 -9.42,
                 51.47,
-                20.0
+                21.0
             ]
         },
-        'properties': {
-            'wigos_station_identifier': '0-20000-0-03951',
-            'phenomenonTime': '2022-03-20T21:00:00Z',
-            'resultTime': '2022-03-20T21:00:00Z',
-            'name': 'non_coordinate_pressure',
-            'value': 1019.3,
-            'units': 'hPa',
-            'description': None,
-            'metadata': [
+        "properties": {
+            "host": "0-20000-0-03951",
+            "observer": None,
+            "observationType": "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement",  # noqa
+            "observedProperty": "non_coordinate_pressure",
+            "observingProcedure": "http://codes.wmo.int/wmdr/SourceOfObservation/unknown",  # noqa
+            "phenomenonTime": "2022-03-20T21:00:00Z",
+            "resultTime": "2024-12-19 00:00:00",
+            "validTime": None,
+            "result": {
+                "value": 1019.3,
+                "units": "hPa",
+                "standardUncertainty": None
+            },
+            "resultQuality": [
                 {
-                    'name': 'station_or_site_name',
-                    'value': None,
-                    'units': 'CCITT IA5',
-                    'description': 'SHERKIN ISLAND'
-                },
-                {
-                    'name': 'station_type',
-                    'value': 0,
-                    'units': 'CODE TABLE',
-                    'description': 'AUTOMATIC STATION'
-                },
-                {
-                    'name': 'height_of_barometer_above_mean_sea_level',
-                    'value': 21.0,
-                    'units': 'm',
-                    'description': None
+                    "inScheme": None,
+                    "flag": None,
+                    "flagValue": None
                 }
             ],
-            'index': 13,
-            'fxxyyy': '010004'
+            "parameter": {
+                "hasProvenance": {
+                    "prefix": {
+                        "prov": "http://www.w3.org/ns/prov#",
+                        "schema": "https://schema.org/"
+                    },
+                    "entity": {
+                        "0-20000-0-03951": {
+                            "prov:type": "schema:DigitalDocument",
+                            "prov:label": "Input data file",
+                            "schema:encodingFormat": "application/bufr"
+                        },
+                        "1ec58338aab209c8ab22f05309315b71-0": {
+                            "prov:type": "observation",
+                            "prov:label": "Observation 0 from subset 0 of message 1"  # noqa
+                        }
+                    },
+                    "wasDerivedFrom": {
+                        "_:wdf": {
+                            "prov:generatedEntity": "1ec58338aab209c8ab22f05309315b71-0",  # noqa
+                            "prov:usedEntity": "0-20000-0-03951",
+                            "prov:activity": "_:bufr2geojson"
+                        }
+                    },
+                    "activity": {
+                        "_:bufr2geojson": {
+                            "prov:type": "prov:Activity",
+                            "prov:label": "Data transformation using version 0.7.dev0 of bufr2geojson",  # noqa
+                            "prov:endTime": "2024-12-19 00:00:00"
+                        }
+                    }
+                },
+                "status": None,
+                "version": 0,
+                "comment": None,
+                "reportType": "000001",
+                "reportIdentifier": "1ec58338aab209c8ab22f05309315b71",
+                "isMemberOf": None,
+                "additionalProperties": {
+                    "identification": {
+                        "station_or_site_name": {
+                            "value": "SHERKIN ISLAND"
+                        }
+                    },
+                    "instrumentation": {
+                        "station_type": {
+                            "value": {
+                                "codetable": "http://codes.wmo.int/bufr4/codeflag/0-02-001",  # noqa
+                                "entry": "0",
+                                "description": "AUTOMATIC STATION"
+                            }
+                        },
+                        "height_of_station_ground_above_mean_sea_level": {
+                            "value": 20.0,
+                            "units": "m",
+                            "description": None
+                        },
+                        "height_of_barometer_above_mean_sea_level": {
+                            "value": 21.0,
+                            "units": "m",
+                            "description": None
+                        }
+                    },
+                    "qualifiers": {},
+                    "processing": {},
+                    "monitoring": {},
+                    "quality": {},
+                    "associated_field": {},
+                    "BUFR_element": "010004",
+                    "zCoordinate": {
+                        "name": "height_above_local_ground",
+                        "value": 1.0,
+                        "units": "m"
+                    },
+                    "BUFRheaders": {
+                        "edition": 4,
+                        "masterTableNumber": 0,
+                        "bufrHeaderCentre": 233,
+                        "bufrHeaderSubCentre": 0,
+                        "updateSequenceNumber": 0,
+                        "dataCategory": 0,
+                        "internationalDataSubCategory": 1,
+                        "dataSubCategory": 0,
+                        "masterTablesVersionNumber": 14,
+                        "localTablesVersionNumber": 0,
+                        "typicalYear": 2022,
+                        "typicalMonth": 3,
+                        "typicalDay": 20,
+                        "typicalHour": 21,
+                        "typicalMinute": 0,
+                        "typicalSecond": 0,
+                        "typicalDate": "20220320",
+                        "typicalTime": "210000",
+                        "numberOfSubsets": 1,
+                        "observedData": 1,
+                        "compressedData": 0,
+                        "subsetNumber": 1,
+                        "sequence": "307080"
+                    }
+                }
+            },
+            "featureOfInterest": [
+                {
+                    "id": None,
+                    "label": None,
+                    "relation": None
+                }
+            ],
+            "index": 0
         }
     }
 
@@ -133,6 +232,8 @@ def test_multi(multimsg_bufr):
     icount = 0
     for res in results:
         for key, val in res.items():
+            if key != "geojson":
+                continue
             icount += 1
     assert icount == 48
 
@@ -145,20 +246,24 @@ def test_transform(geojson_schema, geojson_output):
 
         # validate against JSON Schema
         for message in messages1:
-            geojson_dict = list(message.values())[0]['geojson']
+            geojson_dict = message['geojson']
             assert isinstance(geojson_dict, dict)
-            print("Validating GeoJSON")
             _ = validate(geojson_dict, geojson_schema,
                          format_checker=WSI_FORMATCHECKER)
 
+        print("==========================================")
         print("Messages validated against schema")
+        print("==========================================")
 
         # validate content
         message = next(messages2)
-        assert 'WIGOS_0-20000-0-03951_20220320T210000-0-13' in message
-        print("Message found in result")
-        geojson = message['WIGOS_0-20000-0-03951_20220320T210000-0-13']['geojson']  # noqa
+        geojson = message['geojson']  # noqa
+        geojson['properties']['parameter']['hasProvenance']['activity']['_:bufr2geojson']['prov:endTime'] = "2024-12-19 00:00:00"  # noqa
+        geojson['properties']['resultTime'] = "2024-12-19 00:00:00"
+        for k, v in geojson.items():
+            assert v == geojson_output[k]
         assert geojson == geojson_output
+
         print("Message matches expected value")
 
 

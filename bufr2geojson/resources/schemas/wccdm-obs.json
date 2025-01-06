@@ -1,0 +1,320 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "http://schemas.wmo.int/cdm-obs/2024/wccdm-obs.json",
+    "title": "WCCDM-OBS record definition",
+    "description": "JSON schema for the representation of WCCDM-OBS",
+    "definitions": {
+        "TM_Period": {
+            "type": "string",
+            "pattern": "^(\\d{4}-\\d{2}-\\d{2}[ tT]{1}\\d{2}:\\d{2}:\\d{2}[zZ]{0,1})/(\\d{4}-\\d{2}-\\d{2}[ tT]{1}\\d{2}:\\d{2}:\\d{2}[zZ]{0,1})$"
+        },
+        "TM_Instant": {
+            "anyOf": [
+                {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                {
+                    "type": "string",
+                    "format": "date"
+                }
+            ]
+        },
+        "httpURI": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ]
+        },
+        "Collection": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "FeatureCollection"
+                    ]
+                },
+                "features": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Observation"
+                    }
+                }
+            }
+        },
+        "Observation": {
+            "type": "object",
+            "required": [
+                "conformsTo",
+                "id",
+                "type",
+                "geometry",
+                "properties"
+            ],
+            "properties": {
+                "conformsTo": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/httpURI"
+                    },
+                    "minItems": 1
+                },
+                "id": {
+                    "$ref": "#/definitions/httpURI"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "Feature"
+                    ]
+                },
+                "geometry": {
+                    "$ref": "#/definitions/Geometry"
+                },
+                "properties": {
+                    "$ref": "#/definitions/Properties"
+                }
+            }
+        },
+        "Geometry": {
+            "type": "object",
+            "required": [
+                "type",
+                "coordinates"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "Point"
+                    ]
+                },
+                "coordinates": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    },
+                    "minItems": 2
+                }
+            }
+        },
+        "QualityFlag": {
+            "type": "object",
+            "required": [
+                "inScheme",
+                "flag",
+                "flagValue"
+            ],
+            "properties": {
+                "flag": {
+                    "$ref": "#/definitions/httpURI"
+                },
+                "flagValue": {
+                    "$ref": "#/definitions/httpURI"
+                },
+                "inScheme": {
+                    "$ref": "#/definitions/httpURI"
+                }
+            }
+        },
+        "Properties": {
+            "type": "object",
+            "required": [
+                "host",
+                "observedProperty",
+                "observingProcedure",
+                "phenomenonTime",
+                "resultTime",
+                "resultQuality",
+                "result",
+                "parameter",
+                "featureOfInterest"
+            ],
+            "properties": {
+                "host": {
+                    "$ref": "#/definitions/httpURI"
+                },
+                "observer": {
+                    "$ref": "#/definitions/httpURI"
+                },
+                "observationType": {
+                    "$ref": "#/definitions/httpURI"
+                },
+                "observedProperty": {
+                    "$ref": "#/definitions/httpURI"
+                },
+                "observingProcedure": {
+                    "$ref": "#/definitions/httpURI"
+                },
+                "phenomenonTime": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/TM_Period"
+                        },
+                        {
+                            "$ref": "#/definitions/TM_Instant"
+                        }
+                    ]
+                },
+                "resultTime": {
+                    "$ref": "#/definitions/TM_Instant"
+                },
+                "validTime": {
+                    "oneOf": [
+                      {"$ref": "#/definitions/TM_Period"},
+                      { "type": "null"}
+                    ]
+                },
+                "resultQuality": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/QualityFlag"
+                    },
+                    "minItems": 1
+                },
+                "result": {
+                    "$ref": "#/definitions/Result"
+                },
+                "parameter": {
+                    "$ref": "#/definitions/Parameter"
+                },
+                "featureOfInterest": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Feature"
+                    },
+                    "minItems": 1
+                }
+            }
+        },
+        "Result": {
+            "type": "object",
+            "required": [
+                "value",
+                "units"
+            ],
+            "properties": {
+                "value": {},
+                "units": {
+                    "$ref": "#/definitions/httpURI"
+                },
+                "standardUncertainty": {
+                    "oneOf": [
+                      {"type": "number"},
+                      {"type": "null"}
+                    ]
+                }
+            }
+        },
+        "Parameter": {
+            "type": "object",
+            "required": [
+                "status",
+                "version",
+                "isMemberOf"
+            ],
+            "properties": {
+                "hasProvenance": {
+                    "oneOf": [
+                      {"$ref": "#/definitions/httpURI"},
+                      {"type": "object"}
+                    ]
+                },
+                "status": {
+                    "$ref": "#/definitions/httpURI"
+                },
+                "version": {
+                    "type": "integer"
+                },
+                "comment": {
+                    "oneOf": [
+                      {"type": "string"},
+                      {"type": "null"}
+                    ]
+                },
+                "reportType": {
+                    "$ref": "#/definitions/httpURI"
+                },
+                "reportIdentifier": {
+                    "$ref": "#/definitions/httpURI"
+                },
+                "isMemberOf": {
+                    "$ref": "#/definitions/httpURI"
+                },
+                "additionalProperties": {}
+            }
+        },
+        "Feature": {
+            "type": "object",
+            "required": [
+                "id",
+                "label",
+                "relation"
+            ],
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/httpURI"
+                },
+                "label": {
+                    "oneOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                },
+                "relation": {
+                    "oneOf": [
+                      {
+                        "type": "string",
+                        "enum": ["proximate", "ultimate"]
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                }
+            }
+        }
+    },
+    "type": "object",
+    "required": [
+        "conformsTo",
+        "id",
+        "type",
+        "geometry",
+        "properties"
+    ],
+    "properties": {
+        "conformsTo": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/httpURI"
+            },
+            "minItems": 1
+        },
+        "id": {
+            "$ref": "#/definitions/httpURI"
+        },
+        "type": {
+            "type": "string",
+            "enum": [
+                "Feature"
+            ]
+        },
+        "geometry": {
+            "$ref": "#/definitions/Geometry"
+        },
+        "properties": {
+            "$ref": "#/definitions/Properties"
+        }
+    }
+}
